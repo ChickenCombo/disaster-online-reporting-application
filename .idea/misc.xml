@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/bg_edit.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/bg_edittext.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/bg_splash.xml" value="0.21837606837606838" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/dashed.xml" value="0.26205128205128203" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_advisories.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_back.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_camera.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_chat.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_error.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_get_location.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_home.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_post.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_profile.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_save.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_upvote.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_upvoted.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_user.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/img_dora_logo.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/item_selector.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/rounded_corners.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_advisories.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_bluetooth_chat.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_change_email.xml" value="0.264" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_change_password.xml" value="0.264" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_change_profile.xml" value="0.2" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_change_profile_picture.xml" value="0.4" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_comments.xml" value="0.264" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_forgot_password.xml" value="0.264" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_image_fullscreen.xml" value="0.23324275362318841" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_no_internet.xml" value="0.2" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_offline_dashboard.xml" value="0.264" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_post_report.xml" value="0.6" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_profile.xml" value="0.2" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_register.xml" value="0.2" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_report_details.xml" value="0.264" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_setup.xml" value="0.264" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_splash.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/dropdown_disasters.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_bluetooth_chat.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_chat.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_device_scan.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_enable_bluetooth.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_location_required.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_map.xml" value="0.2" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_maps.xml" value="0.2" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_ndrrmc.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_noah.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_pagasa.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_phivolcs.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_red_cross.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_reports.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/item_device.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/item_local_message.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/item_remote_message.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/single_view_comments.xml" value="0.536" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/single_view_reports.xml" value="0.4" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/toolbar_back.xml" value="0.536" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/menu/drawe_menu.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/menu/drawer_menu.xml" value="0.14907407407407408" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/menu/item_menu.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.26614583333333336" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_14_PREVIEW" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

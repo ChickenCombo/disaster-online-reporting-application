@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.CommentsActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+
+        <com.gauravk.bubblenavigation.BubbleNavigationConstraintView
+            android:id="@+id/bubbleNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="4dp"
+            android:padding="12dp"
+            app:bnc_mode="spread"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/navPAGASA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_active="true"
+                app:bt_colorActive="@color/primary_green"
+                app:bt_colorInactive="@color/light_gray"
+                app:bt_icon="@drawable/ic_pagasa"
+                app:bt_title="PAGASA" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/navRedCross"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_active="true"
+                app:bt_colorActive="@color/primary_green"
+                app:bt_colorInactive="@color/light_gray"
+                app:bt_icon="@drawable/ic_redcross"
+                app:bt_title="Red Cross" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/navPHIVOLCS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_active="true"
+                app:bt_colorActive="@color/primary_green"
+                app:bt_colorInactive="@color/light_gray"
+                app:bt_icon="@drawable/ic_phivolcs"
+                app:bt_title="PHIVOLCS" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/navNDRRMC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_active="true"
+                app:bt_colorActive="@color/primary_green"
+                app:bt_colorInactive="@color/light_gray"
+                app:bt_icon="@drawable/ic_ndrrmc"
+                app:bt_title="NDRRMC" />
+
+            <com.gauravk.bubblenavigation.BubbleToggleView
+                android:id="@+id/navNOAH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:bt_active="true"
+                app:bt_colorActive="@color/primary_green"
+                app:bt_colorInactive="@color/light_gray"
+                app:bt_icon="@drawable/ic_noah"
+                app:bt_title="NOAH" />
+        </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
+
+        <FrameLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bubbleNavigation" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

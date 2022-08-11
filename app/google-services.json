@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "664032312286",
+    "firebase_url": "https://dora-ab7c3-default-rtdb.firebaseio.com",
+    "project_id": "dora-ab7c3",
+    "storage_bucket": "dora-ab7c3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664032312286:android:29942868f8939611cbbb4f",
+        "android_client_info": {
+          "package_name": "com.app.dorav4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664032312286-gtp396rkeu5cgkg4tdn73so9u8ab842s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgF3Y9DBOflU5LYDGS5A-H-_gxjNoey4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664032312286-gtp396rkeu5cgkg4tdn73so9u8ab842s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

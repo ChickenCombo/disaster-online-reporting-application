@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/primary">
+        <item android:id="@+id/navAdvisories"
+            android:title="Advisories"
+            android:icon="@drawable/ic_advisories"/>
+
+        <item android:id="@+id/navGuides"
+            android:title="Guides"
+            android:icon="@drawable/ic_guides"/>
+
+        <item android:id="@+id/navHotlines"
+            android:title="Hotlines"
+            android:icon="@drawable/ic_hotlines"/>
+
+        <item android:id="@+id/navFriends"
+            android:title="Friends"
+            android:icon="@drawable/ic_friends"/>
+
+        <item android:id="@+id/navFindFriends"
+            android:title="Find Friends"
+            android:icon="@drawable/ic_find_friends"/>
+    </group>
+</menu>
