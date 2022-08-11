@@ -15,6 +15,6 @@ First, clone the repo
 
 Next, you will need to create your own Firebase project and register `com.app.dorav4` as the Android package name and download the `google-services.json` file.
 
-Switch to the **Project** view in Android studio and paste `google-services.json` into `app` directory
+Switch to the **Project** view in Android studio and paste `google-services.json` into `app` directory.
 
-Lastly, enable Firebase Authentication with Email/Password as the sign-in provider
+Lastly, enable Firebase Authentication with Email/Password as the sign-in provider.
