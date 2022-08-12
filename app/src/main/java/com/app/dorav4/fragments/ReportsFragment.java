@@ -1,8 +1,13 @@
 package com.app.dorav4.fragments;
 
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -11,17 +16,6 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.transition.Slide;
-import android.transition.Transition;
-import android.transition.TransitionManager;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.Button;
-import android.widget.FrameLayout;
 
 import com.app.dorav4.R;
 import com.app.dorav4.activities.PostReportActivity;
@@ -36,7 +30,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class ReportsFragment extends Fragment {
     FloatingActionButton addReport;
@@ -85,11 +78,9 @@ public class ReportsFragment extends Fragment {
         });
 
         // btnJumpToTop OnClickListener
-        btnJumpToTop.setOnClickListener(v -> {
-            nestedScrollView.smoothScrollTo(0, 0);
-        });
+        btnJumpToTop.setOnClickListener(v -> nestedScrollView.smoothScrollTo(0, 0));
 
-        // searchView QueryTextListener
+        // searchView OnQueryTextListener
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -113,17 +104,16 @@ public class ReportsFragment extends Fragment {
         });
 
         // Show btnJumpToTop button at the end of nested scroll view
-        nestedScrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
-            @Override
-            public void onScrollChanged() {
-                if (nestedScrollView.getScrollY() == 0) {
-                    btnJumpToTop.setVisibility(View.GONE);
-                } else if (nestedScrollView.getChildAt(0).getBottom() <= (nestedScrollView.getHeight() + nestedScrollView.getScrollY())) {
-                    btnJumpToTop.animate().alpha(1.0f);
-                    btnJumpToTop.setVisibility(View.VISIBLE);
-                } else {
-                    btnJumpToTop.setVisibility(View.GONE);
-                }
+        nestedScrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+            Animation slideUp = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_up);
+            Animation slideDown = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down);
+
+            if (nestedScrollView.getScrollY() == 0) {
+                btnJumpToTop.startAnimation(slideDown);
+                btnJumpToTop.setVisibility(View.GONE);
+            } else if (nestedScrollView.getChildAt(0).getBottom() <= (nestedScrollView.getHeight() + nestedScrollView.getScrollY())){
+                btnJumpToTop.startAnimation(slideUp);
+                btnJumpToTop.setVisibility(View.VISIBLE);
             }
         });
 
