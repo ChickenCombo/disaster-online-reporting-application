@@ -42,6 +42,8 @@ public class ReportsFragment extends Fragment {
     LinearLayoutManager layoutManager;
     SearchView searchView;
     Button btnJumpToTop;
+    Animation slideUp, slideDown;
+
 
     DatabaseReference reportsReference;
 
@@ -54,6 +56,8 @@ public class ReportsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reports, container, false);
 
+        reportsList = new ArrayList<>();
+
         emptyView = view.findViewById(R.id.emptyView);
         addReport = view.findViewById(R.id.addReport);
         btnJumpToTop = view.findViewById(R.id.btnJumpToTop);
@@ -61,7 +65,8 @@ public class ReportsFragment extends Fragment {
         searchView = view.findViewById(R.id.searchView);
         nestedScrollView = view.findViewById(R.id.nestedScrollView);
 
-        reportsList = new ArrayList<>();
+        slideUp = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
+        slideDown = AnimationUtils.loadAnimation(getContext(), R.anim.slide_down);
 
         // Show newest reports on top of the recycler view
         layoutManager = new LinearLayoutManager(getActivity());
@@ -105,9 +110,6 @@ public class ReportsFragment extends Fragment {
 
         // Show btnJumpToTop button at the end of nested scroll view
         nestedScrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
-            Animation slideUp = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_up);
-            Animation slideDown = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down);
-
             if (nestedScrollView.getScrollY() == 0) {
                 btnJumpToTop.startAnimation(slideDown);
                 btnJumpToTop.setVisibility(View.GONE);
