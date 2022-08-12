@@ -5,6 +5,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
@@ -35,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ReportsFragment extends Fragment {
     FloatingActionButton addReport;
@@ -44,6 +46,8 @@ public class ReportsFragment extends Fragment {
     List<Reports> reportsList;
     ReportsAdapter reportsAdapter;
     NestedScrollView nestedScrollView;
+    LinearLayoutManager layoutManager;
+    SearchView searchView;
     Button btnJumpToTop;
 
     DatabaseReference reportsReference;
@@ -61,7 +65,16 @@ public class ReportsFragment extends Fragment {
         addReport = view.findViewById(R.id.addReport);
         btnJumpToTop = view.findViewById(R.id.btnJumpToTop);
         recyclerView = view.findViewById(R.id.recyclerView);
+        searchView = view.findViewById(R.id.searchView);
         nestedScrollView = view.findViewById(R.id.nestedScrollView);
+
+        reportsList = new ArrayList<>();
+
+        // Show newest reports on top of the recycler view
+        layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setStackFromEnd(true);
+        layoutManager.setReverseLayout(true);
+        recyclerView.setLayoutManager(layoutManager);
 
         reportsReference = FirebaseDatabase.getInstance().getReference().child("Reports");
 
@@ -74,6 +87,29 @@ public class ReportsFragment extends Fragment {
         // btnJumpToTop OnClickListener
         btnJumpToTop.setOnClickListener(v -> {
             nestedScrollView.smoothScrollTo(0, 0);
+        });
+
+        // searchView QueryTextListener
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (!query.isEmpty()) {
+                    searchReports(query);
+                } else {
+                    loadReports();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                if (!query.isEmpty()) {
+                    searchReports(query);
+                } else {
+                    loadReports();
+                }
+                return false;
+            }
         });
 
         // Show btnJumpToTop button at the end of nested scroll view
@@ -98,14 +134,6 @@ public class ReportsFragment extends Fragment {
 
     // Load reports into the recycler view
     private void loadReports() {
-        reportsList = new ArrayList<>();
-
-        // Show newest reports on top of the recycler view
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setStackFromEnd(true);
-        layoutManager.setReverseLayout(true);
-        recyclerView.setLayoutManager(layoutManager);
-
         reportsReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -121,11 +149,46 @@ public class ReportsFragment extends Fragment {
 
                 // Show emptyView if recyclerView is empty
                 if (reportsList.size() == 0) {
+                    searchView.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.GONE);
                     emptyView.setVisibility(View.VISIBLE);
                 } else {
+                    searchView.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.VISIBLE);
                     emptyView.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    // Search for reports
+    private void searchReports(String searchQuery) {
+        reportsReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                reportsList.clear();
+
+                // Add database data inside the list
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Reports reports = ds.getValue(Reports.class);
+
+                    if (reports != null) {
+                        boolean disasterTypeQuery = reports.getDisasterType().toLowerCase().contains(searchQuery.toLowerCase());
+                        boolean addressQuery = reports.getAddress().toLowerCase().contains(searchQuery.toLowerCase());
+                        boolean nameQuery = reports.getFullName().toLowerCase().contains(searchQuery.toLowerCase());
+
+                        if (disasterTypeQuery || addressQuery || nameQuery) {
+                            reportsList.add(reports);
+                        }
+                    }
+
+                    reportsAdapter = new ReportsAdapter(getActivity(), reportsList);
+                    recyclerView.setAdapter(reportsAdapter);
                 }
             }
 
