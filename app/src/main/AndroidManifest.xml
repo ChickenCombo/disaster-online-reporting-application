@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DORAV4">
         <activity
+            android:name=".activities.UpvotesActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.AdvisoriesActivity"
             android:exported="false" />
         <activity

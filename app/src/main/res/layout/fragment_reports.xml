@@ -25,7 +25,7 @@
             android:layout_height="200dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_img_empty"
+            android:src="@drawable/img_empty"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +91,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:listitem="@layout/single_view_reports"/>
 
     </androidx.core.widget.NestedScrollView>
 

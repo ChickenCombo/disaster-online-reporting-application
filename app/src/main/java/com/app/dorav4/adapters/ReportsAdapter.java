@@ -23,6 +23,7 @@ import com.app.dorav4.R;
 import com.app.dorav4.activities.ImageFullscreenActivity;
 import com.app.dorav4.activities.CommentsActivity;
 import com.app.dorav4.activities.PostReportActivity;
+import com.app.dorav4.activities.UpvotesActivity;
 import com.app.dorav4.holders.ReportsViewHolder;
 import com.app.dorav4.models.Reports;
 import com.google.firebase.auth.FirebaseAuth;
@@ -130,6 +131,13 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
             // Pass image uri to the next intent
             Intent intent = new Intent(context, ImageFullscreenActivity.class);
             intent.putExtra("reportPicture", reportPicture);
+            context.startActivity(intent);
+        });
+
+        // tvReportUpvoteCount OnClickListener
+        holder.tvReportUpvoteCount.setOnClickListener(v -> {
+            Intent intent = new Intent(context, UpvotesActivity.class);
+            intent.putExtra("reportId", reportId);
             context.startActivity(intent);
         });
     }

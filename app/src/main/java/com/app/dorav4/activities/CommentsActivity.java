@@ -82,7 +82,7 @@ public class CommentsActivity extends AppCompatActivity {
         etComment = findViewById(R.id.etComment);
         recyclerView = findViewById(R.id.recyclerView);
 
-        tvToolbarHeader.setText("Report Details");
+        tvToolbarHeader.setText("Comments");
 
         progressDialog = new ProgressDialog(CommentsActivity.this);
 
@@ -105,6 +105,13 @@ public class CommentsActivity extends AppCompatActivity {
             // Pass image uri to the next intent
             Intent intent = new Intent(CommentsActivity.this, ImageFullscreenActivity.class);
             intent.putExtra("reportPicture", reportPicture);
+            startActivity(intent);
+        });
+
+        // tvReportUpvoteCount OnClickListener
+        tvReportUpvoteCount.setOnClickListener(v -> {
+            Intent intent = new Intent(CommentsActivity.this, UpvotesActivity.class);
+            intent.putExtra("reportId", reportId);
             startActivity(intent);
         });
 
