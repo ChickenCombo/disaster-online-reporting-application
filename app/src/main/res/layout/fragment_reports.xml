@@ -71,6 +71,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:showAsAction="always"
+        app:searchIcon="@drawable/ic_search"
         app:closeIcon="@drawable/ic_erase"
         app:iconifiedByDefault="false"
         app:queryHint="Search..."
