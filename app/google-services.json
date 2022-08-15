@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "664032312286",
-    "firebase_url": "https://dora-ab7c3-default-rtdb.firebaseio.com",
-    "project_id": "dora-ab7c3",
-    "storage_bucket": "dora-ab7c3.appspot.com"
+    "project_number": "369884319647",
+    "firebase_url": "https://dorav4-app-default-rtdb.firebaseio.com",
+    "project_id": "dorav4-app",
+    "storage_bucket": "dorav4-app.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:664032312286:android:29942868f8939611cbbb4f",
+        "mobilesdk_app_id": "1:369884319647:android:86a88d9ac2bcd690f3f7aa",
         "android_client_info": {
           "package_name": "com.app.dorav4"
         }
       },
       "oauth_client": [
         {
-          "client_id": "664032312286-gtp396rkeu5cgkg4tdn73so9u8ab842s.apps.googleusercontent.com",
+          "client_id": "369884319647-e6v8434cemqik8grus9btqtiqmt1sj0t.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBgF3Y9DBOflU5LYDGS5A-H-_gxjNoey4g"
+          "current_key": "AIzaSyCSppwDPrK9_C5K_U7QlKuL1xzE7o11Lg4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "664032312286-gtp396rkeu5cgkg4tdn73so9u8ab842s.apps.googleusercontent.com",
+              "client_id": "369884319647-e6v8434cemqik8grus9btqtiqmt1sj0t.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
