@@ -23,7 +23,7 @@
             android:id="@+id/bubbleNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/background"
             android:elevation="4dp"
             android:padding="12dp"
             app:bnc_mode="spread"
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 app:bt_active="true"
                 app:bt_colorActive="@color/primary_green"
-                app:bt_colorInactive="@color/light_gray"
+                app:bt_colorInactive="@color/secondary_gray"
                 app:bt_icon="@drawable/ic_pagasa"
                 app:bt_title="PAGASA" />
 
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 app:bt_active="true"
                 app:bt_colorActive="@color/primary_green"
-                app:bt_colorInactive="@color/light_gray"
+                app:bt_colorInactive="@color/secondary_gray"
                 app:bt_icon="@drawable/ic_redcross"
                 app:bt_title="Red Cross" />
 
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 app:bt_active="true"
                 app:bt_colorActive="@color/primary_green"
-                app:bt_colorInactive="@color/light_gray"
+                app:bt_colorInactive="@color/secondary_gray"
                 app:bt_icon="@drawable/ic_phivolcs"
                 app:bt_title="PHIVOLCS" />
 
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 app:bt_active="true"
                 app:bt_colorActive="@color/primary_green"
-                app:bt_colorInactive="@color/light_gray"
+                app:bt_colorInactive="@color/secondary_gray"
                 app:bt_icon="@drawable/ic_ndrrmc"
                 app:bt_title="NDRRMC" />
 
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 app:bt_active="true"
                 app:bt_colorActive="@color/primary_green"
-                app:bt_colorInactive="@color/light_gray"
+                app:bt_colorInactive="@color/secondary_gray"
                 app:bt_icon="@drawable/ic_noah"
                 app:bt_title="NOAH" />
         </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>

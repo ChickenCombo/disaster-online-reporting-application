@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/safe_gray"
     tools:context=".activities.ChangeEmailActivity">
 
     <View
@@ -12,7 +13,7 @@
         android:layout_height="300dp"
         android:background="@color/primary_green"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,13 +28,14 @@
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
+        app:tint="@color/secondary_gray" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvAuthenticate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:backgroundTint="@color/safe_white"
         app:cardCornerRadius="30dp"
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,7 +61,7 @@
                 android:fontFamily="@font/raleway"
                 android:text="Authenticate"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/safe_black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -71,6 +73,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingEnd="16dp"
+                android:textColor="@color/safe_black"
                 android:text="Please take a moment to verify your account by entering your password, this helps us confirm your identity and secure your account."
                 android:textAlignment="center" />
 
@@ -137,10 +140,11 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:backgroundTint="@color/secondary_green"
+                android:backgroundTint="@color/primary_green"
                 android:fontFamily="@font/raleway"
                 android:text="Authenticate"
                 android:textStyle="bold"
+                android:textColor="@color/safe_white"
                 app:cornerRadius="30dp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -178,7 +182,7 @@
                 android:fontFamily="@font/raleway"
                 android:text="Update Email Address"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/safe_black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -190,6 +194,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingEnd="16dp"
+                android:textColor="@color/safe_black"
                 android:text="Please enter your new email address."
                 android:textAlignment="center" />
 
@@ -229,10 +234,11 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:backgroundTint="@color/secondary_green"
+                android:backgroundTint="@color/primary_green"
                 android:fontFamily="@font/raleway"
                 android:text="Change Email Address"
                 android:textStyle="bold"
+                android:textColor="@color/safe_white"
                 app:cornerRadius="30dp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

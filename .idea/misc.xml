@@ -74,10 +74,25 @@
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/menu/item_menu.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.26614583333333336" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_comment.xml" value="0.2245" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_upvote.xml" value="0.1" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_upvoted.xml" value="0.1" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_advisories.xml" value="0.36666666666666664" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_change_email.xml" value="0.36666666666666664" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_change_password.xml" value="0.36666666666666664" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_change_profile_picture.xml" value="0.36666666666666664" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_comments.xml" value="0.33" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/fragment_red_cross.xml" value="0.36666666666666664" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/fragment_reports.xml" value="0.36666666666666664" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/single_view_comments.xml" value="0.36666666666666664" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/single_view_reports.xml" value="0.36666666666666664" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/single_view_upvotes.xml" value="0.36666666666666664" />
+        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/toolbar_back.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_14_PREVIEW" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
