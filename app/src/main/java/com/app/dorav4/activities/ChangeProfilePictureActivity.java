@@ -32,6 +32,7 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -177,6 +178,9 @@ public class ChangeProfilePictureActivity extends AppCompatActivity {
                             Toast.makeText(ChangeProfilePictureActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         });
                     });
+                } else {
+                    progressDialog.dismiss();
+                    Toast.makeText(ChangeProfilePictureActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

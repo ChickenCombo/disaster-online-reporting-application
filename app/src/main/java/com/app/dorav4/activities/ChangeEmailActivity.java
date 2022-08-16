@@ -116,7 +116,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
                     cvEmail.setVisibility(View.VISIBLE);
                 } else {
                     progressDialog.dismiss();
-                    Toast.makeText(ChangeEmailActivity.this, "Invalid password, please try again!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChangeEmailActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -150,6 +150,8 @@ public class ChangeEmailActivity extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
+                } else {
+                    Toast.makeText(ChangeEmailActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

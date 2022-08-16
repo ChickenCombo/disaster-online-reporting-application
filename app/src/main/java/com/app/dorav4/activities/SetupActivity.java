@@ -121,6 +121,8 @@ public class SetupActivity extends AppCompatActivity {
                             Toast.makeText(SetupActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         });
                     });
+                } else {
+                    Toast.makeText(SetupActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

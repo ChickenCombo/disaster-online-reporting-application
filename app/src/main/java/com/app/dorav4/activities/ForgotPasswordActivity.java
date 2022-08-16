@@ -73,7 +73,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     finish();
                 } else {
                     progressDialog.dismiss();
-                    Toast.makeText(ForgotPasswordActivity.this, "Account does not exist, please try again!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgotPasswordActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
