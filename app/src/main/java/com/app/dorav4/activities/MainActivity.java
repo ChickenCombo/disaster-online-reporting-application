@@ -89,7 +89,8 @@ public class MainActivity extends AppCompatActivity {
             if (id == R.id.navGuides) {
                 Toast.makeText(MainActivity.this, "Guides", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.navHotlines) {
-                Toast.makeText(MainActivity.this, "Hotlines", Toast.LENGTH_SHORT).show();
+                intent = new Intent(MainActivity.this, HotlinesActivity.class);
+                startActivity(intent);
             } else if (id == R.id.navAdvisories) {
                 intent = new Intent(MainActivity.this, AdvisoriesActivity.class);
                 startActivity(intent);

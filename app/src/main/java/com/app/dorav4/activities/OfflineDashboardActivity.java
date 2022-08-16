@@ -39,15 +39,14 @@ public class OfflineDashboardActivity extends AppCompatActivity {
 
         // Emergency Hotlines OnClickListener
         cvHotlines.setOnClickListener(v ->{
-            Toast.makeText(OfflineDashboardActivity.this, "Hotlines Clicked", Toast.LENGTH_SHORT).show();
-            // intent = new Intent(OfflineDashboardActivity.this, HotlinesActivity.class);
-            // startActivity(intent);
+            intent = new Intent(OfflineDashboardActivity.this, HotlinesActivity.class);
+            startActivity(intent);
         });
 
         // Bluetooth Chat OnClickListener
         cvBluetoothChat.setOnClickListener(v ->{
             Toast.makeText(OfflineDashboardActivity.this, "Offline Chat Clicked", Toast.LENGTH_SHORT).show();
-            // intent = new Intent(OfflineDashboardActivity.this, HotlinesActivity.class);
+            // intent = new Intent(OfflineDashboardActivity.this, BluetoothChat.class);
             // startActivity(intent);
         });
 
