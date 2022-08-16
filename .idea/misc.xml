@@ -51,6 +51,7 @@
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_bluetooth_chat.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_chat.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_device_scan.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_disasters.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_enable_bluetooth.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_location_required.xml" value="0.25" />
@@ -70,7 +71,7 @@
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/single_view_upvotes.xml" value="0.3076923076923077" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/toolbar_back.xml" value="0.536" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/menu/drawe_menu.xml" value="0.25" />
-        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/menu/drawer_menu.xml" value="0.14907407407407408" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/menu/drawer_menu.xml" value="0.4" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/menu/item_menu.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.26614583333333336" />
