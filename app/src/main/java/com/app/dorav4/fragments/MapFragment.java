@@ -41,6 +41,8 @@ public class MapFragment extends Fragment {
 
                 if (position == 0) {
                     fragmentTransaction.replace(R.id.mapContainer, new DisastersFragment());
+                } else if (position == 1) {
+                    fragmentTransaction.replace(R.id.mapContainer, new EvacuateFragment());
                 }
 
                 fragmentTransaction.commit();
