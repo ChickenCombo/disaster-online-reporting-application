@@ -203,23 +203,6 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
         });
     }
 
-    // Get location updates
-    private void getLocationUpdates() {
-        // Permission check
-        if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity());
-
-        fusedLocationProviderClient.requestLocationUpdates(locationRequest, new LocationCallback() {
-            @Override
-            public void onLocationResult(@NonNull LocationResult locationResult) {
-                super.onLocationResult(locationResult);
-            }
-        }, Looper.getMainLooper());
-    }
-
     // Check if GPS in turned on
     private boolean isGPSEnabled() {
         boolean isEnabled;
