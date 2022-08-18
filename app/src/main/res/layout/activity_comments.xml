@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e5e5e5"
+    android:background="@color/background"
     tools:context=".activities.CommentsActivity">
 
     <include
@@ -63,7 +63,7 @@
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/raleway"
                         android:text="Juan Dela Cruz"
-                        android:textColor="@color/black"
+                        android:textColor="@color/safe_black"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -79,6 +79,7 @@
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/raleway"
                         android:text="0 days ago"
+                        android:textColor="@color/primary_gray"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/ivReportProfile"
@@ -109,6 +110,7 @@
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/raleway"
                         android:text="España Blvd, Sampaloc, Manila, 1008 Metro Manila"
+                        android:textColor="@color/primary_gray"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -138,6 +140,7 @@
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/raleway"
                         android:text="There’s heavy rain in España Boulevard right now nearby UST."
+                        android:textColor="@color/safe_black"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
@@ -164,6 +167,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/raleway"
                         android:text="0 upvotes"
+                        android:textColor="@color/primary_gray"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/ivReportUpvote"
                         app:layout_constraintTop_toBottomOf="@+id/tvReportDescription"
@@ -187,6 +191,7 @@
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/raleway"
                         android:text="0 comments"
+                        android:textColor="@color/primary_gray"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvReportDescription" />
 
@@ -198,34 +203,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/raleway"
                 android:text=" Comments"
-                android:layout_marginBottom="8dp"
-                android:textColor="@color/black"
+                android:textColor="@color/safe_black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
-                android:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/single_view_comments"/>
+                android:visibility="visible"
+                tools:listitem="@layout/single_view_comments" />
 
             <TextView
                 android:id="@+id/tvEmptyViewHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/raleway"
-                android:visibility="gone"
                 android:text="No comments yet"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/safe_black"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tvEmptyViewSubHeader"
@@ -233,12 +238,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:visibility="gone"
                 android:fontFamily="@font/raleway"
-                android:textSize="12sp"
                 android:text="Be the first to comment"
                 android:textAlignment="center"
-                android:textColor="@color/black" />
+                android:textColor="@color/safe_black"
+                android:textSize="12sp"
+                android:visibility="gone" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
@@ -248,7 +253,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:background="@color/white"
+        android:background="@color/safe_white"
         android:layout_alignParentBottom="true">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -270,6 +275,7 @@
             android:layout_toEndOf="@id/ivCommentProfile"
             android:background="@drawable/bg_edittext"
             android:hint="Enter a comment..."
+            android:textColorHint="@color/primary_gray"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             tools:ignore="TouchTargetSizeCheck" />
@@ -281,7 +287,8 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:scaleType="center"
-            android:src="@drawable/ic_reply" />
+            android:src="@drawable/ic_reply"
+            app:tint="@color/primary_green" />
 
     </RelativeLayout>
 </RelativeLayout>

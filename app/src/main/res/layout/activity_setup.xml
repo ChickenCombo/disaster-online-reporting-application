@@ -47,7 +47,7 @@
                 android:fontFamily="@font/raleway"
                 android:text="Welcome to DORA!"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/safe_black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -73,7 +73,7 @@
                 android:textSize="17sp"
                 android:textAlignment="center"
                 android:text="Profile Setup"
-                android:textColor="@color/black" />
+                android:textColor="@color/safe_black" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/ivProfilePicture"
@@ -93,7 +93,7 @@
                 android:textAlignment="center"
                 android:text="Profile Picture"
                 android:textStyle="bold"
-                android:textColor="@color/black" />
+                android:textColor="@color/safe_black" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilFullName"
@@ -132,7 +132,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
-                android:backgroundTint="@color/secondary_green"
+                android:backgroundTint="@color/primary_green"
                 android:fontFamily="@font/raleway"
                 android:text="Save Profile"
                 android:textStyle="bold"

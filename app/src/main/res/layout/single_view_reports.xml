@@ -42,7 +42,7 @@
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/raleway"
                 android:text="Juan Dela Cruz"
-                android:textColor="@color/black"
+                android:textColor="@color/safe_black"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

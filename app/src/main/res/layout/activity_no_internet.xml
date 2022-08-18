@@ -34,7 +34,7 @@
             android:fontFamily="@font/raleway"
             android:text="Whoops!"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/safe_black"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
             android:paddingEnd="16dp"
             android:text="No internet connection, please make sure that Wi-Fi or mobile data is turned on."
             android:textAlignment="center"
-            android:textColor="@color/black" />
+            android:textColor="@color/safe_black" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnTryAgain"

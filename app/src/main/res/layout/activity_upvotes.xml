@@ -44,7 +44,7 @@
             android:fontFamily="@font/raleway"
             android:text="Report has no upvotes!"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/safe_black"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +60,7 @@
             android:layout_marginEnd="32dp"
             android:text="Verify the report by clicking the upvote button"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/safe_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />

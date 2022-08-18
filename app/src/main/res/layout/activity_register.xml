@@ -25,12 +25,11 @@
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
         android:contentDescription="@null"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
+        app:tint="@color/safe_white" />
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -63,7 +62,7 @@
                 android:fontFamily="@font/raleway"
                 android:text="We’re glad to have you!"
                 android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="@color/safe_black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -89,7 +88,7 @@
                 android:textSize="17sp"
                 android:textAlignment="center"
                 android:text="Account Setup"
-                android:textColor="@color/black" />
+                android:textColor="@color/safe_black" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilEmailAddress"
@@ -158,7 +157,7 @@
                 android:text="Register"
                 android:fontFamily="@font/raleway"
                 android:textStyle="bold"
-                android:backgroundTint="@color/secondary_green"
+                android:backgroundTint="@color/primary_green"
                 app:cornerRadius="30dp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

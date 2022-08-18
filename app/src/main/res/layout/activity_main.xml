@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 app:bt_active="true"
                 app:bt_colorActive="@color/primary_green"
-                app:bt_colorInactive="@color/light_gray"
+                app:bt_colorInactive="@color/primary_gray"
                 app:bt_icon="@drawable/ic_home"
                 app:bt_title="Reports" />
 
@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 app:bt_active="true"
                 app:bt_colorActive="@color/primary_green"
-                app:bt_colorInactive="@color/light_gray"
+                app:bt_colorInactive="@color/primary_gray"
                 app:bt_icon="@drawable/ic_chat"
                 app:bt_title="Chat" />
 
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 app:bt_active="true"
                 app:bt_colorActive="@color/primary_green"
-                app:bt_colorInactive="@color/light_gray"
+                app:bt_colorInactive="@color/primary_gray"
                 app:bt_icon="@drawable/ic_map"
                 app:bt_title="Map" />
         </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
