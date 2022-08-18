@@ -1,37 +1,32 @@
 package com.app.dorav4.fragments;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-
-import com.app.dorav4.activities.PostReportActivity;
-import com.app.dorav4.adapters.ReportsAdapter;
-import com.app.dorav4.models.Reports;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-
-import android.graphics.Color;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 import com.app.dorav4.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
@@ -41,8 +36,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
@@ -59,7 +54,6 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class DisastersFragment extends Fragment implements EasyPermissions.PermissionCallbacks {
     LocationRequest locationRequest;
-    FusedLocationProviderClient fusedLocationProviderClient;
 
     DatabaseReference reportsReference;
 
@@ -159,12 +153,44 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
 
     // Add disasters marker
     private void addMarker(GoogleMap googleMap) {
+        int iconId = 0;
+
         // Check if list is empty
         if (!longitudeList.isEmpty() && !latitudeList.isEmpty()) {
             for (int i = 0; i < longitudeList.size(); i++) {
+                // Set icon id for custom marker
+                switch(disasterTypeList.get(i)) {
+                    case "Typhoon":
+                        iconId = R.drawable.ic_map_typhoon;
+                        break;
+                    case "Heavy Rain":
+                        iconId = R.drawable.ic_map_heavy_rain;
+                        break;
+                    case "Landslide":
+                        iconId = R.drawable.ic_map_landslide;
+                        break;
+                    case "Earthquake":
+                        iconId = R.drawable.ic_map_earthquake;
+                        break;
+                    case "Fire":
+                        iconId = R.drawable.ic_map_fire;
+                        break;
+                    case "Flood":
+                        iconId = R.drawable.ic_map_flood;
+                        break;
+                    case "Tsunami":
+                        iconId = R.drawable.ic_map_tsunami;
+                        break;
+                    case "Volcanic Eruption":
+                        iconId = R.drawable.ic_map_volcanic_eruption;
+                        break;
+                }
+
+                // Add marker to the map
                 LatLng latLng = new LatLng(latitudeList.get(i), longitudeList.get(i));
                 googleMap.addMarker(new MarkerOptions()
                         .position(latLng)
+                        .icon(bitmapDescriptor(requireActivity().getApplicationContext(), iconId))
                         .title(disasterTypeList.get(i)));
             }
         }
@@ -267,5 +293,17 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
         GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
         int result = googleApiAvailability.isGooglePlayServicesAvailable(requireActivity());
         return result == ConnectionResult.SUCCESS;
+    }
+
+    // Bitmap Descriptor for custom marker icons
+    private BitmapDescriptor bitmapDescriptor (Context context, int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+        assert vectorDrawable != null;
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 }
