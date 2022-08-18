@@ -90,22 +90,8 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
         // Permission Check
         checkPermission();
 
-        // Check if device has Google Play Services
-        if (checkGooglePlayServices()) {
-            // Initialize Map Fragment
-            SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-            if (mapFragment != null) {
-                mapFragment.getMapAsync(callback);
-            }
-
-            // Check if user has granted permission
-            if (isPermissionGranted) {
-                // Enable GPS
-                turnOnGPS();
-            }
-        } else {
-            Toast.makeText(requireActivity(), "Google Play Services is required in order for maps to work!", Toast.LENGTH_SHORT).show();
-        }
+        // Initialize Google Maps
+        initializeMap();
 
         return view;
     }
@@ -125,11 +111,35 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
 
     @Override
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+        // Set to if user grants location permission
         isPermissionGranted = true;
+
+        // Initialize Google Maps
+        initializeMap();
     }
 
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+    }
+
+    // Initialize map
+    private void initializeMap() {
+        // Check if device has Google Play Services
+        if (checkGooglePlayServices()) {
+            // Initialize Map Fragment
+            SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+            if (mapFragment != null) {
+                mapFragment.getMapAsync(callback);
+            }
+
+            // Check if user has granted permission
+            if (isPermissionGranted) {
+                // Enable GPS
+                turnOnGPS();
+            }
+        } else {
+            Toast.makeText(requireActivity(), "Google Play Services is required in order for Google Maps to work!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     // Check if GPS in turned on
