@@ -11,6 +11,8 @@ import android.content.IntentSender;
 import android.content.pm.PackageManager;
 
 import com.app.dorav4.activities.PostReportActivity;
+import com.app.dorav4.adapters.ReportsAdapter;
+import com.app.dorav4.models.Reports;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -34,11 +36,20 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.location.Priority;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
@@ -46,6 +57,11 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class DisastersFragment extends Fragment implements EasyPermissions.PermissionCallbacks {
     LocationRequest locationRequest;
     FusedLocationProviderClient fusedLocationProviderClient;
+
+    DatabaseReference reportsReference;
+
+    List<Double> longitudeList;
+    List<Double> latitudeList;
 
     boolean isPermissionGranted;
 
@@ -56,6 +72,10 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
             if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
+
+            // Set default map camera starting location
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(11.6737, 122.4816), 5.4f) );
+
 
             // Google Map UI Settings
             googleMap.getUiSettings().setZoomControlsEnabled(true);
@@ -74,6 +94,9 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
                 }
                 return false;
             });
+
+            // Add disaster markers
+            addMarker(googleMap);
         }
     };
 
@@ -84,6 +107,9 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
 
         // Permission Check
         checkPermission();
+
+        // Get reports list
+        getReportsList();
 
         // Check if device has Google Play Services
         if (checkGooglePlayServices()) {
@@ -125,6 +151,51 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
 
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+    }
+
+    // Add disasters marker
+    private void addMarker(GoogleMap googleMap) {
+        // Check if list is empty
+        if (!longitudeList.isEmpty() && !latitudeList.isEmpty()) {
+            for (int i = 0; i < longitudeList.size(); i++) {
+                LatLng latLng = new LatLng(latitudeList.get(i), longitudeList.get(i));
+                googleMap.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .title("Marker in Sydney"));
+            }
+        }
+    }
+
+    // Get reports list
+    private void getReportsList() {
+        longitudeList = new ArrayList<>();
+        latitudeList = new ArrayList<>();
+
+        reportsReference = FirebaseDatabase.getInstance().getReference().child("Reports");
+        reportsReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                longitudeList.clear();
+                latitudeList.clear();
+
+                // Add database data inside the list
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    String longitude = String.valueOf(ds.child("longitude").getValue());
+                    String latitude = String.valueOf(ds.child("latitude").getValue());
+
+                    Double lon = Double.valueOf(longitude);
+                    Double lat = Double.valueOf(latitude);
+
+                    longitudeList.add(lon);
+                    latitudeList.add(lat);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     // Get location updates
