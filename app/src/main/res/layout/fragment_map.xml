@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:padding="12dp"
+        android:elevation="2dp"
         app:bnc_mode="spread"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +26,7 @@
             android:layout_height="wrap_content"
             app:bt_active="true"
             app:bt_colorActive="@color/primary_green"
-            app:bt_colorInactive="@color/light_gray"
+            app:bt_colorInactive="@color/primary_gray"
             app:bt_icon="@drawable/ic_disasters"
             app:bt_title="Disasters" />
 
@@ -35,7 +36,7 @@
             android:layout_height="wrap_content"
             app:bt_active="true"
             app:bt_colorActive="@color/primary_green"
-            app:bt_colorInactive="@color/light_gray"
+            app:bt_colorInactive="@color/primary_gray"
             app:bt_icon="@drawable/ic_evacuation_areas"
             app:bt_title="Evacuate"/>
     </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>

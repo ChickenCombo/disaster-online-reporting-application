@@ -45,7 +45,7 @@
             android:fontFamily="@font/raleway"
             android:text="No reports found!"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/safe_black"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,7 @@
             android:layout_marginEnd="32dp"
             android:text="Tap the floating button to submit a disaster report"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/safe_black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -81,7 +81,8 @@
         app:queryHint="Search..."
         android:background="@color/white"
         app:queryBackground="@android:color/transparent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="2dp"/>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
