@@ -62,6 +62,7 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
 
     List<Double> longitudeList;
     List<Double> latitudeList;
+    List<String> disasterTypeList;
 
     boolean isPermissionGranted;
 
@@ -161,7 +162,7 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
                 LatLng latLng = new LatLng(latitudeList.get(i), longitudeList.get(i));
                 googleMap.addMarker(new MarkerOptions()
                         .position(latLng)
-                        .title("Marker in Sydney"));
+                        .title(disasterTypeList.get(i)));
             }
         }
     }
@@ -170,6 +171,7 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
     private void getReportsList() {
         longitudeList = new ArrayList<>();
         latitudeList = new ArrayList<>();
+        disasterTypeList = new ArrayList<>();
 
         reportsReference = FirebaseDatabase.getInstance().getReference().child("Reports");
         reportsReference.addValueEventListener(new ValueEventListener() {
@@ -177,17 +179,20 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 longitudeList.clear();
                 latitudeList.clear();
+                disasterTypeList.clear();
 
                 // Add database data inside the list
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     String longitude = String.valueOf(ds.child("longitude").getValue());
                     String latitude = String.valueOf(ds.child("latitude").getValue());
+                    String disasterType = String.valueOf(ds.child("disasterType").getValue());
 
                     Double lon = Double.valueOf(longitude);
                     Double lat = Double.valueOf(latitude);
 
                     longitudeList.add(lon);
                     latitudeList.add(lat);
+                    disasterTypeList.add(disasterType);
                 }
             }
 
