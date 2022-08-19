@@ -25,7 +25,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
@@ -60,8 +59,10 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
     List<Double> longitudeList;
     List<Double> latitudeList;
     List<String> disasterTypeList;
+    List<String> addressList;
 
     boolean isPermissionGranted;
+    Double currentLongitude = 0.0, currentLatitude = 0.0;
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
@@ -181,6 +182,7 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
                 googleMap.addMarker(new MarkerOptions()
                         .position(latLng)
                         .icon(bitmapDescriptor(requireActivity().getApplicationContext(), iconId))
+                        .snippet("Address: " + addressList.get(i))
                         .title(disasterTypeList.get(i)));
             }
         }
@@ -211,6 +213,7 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
         longitudeList = new ArrayList<>();
         latitudeList = new ArrayList<>();
         disasterTypeList = new ArrayList<>();
+        addressList = new ArrayList<>();
 
         reportsReference = FirebaseDatabase.getInstance().getReference().child("Reports");
         reportsReference.addValueEventListener(new ValueEventListener() {
@@ -219,19 +222,21 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
                 longitudeList.clear();
                 latitudeList.clear();
                 disasterTypeList.clear();
+                addressList.clear();
 
                 // Add database data inside the list
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    String longitude = String.valueOf(ds.child("longitude").getValue());
-                    String latitude = String.valueOf(ds.child("latitude").getValue());
+                    // Fetch values in the database
+                    Double longitude = Double.valueOf(String.valueOf(ds.child("longitude").getValue()));
+                    Double latitude = Double.valueOf(String.valueOf(ds.child("latitude").getValue()));
                     String disasterType = String.valueOf(ds.child("disasterType").getValue());
+                    String address = String.valueOf(ds.child("address").getValue());
 
-                    Double lon = Double.valueOf(longitude);
-                    Double lat = Double.valueOf(latitude);
-
-                    longitudeList.add(lon);
-                    latitudeList.add(lat);
+                    // Add values inside the list
+                    longitudeList.add(longitude);
+                    latitudeList.add(latitude);
                     disasterTypeList.add(disasterType);
+                    addressList.add(address);
                 }
             }
 
