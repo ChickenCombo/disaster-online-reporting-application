@@ -32,9 +32,8 @@ public class OfflineDashboardActivity extends AppCompatActivity {
 
         // Disaster Preparedness Guides OnClickListener
         cvGuides.setOnClickListener(v ->{
-            Toast.makeText(OfflineDashboardActivity.this, "Guides Clicked", Toast.LENGTH_SHORT).show();
-            // intent = new Intent(OfflineDashboardActivity.this, GuidesActivity.class);
-            // startActivity(intent);
+            intent = new Intent(OfflineDashboardActivity.this, GuidesActivity.class);
+            startActivity(intent);
         });
 
         // Emergency Hotlines OnClickListener

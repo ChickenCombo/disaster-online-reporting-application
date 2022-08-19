@@ -103,7 +103,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/tv911" />
 
                     <TextView
-                        android:id="@+id/tv911SubHeader"
+                        android:id="@+id/tvEarthquakeSubHeader"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/raleway"
