@@ -1,9 +1,9 @@
 package com.app.dorav4.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.format.DateUtils;
 import android.view.Gravity;
@@ -11,18 +11,19 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
 import com.app.dorav4.activities.ImageFullscreenActivity;
 import com.app.dorav4.activities.CommentsActivity;
-import com.app.dorav4.activities.PostReportActivity;
 import com.app.dorav4.activities.UpvotesActivity;
 import com.app.dorav4.holders.ReportsViewHolder;
 import com.app.dorav4.models.Reports;
@@ -49,6 +50,8 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
     List<Reports> reportsList;
 
     ProgressDialog progressDialog;
+
+    Dialog dialog;
 
     DatabaseReference reportsReference;
 
@@ -158,14 +161,35 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
 
             // Delete is clicked
             if (id == 0) {
-                // Confirmation dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setCancelable(true);
-                builder.setTitle("Delete Report");
-                builder.setMessage("Are you sure you want to delete your report?");
-                builder.setPositiveButton("Delete", (dialog, which) -> deleteReport(reportId, reportPicture));
-                builder.setNegativeButton("Cancel", (dialog, which) -> { });
-                builder.create().show();
+                // Initialize custom dialog
+                dialog = new Dialog(context);
+                dialog.setContentView(R.layout.alert_dialog);
+                dialog.getWindow().setBackgroundDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.bg_alert_dialog, null));
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.setCancelable(false);
+                dialog.getWindow().getAttributes().windowAnimations = R.style.dialogAnimation;
+
+                // Set dialog details
+                TextView alertTitle = dialog.findViewById(R.id.tvAlertTitle);
+                TextView alertDescription = dialog.findViewById(R.id.tvAlertDescription);
+                ImageView alertImage = dialog.findViewById(R.id.ivAlertImage);
+                alertTitle.setText("Delete Report?");
+                alertDescription.setText("Are you sure you want to delete your report? Deleted reports cannot be recovered.");
+                alertImage.setImageResource(R.drawable.img_delete);
+
+                // Dialog confirmation button
+                Button confirm = dialog.findViewById(R.id.btnConfirm);
+                confirm.setText("Delete");
+                confirm.setOnClickListener(v -> {
+                    dialog.dismiss();
+                    deleteReport(reportId, reportPicture);
+                });
+
+                // Dialog cancel button
+                Button cancel = dialog.findViewById(R.id.btnCancel);
+                cancel.setOnClickListener(v -> dialog.dismiss());
+
+                dialog.show();
             }
             return false;
         });

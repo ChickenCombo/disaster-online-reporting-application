@@ -1,6 +1,7 @@
 package com.app.dorav4.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,12 +11,15 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
@@ -35,7 +39,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-public class CommentsAdapters extends RecyclerView.Adapter<CommentsViewHolder>{
+public class CommentsAdapters extends RecyclerView.Adapter<CommentsViewHolder> {
+    Dialog dialog;
+
     Context context;
     List<Comments> commentsList;
 
@@ -96,14 +102,35 @@ public class CommentsAdapters extends RecyclerView.Adapter<CommentsViewHolder>{
 
             // Delete is clicked
             if (id == 0) {
-                // Confirmation dialog
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setCancelable(true);
-                builder.setTitle("Delete Comment");
-                builder.setMessage("Are you sure you want to delete your comment?");
-                builder.setPositiveButton("Delete", (dialog, which) -> deleteComment(commentId));
-                builder.setNegativeButton("Cancel", (dialog, which) -> { });
-                builder.create().show();
+                // Initialize custom dialog
+                dialog = new Dialog(context);
+                dialog.setContentView(R.layout.alert_dialog);
+                dialog.getWindow().setBackgroundDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.bg_alert_dialog, null));
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.setCancelable(false);
+                dialog.getWindow().getAttributes().windowAnimations = R.style.dialogAnimation;
+
+                // Set dialog details
+                TextView alertTitle = dialog.findViewById(R.id.tvAlertTitle);
+                TextView alertDescription = dialog.findViewById(R.id.tvAlertDescription);
+                ImageView alertImage = dialog.findViewById(R.id.ivAlertImage);
+                alertTitle.setText("Delete Comment?");
+                alertDescription.setText("Are you sure you want to delete your comment? Deleted comments cannot be recovered.");
+                alertImage.setImageResource(R.drawable.img_delete);
+
+                // Dialog confirmation button
+                Button confirm = dialog.findViewById(R.id.btnConfirm);
+                confirm.setText("Delete");
+                confirm.setOnClickListener(v -> {
+                    dialog.dismiss();
+                    deleteComment(commentId);
+                });
+
+                // Dialog cancel button
+                Button cancel = dialog.findViewById(R.id.btnCancel);
+                cancel.setOnClickListener(v -> dialog.dismiss());
+
+                dialog.show();
             }
             return false;
         });
