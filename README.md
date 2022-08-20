@@ -8,15 +8,32 @@
 * Maruno, Hitomi B.
 * Quitor, Cedric John D.
 
-# Getting Started
-First, clone the repo:
+# Building DORA v4
+First, clone the repository:
 
     gh repo clone ChickenCombo/disaster-online-reporting-application-v4
 
-Next, you will need to create your own Firebase project and register `com.app.dorav4` as the Android package name and download the `google-services.json` file.
+### Firebase Setup
 
-Switch to **Project** view in Android Studio and paste `google-services.json` into `app/` directory.
+* Create your own Firebase project and register `com.app.dorav4` as the Android package name and download the `google-services.json` file.
 
-Lastly, configure the following: Authentication, Realtime Database, and Storage.
+* Switch to *Project* view in Android Studio and paste `google-services.json` into `app/` directory.
 
-Afterwards, make sure to perform a clean rebuild of the application.
+* Configure the following on your Firebase dashboard: Authentication, Realtime Database, and Storage.
+
+### Maps SDK for Android Setup
+
+* Go to Google Cloud Platform and select your Firebase project.
+
+* Navigate to APIs and Services and enable *Maps SDK for Android*.
+
+* Navigate to Credentials to get your API key.
+
+# Running DORA v4
+
+Connect an Android device or an emulator on your development machine.
+
+### Android Studio
+
+* Select `Run -> Run 'app'` (or `Debug 'app'`) from the menu bar
+* Select the device you wish to run the app on and click 'OK'
