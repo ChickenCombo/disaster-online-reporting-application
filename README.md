@@ -8,10 +8,13 @@
 * Maruno, Hitomi B.
 * Quitor, Cedric John D.
 
-## Building DORA v4
-First, clone the repository:
+## Getting Started
+### Project Setup
+Clone the repository:
 
     gh repo clone ChickenCombo/disaster-online-reporting-application-v4
+
+Then open the project using Android Studio.
 
 ### Firebase Setup
 
@@ -29,7 +32,7 @@ First, clone the repository:
 
 * Navigate to Credentials to get your API key.
 
-## Running DORA v4
+## Installation
 
 Connect an Android device or an emulator on your development machine.
 
