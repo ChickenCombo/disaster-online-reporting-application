@@ -8,7 +8,7 @@
 * Maruno, Hitomi B.
 * Quitor, Cedric John D.
 
-# Building DORA v4
+## Building DORA v4
 First, clone the repository:
 
     gh repo clone ChickenCombo/disaster-online-reporting-application-v4
@@ -29,7 +29,7 @@ First, clone the repository:
 
 * Navigate to Credentials to get your API key.
 
-# Running DORA v4
+## Running DORA v4
 
 Connect an Android device or an emulator on your development machine.
 
