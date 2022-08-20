@@ -312,6 +312,7 @@ public class CommentsActivity extends AppCompatActivity {
         });
     }
 
+    // TODO: Fix bug with timezone
     // Convert time into "time ago"
     private String calculateTime (String strDate) {
         @SuppressLint("SimpleDateFormat")

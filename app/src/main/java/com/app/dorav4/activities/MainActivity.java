@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         mUser = mAuth.getCurrentUser();
         usersReference = FirebaseDatabase.getInstance().getReference().child("Users");
 
+        // Add sidebar header
+        sidebarNavigation.inflateHeaderView(R.layout.drawer_header);
+
         // Change status bar color
         getWindow().setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.white));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);

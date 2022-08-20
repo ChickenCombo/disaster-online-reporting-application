@@ -31,6 +31,7 @@
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_upvote.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_upvoted.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_user.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/img_beach.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/img_delete.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/img_dora_logo.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/img_no_internet.xml" value="0.26614583333333336" />
@@ -62,6 +63,7 @@
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_splash.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_upvotes.xml" value="0.264" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/alert_dialog.xml" value="0.4" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/drawer_header.xml" value="0.264" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/dropdown_disasters.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_bluetooth_chat.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/fragment_chat.xml" value="0.25" />
