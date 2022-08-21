@@ -25,6 +25,8 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import es.dmoral.toasty.Toasty;
+
 public class ChangePasswordActivity extends AppCompatActivity {
     TextInputLayout tilEmailAddress, tilPassword, tilNewPassword;
     EditText etEmailAddress, etPassword, etNewPassword;
@@ -104,14 +106,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
             mUser.reauthenticate(credential).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
-                    Toast.makeText(ChangePasswordActivity.this, "Account successfully authenticated!", Toast.LENGTH_SHORT).show();
+                    Toasty.success(ChangePasswordActivity.this, "Account successfully authenticated.", Toasty.LENGTH_SHORT).show();
 
                     // Hide authentication form and show update password form
                     cvAuthenticate.setVisibility(View.GONE);
                     cvPassword.setVisibility(View.VISIBLE);
                 } else {
                     progressDialog.dismiss();
-                    Toast.makeText(ChangePasswordActivity.this, "Invalid password, please try again!", Toast.LENGTH_SHORT).show();
+                    Toasty.error(ChangePasswordActivity.this, Objects.requireNonNull(Objects.requireNonNull(task.getException()).getMessage()), Toasty.LENGTH_SHORT, true).show();
                 }
             });
         }
@@ -138,14 +140,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
             mUser.updatePassword(newPassword).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     // Logout user
-                    Toast.makeText(ChangePasswordActivity.this, "Password has been updated, please re-login your account.", Toast.LENGTH_SHORT).show();
+                    Toasty.success(ChangePasswordActivity.this, "Password has been updated, please re-login your account.", Toasty.LENGTH_SHORT, true).show();
                     FirebaseAuth.getInstance().signOut();
                     intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(ChangePasswordActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                    Toasty.error(ChangePasswordActivity.this, Objects.requireNonNull(Objects.requireNonNull(task.getException()).getMessage()), Toasty.LENGTH_SHORT, true).show();
                 }
             });
         }

@@ -16,6 +16,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
+import es.dmoral.toasty.Toasty;
+
 public class ForgotPasswordActivity extends AppCompatActivity {
     TextInputLayout tilEmailAddress;
     TextInputEditText etEmailAddress;
@@ -69,11 +71,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
-                    Toast.makeText(ForgotPasswordActivity.this, "Please check your email to reset your password", Toast.LENGTH_SHORT).show();
+                    Toasty.info(ForgotPasswordActivity.this, "Please check your email to reset your password", Toasty.LENGTH_SHORT, true).show();
                     finish();
                 } else {
                     progressDialog.dismiss();
-                    Toast.makeText(ForgotPasswordActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                    Toasty.error(ForgotPasswordActivity.this, Objects.requireNonNull(Objects.requireNonNull(task.getException()).getMessage()), Toasty.LENGTH_SHORT, true).show();
                 }
             });
         }

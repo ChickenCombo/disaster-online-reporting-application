@@ -43,6 +43,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class EvacuateFragment extends Fragment implements EasyPermissions.PermissionCallbacks {
@@ -138,7 +139,7 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
                 turnOnGPS();
             }
         } else {
-            Toast.makeText(requireActivity(), "Google Play Services is required in order for Google Maps to work!", Toast.LENGTH_SHORT).show();
+            Toasty.info(requireActivity(), "Google Play Services is required in order for Google Maps to work.", Toasty.LENGTH_SHORT, true).show();
         }
     }
 

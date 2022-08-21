@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.app.dorav4.R;
+import com.app.dorav4.activities.ChangeEmailActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.ApiException;
@@ -48,7 +49,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import es.dmoral.toasty.Toasty;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class DisastersFragment extends Fragment implements EasyPermissions.PermissionCallbacks {
@@ -204,7 +207,7 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
                 turnOnGPS();
             }
         } else {
-            Toast.makeText(requireActivity(), "Google Play Services is required in order for Google Maps to work!", Toast.LENGTH_SHORT).show();
+            Toasty.info(requireActivity(), "Google Play Services is required in order for Google Maps to work.", Toasty.LENGTH_SHORT, true).show();
         }
     }
 

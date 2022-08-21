@@ -19,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -64,6 +63,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
 
+import es.dmoral.toasty.Toasty;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
@@ -151,7 +151,7 @@ public class PostReportActivity extends AppCompatActivity {
 
         if (requestCode == 1) {
             if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                Toast.makeText(PostReportActivity.this, "Application requires location permission", Toast.LENGTH_SHORT).show();
+                Toasty.error(PostReportActivity.this, "Application requires location permission.", Toasty.LENGTH_SHORT).show();
                 finish();
             }
         }
@@ -165,7 +165,7 @@ public class PostReportActivity extends AppCompatActivity {
 
         // Validate address
         if (address.isEmpty()) {
-            Toast.makeText(PostReportActivity.this, "Invalid location, please try again", Toast.LENGTH_SHORT).show();
+            Toasty.error(PostReportActivity.this, "Invalid location, please try again.", Toasty.LENGTH_SHORT).show();
         } else {
             isAddressEmpty = true;
         }
@@ -190,7 +190,7 @@ public class PostReportActivity extends AppCompatActivity {
         if (photoUri != null && !photoUri.equals(Uri.EMPTY)) {
             isImageEmpty = true;
         } else {
-            Toast.makeText(PostReportActivity.this, "Please upload an image of the incident!", Toast.LENGTH_SHORT).show();
+            Toasty.error(PostReportActivity.this, "Please upload an image of the disaster report.", Toasty.LENGTH_SHORT).show();
         }
 
         // Add to Firebase
@@ -229,17 +229,17 @@ public class PostReportActivity extends AppCompatActivity {
                            if (task.isSuccessful()) {
                                progressDialog.dismiss();
 
-                               Toast.makeText(PostReportActivity.this, "Report has been submitted!", Toast.LENGTH_SHORT).show();
+                               Toasty.success(PostReportActivity.this, "Report has been submitted.", Toasty.LENGTH_SHORT).show();
                                finish();
                            } else {
                                progressDialog.dismiss();
-                               Toast.makeText(PostReportActivity.this, "Post failed: " + Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_SHORT).show();
+                               Toasty.error(PostReportActivity.this, Objects.requireNonNull(task.getException()).toString(), Toasty.LENGTH_SHORT).show();
                            }
                        });
                    });
                } else {
                    progressDialog.dismiss();
-                   Toast.makeText(PostReportActivity.this, "Post failed: " + Objects.requireNonNull(task.getException()).toString(), Toast.LENGTH_SHORT).show();
+                   Toasty.error(PostReportActivity.this, Objects.requireNonNull(task.getException()).toString(), Toasty.LENGTH_SHORT).show();
                }
             });
         }
@@ -262,8 +262,6 @@ public class PostReportActivity extends AppCompatActivity {
             if (!isGPSEnabled()) {
                 turnOnGPS();
             }
-
-            Toast.makeText(PostReportActivity.this, "Fetching your current location", Toast.LENGTH_SHORT).show();
 
             // Get current location
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {

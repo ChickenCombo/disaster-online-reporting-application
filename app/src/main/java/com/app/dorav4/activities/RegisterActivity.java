@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.app.dorav4.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -18,6 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import es.dmoral.toasty.Toasty;
 
 public class RegisterActivity extends AppCompatActivity {
     TextInputEditText etEmailAddress, etPassword;
@@ -93,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
                     finish();
                 } else {
                     progressDialog.dismiss();
-                    Toast.makeText(RegisterActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                    Toasty.error(RegisterActivity.this, Objects.requireNonNull(task.getException()).toString(), Toasty.LENGTH_SHORT).show();
                 }
             });
         }

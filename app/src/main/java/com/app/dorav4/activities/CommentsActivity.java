@@ -34,7 +34,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.TimeZone;
+
+import es.dmoral.toasty.Toasty;
 
 public class CommentsActivity extends AppCompatActivity {
     ImageView ivReportProfile, ivReportPicture, ivReportUpvote, ivCommentProfile, ivSubmitComment, ivBack;
@@ -206,7 +209,7 @@ public class CommentsActivity extends AppCompatActivity {
         String comment = etComment.getText().toString().trim();
 
         if (comment.isEmpty()) {
-            Toast.makeText(CommentsActivity.this, "Comment cannot be empty!", Toast.LENGTH_SHORT).show();
+            Toasty.error(CommentsActivity.this, "Comment cannot be empty.", Toasty.LENGTH_SHORT, true).show();
         } else {
             // ProgressDialog
             progressDialog.setTitle("Comment");
@@ -231,12 +234,12 @@ public class CommentsActivity extends AppCompatActivity {
             DatabaseReference commentsReference = FirebaseDatabase.getInstance().getReference("Reports").child(reportId).child("Comments");
             commentsReference.child(String.valueOf(epochDate)).setValue(hashMap).addOnSuccessListener(unused -> {
                 progressDialog.dismiss();
-                Toast.makeText(CommentsActivity.this, "Comment submitted", Toast.LENGTH_SHORT).show();
+                Toasty.success(CommentsActivity.this, "Comment has been submitted.", Toasty.LENGTH_SHORT, true).show();
                 etComment.getText().clear();
                 commentCount();
             }).addOnFailureListener(e -> {
                 progressDialog.dismiss();
-                Toast.makeText(CommentsActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toasty.error(CommentsActivity.this, e.toString(), Toasty.LENGTH_SHORT, true).show();
             });
         }
     }

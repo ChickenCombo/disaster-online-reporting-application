@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -24,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.app.dorav4.R;
 import com.app.dorav4.activities.ImageFullscreenActivity;
 import com.app.dorav4.activities.CommentsActivity;
+import com.app.dorav4.activities.PostReportActivity;
+import com.app.dorav4.activities.SetupActivity;
 import com.app.dorav4.activities.UpvotesActivity;
 import com.app.dorav4.holders.ReportsViewHolder;
 import com.app.dorav4.models.Reports;
@@ -44,6 +45,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
+
+import es.dmoral.toasty.Toasty;
 
 public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
     Context context;
@@ -222,11 +225,12 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
                 }
             });
             progressDialog.dismiss();
-            Toast.makeText(context, "Report successfully deleted", Toast.LENGTH_SHORT).show();
+            Toasty.success(context, "Report has been deleted", Toasty.LENGTH_SHORT).show();
         }).addOnFailureListener(e -> {
             // Report deletion failed
             progressDialog.dismiss();
-            Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toasty.error(context, e.toString(), Toasty.LENGTH_SHORT).show();
+
         });
     }
 

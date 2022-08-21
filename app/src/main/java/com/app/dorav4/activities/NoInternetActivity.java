@@ -14,6 +14,10 @@ import android.widget.Toast;
 
 import com.app.dorav4.R;
 
+import java.util.Objects;
+
+import es.dmoral.toasty.Toasty;
+
 public class NoInternetActivity extends AppCompatActivity {
     Button btnTryAgain, btnOfflineMode;
     Intent intent;
@@ -29,7 +33,7 @@ public class NoInternetActivity extends AppCompatActivity {
         // btnTryAgain OnClickListener
         btnTryAgain.setOnClickListener(v -> {
             if (!isConnected(NoInternetActivity.this)) {
-                Toast.makeText(NoInternetActivity.this, "Connection failed, please try again!", Toast.LENGTH_SHORT).show();
+                Toasty.error(NoInternetActivity.this, "Connection failed, please try again.", Toasty.LENGTH_SHORT, true).show();
             } else {
                 intent = new Intent(NoInternetActivity.this, SplashActivity.class);
                 startActivity(intent);

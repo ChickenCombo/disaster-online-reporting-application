@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.app.dorav4.R;
 import com.github.drjacky.imagepicker.ImagePicker;
@@ -30,6 +29,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import es.dmoral.toasty.Toasty;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
@@ -89,7 +89,7 @@ public class SetupActivity extends AppCompatActivity {
         if (photoUri != null && !photoUri.equals(Uri.EMPTY)) {
             isImageEmpty = true;
         } else {
-            Toast.makeText(SetupActivity.this, "Please upload a profile picture", Toast.LENGTH_SHORT).show();
+            Toasty.error(SetupActivity.this, "Please upload a profile picture.", Toasty.LENGTH_SHORT).show();
         }
 
         // Save profile to Firebase Database and Storage
@@ -112,17 +112,17 @@ public class SetupActivity extends AppCompatActivity {
                         // Save user details to database
                         usersReference.child(mUser.getUid()).updateChildren(hashMap).addOnSuccessListener(o -> {
                             progressDialog.dismiss();
-                            Toast.makeText(SetupActivity.this, "Profile setup complete", Toast.LENGTH_SHORT).show();
+                            Toasty.success(SetupActivity.this, "Profile setup complete.", Toasty.LENGTH_SHORT).show();
                             intent = new Intent(SetupActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
                         }).addOnFailureListener(e -> {
                             progressDialog.dismiss();
-                            Toast.makeText(SetupActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            Toasty.error(SetupActivity.this, e.toString(), Toasty.LENGTH_SHORT).show();
                         });
                     });
                 } else {
-                    Toast.makeText(SetupActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                    Toasty.error(SetupActivity.this, Objects.requireNonNull(task.getException()).toString(), Toasty.LENGTH_SHORT).show();
                 }
             });
         }

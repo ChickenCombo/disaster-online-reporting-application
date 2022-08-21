@@ -34,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Objects;
 
+import es.dmoral.toasty.Toasty;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
@@ -89,7 +90,7 @@ public class ChangeProfilePictureActivity extends AppCompatActivity {
         if (photoUri != null && !photoUri.equals(Uri.EMPTY)) {
             isImageEmpty = true;
         } else {
-            Toast.makeText(ChangeProfilePictureActivity.this, "Please upload a profile picture", Toast.LENGTH_SHORT).show();
+            Toasty.error(ChangeProfilePictureActivity.this, "Please upload a profile picture", Toasty.LENGTH_SHORT, true).show();
         }
 
         if (isImageEmpty) {
@@ -171,16 +172,16 @@ public class ChangeProfilePictureActivity extends AppCompatActivity {
                             });
 
                             progressDialog.dismiss();
-                            Toast.makeText(ChangeProfilePictureActivity.this, "Profile successfully updated", Toast.LENGTH_SHORT).show();
+                            Toasty.success(ChangeProfilePictureActivity.this, "Profile picture successfully updated.", Toasty.LENGTH_SHORT, true).show();
                             finish();
                         }).addOnFailureListener(e -> {
                             progressDialog.dismiss();
-                            Toast.makeText(ChangeProfilePictureActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                            Toasty.error(ChangeProfilePictureActivity.this, Objects.requireNonNull(Objects.requireNonNull(task.getException()).getMessage()), Toasty.LENGTH_SHORT, true).show();
                         });
                     });
                 } else {
                     progressDialog.dismiss();
-                    Toast.makeText(ChangeProfilePictureActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                    Toasty.error(ChangeProfilePictureActivity.this, Objects.requireNonNull(Objects.requireNonNull(task.getException()).getMessage()), Toasty.LENGTH_SHORT, true).show();
                 }
             });
         }

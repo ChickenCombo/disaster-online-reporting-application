@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.dorav4.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +27,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
+
+import es.dmoral.toasty.Toasty;
 
 public class ChangeEmailActivity extends AppCompatActivity {
     TextInputLayout tilEmailAddress, tilPassword, tilNewEmailAddress;
@@ -109,14 +110,14 @@ public class ChangeEmailActivity extends AppCompatActivity {
             mUser.reauthenticate(credential).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
-                    Toast.makeText(ChangeEmailActivity.this, "Account successfully authenticated!", Toast.LENGTH_SHORT).show();
+                    Toasty.success(ChangeEmailActivity.this,  "Account successfully authenticated.", Toasty.LENGTH_SHORT).show();
 
                     // Hide authentication form and show update email form
                     cvAuthenticate.setVisibility(View.GONE);
                     cvEmail.setVisibility(View.VISIBLE);
                 } else {
                     progressDialog.dismiss();
-                    Toast.makeText(ChangeEmailActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                    Toasty.error(ChangeEmailActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toasty.LENGTH_SHORT, true).show();
                 }
             });
         }
@@ -143,7 +144,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
             mUser.updateEmail(newEmail).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     // Send email verification then logout
-                    Toast.makeText(ChangeEmailActivity.this, "Email has been updated, please verify and re-login your account.", Toast.LENGTH_SHORT).show();
+                    Toasty.success(ChangeEmailActivity.this, "Email has been updated, please verify and re-login your account.", Toasty.LENGTH_SHORT, true).show();
                     mUser.sendEmailVerification();
                     FirebaseAuth.getInstance().signOut();
                     intent = new Intent(ChangeEmailActivity.this, LoginActivity.class);
@@ -151,7 +152,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(ChangeEmailActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                    Toasty.error(ChangeEmailActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toasty.LENGTH_SHORT, true).show();
                 }
             });
         }

@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
+import es.dmoral.toasty.Toasty;
+
 public class LoginActivity extends AppCompatActivity {
     TextInputLayout tilEmailAddress, tilPassword;
     TextInputEditText etEmailAddress, etPassword;
@@ -107,12 +109,11 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     } else {
                         user.sendEmailVerification();
-
-                        Toast.makeText(LoginActivity.this, "Please check your email address to verify your account", Toast.LENGTH_SHORT).show();
+                        Toasty.info(LoginActivity.this, "Please check your email address to verify your account", Toasty.LENGTH_SHORT, true).show();
                     }
                 } else {
                     progressDialog.dismiss();
-                    Toast.makeText(LoginActivity.this, "Failed: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                    Toasty.error(LoginActivity.this, Objects.requireNonNull(Objects.requireNonNull(task.getException()).getMessage()), Toasty.LENGTH_SHORT, true).show();
                 }
                 clearFields();
             });
