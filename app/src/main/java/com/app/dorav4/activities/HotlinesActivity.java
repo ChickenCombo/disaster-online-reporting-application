@@ -76,7 +76,6 @@ public class HotlinesActivity extends AppCompatActivity {
             dialog.getWindow().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_alert_dialog, null));
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             dialog.setCancelable(false);
-            dialog.getWindow().getAttributes().windowAnimations = R.style.dialogAnimation;
 
             // Set dialog details
             TextView alertTitle = dialog.findViewById(R.id.tvAlertTitle);
