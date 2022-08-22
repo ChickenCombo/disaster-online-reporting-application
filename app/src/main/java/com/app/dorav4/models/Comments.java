@@ -1,7 +1,7 @@
 package com.app.dorav4.models;
 
 public class Comments {
-    String commentId, comment, name, profilePicture, date, userId;
+    private String commentId, comment, name, profilePicture, date, userId;
 
     public Comments() {
     }

@@ -9,33 +9,33 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
-import com.app.dorav4.holders.UpvotesViewHolder;
-import com.app.dorav4.models.Upvotes;
+import com.app.dorav4.holders.UsersViewHolder;
+import com.app.dorav4.models.Users;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class UpvotesAdapter extends RecyclerView.Adapter<UpvotesViewHolder>{
+public class UsersAdapter extends RecyclerView.Adapter<UsersViewHolder> {
     Context context;
-    List<Upvotes> upvotesList;
+    List<Users> usersList;
 
-    public UpvotesAdapter(Context context, List<Upvotes> upvotesList) {
+    public UsersAdapter(Context context, List<Users> usersList) {
         this.context = context;
-        this.upvotesList = upvotesList;
+        this.usersList = usersList;
     }
 
     @NonNull
     @Override
-    public UpvotesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.single_view_user, parent, false);
-        return new UpvotesViewHolder(view);
+        return new UsersViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UpvotesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UsersViewHolder holder, int position) {
         // Fetch user's details
-        String fullName = upvotesList.get(position).getFullName();
-        String profilePicture = upvotesList.get(position).getProfilePicture();
+        String fullName = usersList.get(position).getFullName();
+        String profilePicture = usersList.get(position).getProfilePicture();
 
         // Set user's details
         holder.tvUserName.setText(fullName);
@@ -44,6 +44,6 @@ public class UpvotesAdapter extends RecyclerView.Adapter<UpvotesViewHolder>{
 
     @Override
     public int getItemCount() {
-        return upvotesList.size();
+        return usersList.size();
     }
 }

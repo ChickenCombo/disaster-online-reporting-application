@@ -98,7 +98,7 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/single_view_reports" />
+            tools:listitem="@layout/single_view_report" />
 
     </androidx.core.widget.NestedScrollView>
 

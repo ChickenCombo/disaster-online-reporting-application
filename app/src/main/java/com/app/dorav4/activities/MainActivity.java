@@ -101,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.navFriends) {
                 Toast.makeText(MainActivity.this, "Friends", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.navFindFriends) {
-                Toast.makeText(MainActivity.this, "Find Friends", Toast.LENGTH_SHORT).show();
+                intent = new Intent(MainActivity.this, FindFriendsActivity.class);
+                startActivity(intent);
             }
 
             return true;

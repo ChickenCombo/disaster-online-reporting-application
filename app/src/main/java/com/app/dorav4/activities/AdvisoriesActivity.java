@@ -67,6 +67,7 @@ public class AdvisoriesActivity extends AppCompatActivity {
             fragmentTransaction.commit();
         });
 
+        // ivBack OnClickListener
         ivBack.setOnClickListener(v -> finish());
     }
 }

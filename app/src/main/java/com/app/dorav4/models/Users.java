@@ -1,12 +1,12 @@
 package com.app.dorav4.models;
 
-public class Upvotes {
+public class Users {
     private String fullName, profilePicture;
 
-    public Upvotes() {
+    public Users() {
     }
 
-    public Upvotes(String fullName, String profilePicture) {
+    public Users(String fullName, String profilePicture) {
         this.fullName = fullName;
         this.profilePicture = profilePicture;
     }

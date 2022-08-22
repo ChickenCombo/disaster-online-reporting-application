@@ -12,6 +12,7 @@
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_back.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_camera.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_chat.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_comment.xml" value="0.1735" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_error.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_get_location.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/drawable/ic_home.xml" value="0.26614583333333336" />
@@ -47,6 +48,7 @@
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_change_profile.xml" value="0.2" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_change_profile_picture.xml" value="0.4" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_comments.xml" value="0.264" />
+        <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_find_friends.xml" value="0.16296296296296298" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_forgot_password.xml" value="0.264" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_guides.xml" value="0.264" />
         <entry key="..\:/Users/63927/Desktop/DORA v4/app/src/main/res/layout/activity_hotlines.xml" value="0.264" />
