@@ -19,4 +19,6 @@
     <color name="primary_gray">#AEB4B6</color>
     <color name="secondary_gray">#DADADA</color>
     <color name="background">#F9F7F4</color>
+    <color name="primary_red">#BF616A</color>
+    <color name="secondary_red">#8C474D</color>
 </resources>

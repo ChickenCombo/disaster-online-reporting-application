@@ -91,6 +91,16 @@ public class RegisterActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
 
+                    MotionToast.Companion.darkToast(
+                            this,
+                            "Success",
+                            "Account registration complete",
+                            MotionToastStyle.SUCCESS,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                    );
+
                     intent = new Intent(RegisterActivity.this, SetupActivity.class);
                     startActivity(intent);
                     finish();

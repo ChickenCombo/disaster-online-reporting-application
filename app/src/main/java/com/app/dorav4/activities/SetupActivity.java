@@ -116,6 +116,7 @@ public class SetupActivity extends AppCompatActivity {
                     // Get Image URI
                     storageReference.child(mUser.getUid()).getDownloadUrl().addOnSuccessListener(uri -> {
                         HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("userId", mUser.getUid());
                         hashMap.put("fullName", fullName);
                         hashMap.put("profilePicture", uri.toString());
 

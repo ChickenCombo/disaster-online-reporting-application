@@ -21,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DORAV4">
         <activity
+            android:name=".activities.ViewUserActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.FindFriendsActivity"
             android:exported="false" />
         <activity
