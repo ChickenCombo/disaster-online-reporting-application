@@ -1,24 +1,19 @@
 package com.app.dorav4.activities;
 
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.webkit.WebView;
-import android.webkit.WebViewFragment;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.app.dorav4.R;
-import com.app.dorav4.fragments.ChatFragment;
-import com.app.dorav4.fragments.MapFragment;
 import com.app.dorav4.fragments.NDRRMCFragment;
 import com.app.dorav4.fragments.NOAHFragment;
 import com.app.dorav4.fragments.PAGASAFragment;
 import com.app.dorav4.fragments.PHIVOLCSFragment;
 import com.app.dorav4.fragments.RedCrossFragment;
-import com.app.dorav4.fragments.ReportsFragment;
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 
 public class AdvisoriesActivity extends AppCompatActivity {

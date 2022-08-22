@@ -1,9 +1,9 @@
 package com.app.dorav4.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.dorav4.R;
 

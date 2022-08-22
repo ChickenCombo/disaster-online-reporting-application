@@ -1,13 +1,12 @@
 package com.app.dorav4.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.app.dorav4.R;
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;

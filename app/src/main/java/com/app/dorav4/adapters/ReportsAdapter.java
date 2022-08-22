@@ -22,10 +22,8 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
-import com.app.dorav4.activities.ImageFullscreenActivity;
 import com.app.dorav4.activities.CommentsActivity;
-import com.app.dorav4.activities.PostReportActivity;
-import com.app.dorav4.activities.SetupActivity;
+import com.app.dorav4.activities.ImageFullscreenActivity;
 import com.app.dorav4.activities.UpvotesActivity;
 import com.app.dorav4.holders.ReportsViewHolder;
 import com.app.dorav4.models.Reports;

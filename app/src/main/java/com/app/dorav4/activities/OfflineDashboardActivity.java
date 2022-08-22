@@ -1,20 +1,13 @@
 package com.app.dorav4.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.app.dorav4.R;
 import com.google.android.material.card.MaterialCardView;
-
-import pub.devrel.easypermissions.AfterPermissionGranted;
-import pub.devrel.easypermissions.EasyPermissions;
 
 public class OfflineDashboardActivity extends AppCompatActivity {
     MaterialCardView cvGuides, cvHotlines, cvBluetoothChat, cvOnlineFeatures;
