@@ -25,6 +25,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.app.dorav4.R;
 import com.github.drjacky.imagepicker.ImagePicker;
@@ -61,12 +62,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import java.util.TimeZone;
 
-import es.dmoral.toasty.Toasty;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class PostReportActivity extends AppCompatActivity {
     TextInputLayout tilDisasterType, tilDescription;
@@ -151,7 +152,15 @@ public class PostReportActivity extends AppCompatActivity {
 
         if (requestCode == 1) {
             if (!(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                Toasty.error(PostReportActivity.this, "Application requires location permission.", Toasty.LENGTH_SHORT).show();
+                MotionToast.Companion.darkToast(
+                        this,
+                        "Error",
+                        "DORA v4 requires location permission",
+                        MotionToastStyle.ERROR,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                );
                 finish();
             }
         }
@@ -165,7 +174,15 @@ public class PostReportActivity extends AppCompatActivity {
 
         // Validate address
         if (address.isEmpty()) {
-            Toasty.error(PostReportActivity.this, "Invalid location, please try again.", Toasty.LENGTH_SHORT).show();
+            MotionToast.Companion.darkToast(
+                    this,
+                    "Error",
+                    "Invalid location, please try again",
+                    MotionToastStyle.ERROR,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(this, R.font.helvetica_regular)
+            );
         } else {
             isAddressEmpty = true;
         }
@@ -190,7 +207,15 @@ public class PostReportActivity extends AppCompatActivity {
         if (photoUri != null && !photoUri.equals(Uri.EMPTY)) {
             isImageEmpty = true;
         } else {
-            Toasty.error(PostReportActivity.this, "Please upload an image of the disaster report.", Toasty.LENGTH_SHORT).show();
+            MotionToast.Companion.darkToast(
+                    this,
+                    "Error",
+                    "Please upload an image of the incident",
+                    MotionToastStyle.ERROR,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(this, R.font.helvetica_regular)
+            );
         }
 
         // Add to Firebase
@@ -229,17 +254,42 @@ public class PostReportActivity extends AppCompatActivity {
                            if (task.isSuccessful()) {
                                progressDialog.dismiss();
 
-                               Toasty.success(PostReportActivity.this, "Report has been submitted.", Toasty.LENGTH_SHORT).show();
+                               MotionToast.Companion.darkToast(
+                                       this,
+                                       "Success",
+                                       "Disaster report has been submitted",
+                                       MotionToastStyle.SUCCESS,
+                                       MotionToast.GRAVITY_BOTTOM,
+                                       MotionToast.LONG_DURATION,
+                                       ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                               );
+
                                finish();
                            } else {
                                progressDialog.dismiss();
-                               Toasty.error(PostReportActivity.this, Objects.requireNonNull(task.getException()).toString(), Toasty.LENGTH_SHORT).show();
+                               MotionToast.Companion.darkToast(
+                                       this,
+                                       "Error",
+                                       "Disaster report submission failed, please try again",
+                                       MotionToastStyle.ERROR,
+                                       MotionToast.GRAVITY_BOTTOM,
+                                       MotionToast.LONG_DURATION,
+                                       ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                               );
                            }
                        });
                    });
                } else {
                    progressDialog.dismiss();
-                   Toasty.error(PostReportActivity.this, Objects.requireNonNull(task.getException()).toString(), Toasty.LENGTH_SHORT).show();
+                   MotionToast.Companion.darkToast(
+                           this,
+                           "Error",
+                           "Disaster report submission failed, please try again",
+                           MotionToastStyle.ERROR,
+                           MotionToast.GRAVITY_BOTTOM,
+                           MotionToast.LONG_DURATION,
+                           ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                   );
                }
             });
         }

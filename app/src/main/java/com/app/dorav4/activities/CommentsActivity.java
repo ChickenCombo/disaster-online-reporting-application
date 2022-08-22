@@ -2,6 +2,7 @@ package com.app.dorav4.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,7 +15,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.dorav4.R;
 import com.app.dorav4.adapters.CommentsAdapters;
@@ -34,10 +34,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.TimeZone;
 
-import es.dmoral.toasty.Toasty;
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class CommentsActivity extends AppCompatActivity {
     ImageView ivReportProfile, ivReportPicture, ivReportUpvote, ivCommentProfile, ivSubmitComment, ivBack;
@@ -209,7 +209,15 @@ public class CommentsActivity extends AppCompatActivity {
         String comment = etComment.getText().toString().trim();
 
         if (comment.isEmpty()) {
-            Toasty.error(CommentsActivity.this, "Comment cannot be empty.", Toasty.LENGTH_SHORT, true).show();
+            MotionToast.Companion.darkToast(
+                    this,
+                    "Error",
+                    "Comment cannot be empty",
+                    MotionToastStyle.ERROR,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(this, R.font.helvetica_regular)
+            );
         } else {
             // ProgressDialog
             progressDialog.setTitle("Comment");
@@ -234,12 +242,28 @@ public class CommentsActivity extends AppCompatActivity {
             DatabaseReference commentsReference = FirebaseDatabase.getInstance().getReference("Reports").child(reportId).child("Comments");
             commentsReference.child(String.valueOf(epochDate)).setValue(hashMap).addOnSuccessListener(unused -> {
                 progressDialog.dismiss();
-                Toasty.success(CommentsActivity.this, "Comment has been submitted.", Toasty.LENGTH_SHORT, true).show();
+                MotionToast.Companion.darkToast(
+                        this,
+                        "Success",
+                        "Comment has been submitted",
+                        MotionToastStyle.SUCCESS,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                );
                 etComment.getText().clear();
                 commentCount();
             }).addOnFailureListener(e -> {
                 progressDialog.dismiss();
-                Toasty.error(CommentsActivity.this, e.toString(), Toasty.LENGTH_SHORT, true).show();
+                MotionToast.Companion.darkToast(
+                        this,
+                        "Error",
+                        "Comment submission failed, please try again",
+                        MotionToastStyle.ERROR,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                );
             });
         }
     }

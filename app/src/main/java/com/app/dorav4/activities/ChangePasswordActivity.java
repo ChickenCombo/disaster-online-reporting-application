@@ -1,7 +1,7 @@
 package com.app.dorav4.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.dorav4.R;
 import com.google.android.material.card.MaterialCardView;
@@ -25,7 +23,8 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import es.dmoral.toasty.Toasty;
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class ChangePasswordActivity extends AppCompatActivity {
     TextInputLayout tilEmailAddress, tilPassword, tilNewPassword;
@@ -106,14 +105,30 @@ public class ChangePasswordActivity extends AppCompatActivity {
             mUser.reauthenticate(credential).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
-                    Toasty.success(ChangePasswordActivity.this, "Account successfully authenticated.", Toasty.LENGTH_SHORT).show();
+                    MotionToast.Companion.darkToast(
+                            this,
+                            "Success",
+                            "Account has been authenticated",
+                            MotionToastStyle.SUCCESS,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                    );
 
                     // Hide authentication form and show update password form
                     cvAuthenticate.setVisibility(View.GONE);
                     cvPassword.setVisibility(View.VISIBLE);
                 } else {
                     progressDialog.dismiss();
-                    Toasty.error(ChangePasswordActivity.this, Objects.requireNonNull(Objects.requireNonNull(task.getException()).getMessage()), Toasty.LENGTH_SHORT, true).show();
+                    MotionToast.Companion.darkToast(
+                            this,
+                            "Error",
+                            "Incorrect password, please try again",
+                            MotionToastStyle.ERROR,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                    );
                 }
             });
         }
@@ -140,14 +155,30 @@ public class ChangePasswordActivity extends AppCompatActivity {
             mUser.updatePassword(newPassword).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     // Logout user
-                    Toasty.success(ChangePasswordActivity.this, "Password has been updated, please re-login your account.", Toasty.LENGTH_SHORT, true).show();
+                    MotionToast.Companion.darkToast(
+                            this,
+                            "Success",
+                            "Password has been updated, please re-login to continue",
+                            MotionToastStyle.SUCCESS,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                    );
                     FirebaseAuth.getInstance().signOut();
                     intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
                 } else {
-                    Toasty.error(ChangePasswordActivity.this, Objects.requireNonNull(Objects.requireNonNull(task.getException()).getMessage()), Toasty.LENGTH_SHORT, true).show();
+                    MotionToast.Companion.darkToast(
+                            this,
+                            "Error",
+                            "Password update failed, please try again",
+                            MotionToastStyle.ERROR,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                    );
                 }
             });
         }

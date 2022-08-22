@@ -3,6 +3,7 @@ package com.app.dorav4.activities;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -29,10 +30,11 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import es.dmoral.toasty.Toasty;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class SetupActivity extends AppCompatActivity {
     TextInputLayout tilFullName;
@@ -89,7 +91,15 @@ public class SetupActivity extends AppCompatActivity {
         if (photoUri != null && !photoUri.equals(Uri.EMPTY)) {
             isImageEmpty = true;
         } else {
-            Toasty.error(SetupActivity.this, "Please upload a profile picture.", Toasty.LENGTH_SHORT).show();
+            MotionToast.Companion.darkToast(
+                    this,
+                    "Error",
+                    "Please upload a profile picture",
+                    MotionToastStyle.ERROR,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(this, R.font.helvetica_regular)
+            );
         }
 
         // Save profile to Firebase Database and Storage
@@ -112,17 +122,46 @@ public class SetupActivity extends AppCompatActivity {
                         // Save user details to database
                         usersReference.child(mUser.getUid()).updateChildren(hashMap).addOnSuccessListener(o -> {
                             progressDialog.dismiss();
-                            Toasty.success(SetupActivity.this, "Profile setup complete.", Toasty.LENGTH_SHORT).show();
+
+                            MotionToast.Companion.darkToast(
+                                    this,
+                                    "Success",
+                                    "Profile setup complete",
+                                    MotionToastStyle.SUCCESS,
+                                    MotionToast.GRAVITY_BOTTOM,
+                                    MotionToast.LONG_DURATION,
+                                    ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                            );
+
                             intent = new Intent(SetupActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
                         }).addOnFailureListener(e -> {
                             progressDialog.dismiss();
-                            Toasty.error(SetupActivity.this, e.toString(), Toasty.LENGTH_SHORT).show();
+
+                            MotionToast.Companion.darkToast(
+                                    this,
+                                    "Error",
+                                    "Profile setup failed",
+                                    MotionToastStyle.ERROR,
+                                    MotionToast.GRAVITY_BOTTOM,
+                                    MotionToast.LONG_DURATION,
+                                    ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                            );
                         });
                     });
                 } else {
-                    Toasty.error(SetupActivity.this, Objects.requireNonNull(task.getException()).toString(), Toasty.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+
+                    MotionToast.Companion.darkToast(
+                            this,
+                            "Error",
+                            "Profile setup failed",
+                            MotionToastStyle.ERROR,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                    );
                 }
             });
         }
@@ -149,7 +188,7 @@ public class SetupActivity extends AppCompatActivity {
                         return Unit.INSTANCE;
                     }
 
-                    public final void invoke(@NotNull Intent it) {
+                    public void invoke(@NotNull Intent it) {
                         Intrinsics.checkNotNullParameter(it, "it");
                         launcher.launch(it);
                     }

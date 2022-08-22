@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -32,12 +33,12 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
-import java.util.Objects;
 
-import es.dmoral.toasty.Toasty;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class ChangeProfilePictureActivity extends AppCompatActivity {
     ImageView ivBack, ivProfilePicture;
@@ -90,7 +91,15 @@ public class ChangeProfilePictureActivity extends AppCompatActivity {
         if (photoUri != null && !photoUri.equals(Uri.EMPTY)) {
             isImageEmpty = true;
         } else {
-            Toasty.error(ChangeProfilePictureActivity.this, "Please upload a profile picture", Toasty.LENGTH_SHORT, true).show();
+            MotionToast.Companion.darkToast(
+                    this,
+                    "Error",
+                    "Please select a profile picture",
+                    MotionToastStyle.ERROR,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(this, R.font.helvetica_regular)
+            );
         }
 
         if (isImageEmpty) {
@@ -172,16 +181,40 @@ public class ChangeProfilePictureActivity extends AppCompatActivity {
                             });
 
                             progressDialog.dismiss();
-                            Toasty.success(ChangeProfilePictureActivity.this, "Profile picture successfully updated.", Toasty.LENGTH_SHORT, true).show();
+                            MotionToast.Companion.darkToast(
+                                    this,
+                                    "Success",
+                                    "Profile picture has been updated",
+                                    MotionToastStyle.SUCCESS,
+                                    MotionToast.GRAVITY_BOTTOM,
+                                    MotionToast.LONG_DURATION,
+                                    ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                            );
                             finish();
                         }).addOnFailureListener(e -> {
                             progressDialog.dismiss();
-                            Toasty.error(ChangeProfilePictureActivity.this, Objects.requireNonNull(Objects.requireNonNull(task.getException()).getMessage()), Toasty.LENGTH_SHORT, true).show();
+                            MotionToast.Companion.darkToast(
+                                    this,
+                                    "Error",
+                                    "Profile picture update failed, please try again",
+                                    MotionToastStyle.ERROR,
+                                    MotionToast.GRAVITY_BOTTOM,
+                                    MotionToast.LONG_DURATION,
+                                    ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                            );
                         });
                     });
                 } else {
                     progressDialog.dismiss();
-                    Toasty.error(ChangeProfilePictureActivity.this, Objects.requireNonNull(Objects.requireNonNull(task.getException()).getMessage()), Toasty.LENGTH_SHORT, true).show();
+                    MotionToast.Companion.darkToast(
+                            this,
+                            "Error",
+                            "Profile picture update failed, please try again",
+                            MotionToastStyle.ERROR,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                    );
                 }
             });
         }

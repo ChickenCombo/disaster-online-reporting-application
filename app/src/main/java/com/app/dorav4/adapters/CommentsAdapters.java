@@ -1,6 +1,7 @@
 package com.app.dorav4.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -38,6 +39,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class CommentsAdapters extends RecyclerView.Adapter<CommentsViewHolder> {
     Dialog dialog;
@@ -156,6 +160,16 @@ public class CommentsAdapters extends RecyclerView.Adapter<CommentsViewHolder> {
 
             }
         });
+
+        MotionToast.Companion.darkToast(
+                (Activity) context,
+                "Delete",
+                "Comment has been deleted",
+                MotionToastStyle.DELETE,
+                MotionToast.GRAVITY_BOTTOM,
+                MotionToast.LONG_DURATION,
+                ResourcesCompat.getFont(context, R.font.helvetica_regular)
+        );
     }
 
     // Convert time into "time ago"

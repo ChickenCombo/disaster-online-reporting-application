@@ -1,22 +1,19 @@
 package com.app.dorav4.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.app.dorav4.R;
 
-import java.util.Objects;
-
-import es.dmoral.toasty.Toasty;
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class NoInternetActivity extends AppCompatActivity {
     Button btnTryAgain, btnOfflineMode;
@@ -33,7 +30,15 @@ public class NoInternetActivity extends AppCompatActivity {
         // btnTryAgain OnClickListener
         btnTryAgain.setOnClickListener(v -> {
             if (!isConnected(NoInternetActivity.this)) {
-                Toasty.error(NoInternetActivity.this, "Connection failed, please try again.", Toasty.LENGTH_SHORT, true).show();
+                MotionToast.Companion.darkToast(
+                        this,
+                        "No Internet",
+                        "Connection failed, please try again",
+                        MotionToastStyle.NO_INTERNET,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                );
             } else {
                 intent = new Intent(NoInternetActivity.this, SplashActivity.class);
                 startActivity(intent);

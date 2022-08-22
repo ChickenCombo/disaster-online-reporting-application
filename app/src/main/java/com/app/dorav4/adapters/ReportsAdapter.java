@@ -1,6 +1,7 @@
 package com.app.dorav4.adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -46,7 +47,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
 
-import es.dmoral.toasty.Toasty;
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
     Context context;
@@ -225,12 +227,27 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
                 }
             });
             progressDialog.dismiss();
-            Toasty.success(context, "Report has been deleted", Toasty.LENGTH_SHORT).show();
+            MotionToast.Companion.darkToast(
+                    (Activity) context,
+                    "Delete",
+                    "Disaster report has been deleted",
+                    MotionToastStyle.DELETE,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(context, R.font.helvetica_regular)
+            );
         }).addOnFailureListener(e -> {
             // Report deletion failed
             progressDialog.dismiss();
-            Toasty.error(context, e.toString(), Toasty.LENGTH_SHORT).show();
-
+            MotionToast.Companion.darkToast(
+                    (Activity) context,
+                    "Delete",
+                    "Disaster report deletion failed, please try again",
+                    MotionToastStyle.DELETE,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(context, R.font.helvetica_regular)
+            );
         });
     }
 

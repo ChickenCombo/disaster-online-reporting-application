@@ -1,6 +1,7 @@
 package com.app.dorav4.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -18,7 +19,8 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import es.dmoral.toasty.Toasty;
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class RegisterActivity extends AppCompatActivity {
     TextInputEditText etEmailAddress, etPassword;
@@ -94,7 +96,16 @@ public class RegisterActivity extends AppCompatActivity {
                     finish();
                 } else {
                     progressDialog.dismiss();
-                    Toasty.error(RegisterActivity.this, Objects.requireNonNull(task.getException()).toString(), Toasty.LENGTH_SHORT).show();
+
+                    MotionToast.Companion.darkToast(
+                            this,
+                            "Error",
+                            "Email already in use",
+                            MotionToastStyle.ERROR,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                    );
                 }
             });
         }

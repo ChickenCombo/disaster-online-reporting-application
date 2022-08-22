@@ -1,6 +1,7 @@
 package com.app.dorav4.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -16,7 +17,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
-import es.dmoral.toasty.Toasty;
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
     TextInputLayout tilEmailAddress;
@@ -71,11 +73,27 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
-                    Toasty.info(ForgotPasswordActivity.this, "Please check your email to reset your password", Toasty.LENGTH_SHORT, true).show();
+                    MotionToast.Companion.darkToast(
+                            this,
+                            "Info",
+                            "Please check your email to reset your password",
+                            MotionToastStyle.INFO,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                    );
                     finish();
                 } else {
                     progressDialog.dismiss();
-                    Toasty.error(ForgotPasswordActivity.this, Objects.requireNonNull(Objects.requireNonNull(task.getException()).getMessage()), Toasty.LENGTH_SHORT, true).show();
+                    MotionToast.Companion.darkToast(
+                            this,
+                            "Error",
+                            "This account doesn't exist",
+                            MotionToastStyle.ERROR,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                    );
                 }
             });
         }

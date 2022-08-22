@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
@@ -43,8 +44,9 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.List;
 
-import es.dmoral.toasty.Toasty;
 import pub.devrel.easypermissions.EasyPermissions;
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class EvacuateFragment extends Fragment implements EasyPermissions.PermissionCallbacks {
     LocationRequest locationRequest;
@@ -139,7 +141,15 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
                 turnOnGPS();
             }
         } else {
-            Toasty.info(requireActivity(), "Google Play Services is required in order for Google Maps to work.", Toasty.LENGTH_SHORT, true).show();
+            MotionToast.Companion.darkToast(
+                    requireActivity(),
+                    "Error",
+                    "Google Play services is required for this feature",
+                    MotionToastStyle.ERROR,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(requireActivity(), R.font.helvetica_regular)
+            );
         }
     }
 

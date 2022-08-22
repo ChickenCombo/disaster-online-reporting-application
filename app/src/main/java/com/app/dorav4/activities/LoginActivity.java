@@ -1,6 +1,7 @@
 package com.app.dorav4.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -8,7 +9,6 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.dorav4.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -18,7 +18,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
-import es.dmoral.toasty.Toasty;
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class LoginActivity extends AppCompatActivity {
     TextInputLayout tilEmailAddress, tilPassword;
@@ -109,11 +110,30 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     } else {
                         user.sendEmailVerification();
-                        Toasty.info(LoginActivity.this, "Please check your email address to verify your account", Toasty.LENGTH_SHORT, true).show();
+
+                        MotionToast.Companion.darkToast(
+                                this,
+                                "Info",
+                                "Please verify your email address",
+                                MotionToastStyle.INFO,
+                                MotionToast.GRAVITY_BOTTOM,
+                                MotionToast.LONG_DURATION,
+                                ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                        );
+
                     }
                 } else {
                     progressDialog.dismiss();
-                    Toasty.error(LoginActivity.this, Objects.requireNonNull(Objects.requireNonNull(task.getException()).getMessage()), Toasty.LENGTH_SHORT, true).show();
+
+                    MotionToast.Companion.darkToast(
+                            this,
+                            "Error",
+                            "Incorrect email/password",
+                            MotionToastStyle.ERROR,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                    );
                 }
                 clearFields();
             });
