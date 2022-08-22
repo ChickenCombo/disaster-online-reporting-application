@@ -387,9 +387,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:text="Please only access this area when in need to avoid butt-dialing or accidentally calling the hotline."
         android:textAlignment="center"
         android:textColor="@color/primary_gray"
         android:textSize="18dp"
-        android:text="Please only access this area when in need to avoid butt-dialing or accidentally calling the hotline."
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

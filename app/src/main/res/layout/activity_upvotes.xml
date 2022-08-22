@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.UpvotesActivity"
-    android:background="#e5e5e5">
+    android:background="#e5e5e5"
+    tools:context=".activities.UpvotesActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -16,10 +16,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/emptyView"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
+        android:background="@color/white"
         android:backgroundTint="@color/white">
 
         <ImageView
@@ -55,9 +55,9 @@
             android:id="@+id/textView11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
+            android:fontFamily="@font/raleway"
             android:text="Verify the report by clicking the upvote button"
             android:textAlignment="center"
             android:textColor="@color/safe_black"

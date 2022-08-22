@@ -62,37 +62,37 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingEnd="16dp"
-                android:textAlignment="center"
-                android:text="This app requires login to enjoy all the features of this application" />
+                android:text="This app requires login to enjoy all the features of this application"
+                android:textAlignment="center" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilEmailAddress"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email Address"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:hint="Email Address"
                 app:boxCornerRadiusBottomEnd="30dp"
                 app:boxCornerRadiusBottomStart="30dp"
                 app:boxCornerRadiusTopEnd="30dp"
                 app:boxCornerRadiusTopStart="30dp"
+                app:boxStrokeColor="@color/secondary_green"
+                app:boxStrokeWidth="2dp"
                 app:endIconDrawable="@drawable/ic_erase"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@drawable/ic_error"
-                app:startIconDrawable="@drawable/ic_email"
-                app:boxStrokeColor="@color/secondary_green"
                 app:hintTextColor="@color/secondary_green"
-                app:boxStrokeWidth="2dp">
+                app:startIconDrawable="@drawable/ic_email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmailAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:fontFamily="@font/raleway"/>
+                    android:fontFamily="@font/raleway"
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -100,21 +100,21 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:hint="Password"
                 app:boxCornerRadiusBottomEnd="30dp"
                 app:boxCornerRadiusBottomStart="30dp"
                 app:boxCornerRadiusTopEnd="30dp"
                 app:boxCornerRadiusTopStart="30dp"
+                app:boxStrokeColor="@color/secondary_green"
+                app:boxStrokeWidth="2dp"
                 app:endIconDrawable="@drawable/ic_show_password"
                 app:endIconMode="password_toggle"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@drawable/ic_error"
-                app:startIconDrawable="@drawable/ic_password"
-                app:boxStrokeColor="@color/secondary_green"
                 app:hintTextColor="@color/secondary_green"
-                app:boxStrokeWidth="2dp">
+                app:startIconDrawable="@drawable/ic_password">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
@@ -159,9 +159,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp"
-                android:textStyle="bold"
                 android:fontFamily="@font/raleway"
-                android:text="Forgot password?" />
+                android:text="Forgot password?"
+                android:textStyle="bold" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

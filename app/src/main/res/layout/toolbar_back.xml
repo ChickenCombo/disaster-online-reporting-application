@@ -27,10 +27,10 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/raleway"
-        android:textStyle="bold"
-        android:textSize="20sp"
         android:text="Header"
         android:textColor="@color/safe_white"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivBack"
         app:layout_constraintTop_toTopOf="parent" />

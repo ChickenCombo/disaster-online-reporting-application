@@ -252,9 +252,9 @@
         android:id="@+id/commentsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:layout_alignParentBottom="true"
         android:background="@color/safe_white"
-        android:layout_alignParentBottom="true">
+        android:padding="8dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivCommentProfile"
@@ -275,9 +275,9 @@
             android:layout_toEndOf="@id/ivCommentProfile"
             android:background="@drawable/bg_edittext"
             android:hint="Enter a comment..."
-            android:textColorHint="@color/primary_gray"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
+            android:textColorHint="@color/primary_gray"
             tools:ignore="TouchTargetSizeCheck" />
 
         <ImageView

@@ -73,43 +73,43 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingEnd="16dp"
-                android:textAlignment="center"
-                android:text="DORA keeps you updated with current disaster situations" />
+                android:text="DORA keeps you updated with current disaster situations"
+                android:textAlignment="center" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/raleway"
                 android:paddingStart="16dp"
-                android:layout_marginTop="16dp"
                 android:paddingEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:textStyle="bold"
-                android:textSize="17sp"
-                android:textAlignment="center"
                 android:text="Account Setup"
-                android:textColor="@color/safe_black" />
+                android:textAlignment="center"
+                android:textColor="@color/safe_black"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tilEmailAddress"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email Address"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:hint="Email Address"
                 app:boxCornerRadiusBottomEnd="30dp"
                 app:boxCornerRadiusBottomStart="30dp"
                 app:boxCornerRadiusTopEnd="30dp"
                 app:boxCornerRadiusTopStart="30dp"
+                app:boxStrokeColor="@color/secondary_green"
+                app:boxStrokeWidth="2dp"
                 app:endIconDrawable="@drawable/ic_erase"
                 app:endIconMode="clear_text"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@drawable/ic_error"
-                app:startIconDrawable="@drawable/ic_email"
-                app:boxStrokeColor="@color/secondary_green"
                 app:hintTextColor="@color/secondary_green"
-                app:boxStrokeWidth="2dp">
+                app:startIconDrawable="@drawable/ic_email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmailAddress"
@@ -131,14 +131,14 @@
                 app:boxCornerRadiusBottomStart="30dp"
                 app:boxCornerRadiusTopEnd="30dp"
                 app:boxCornerRadiusTopStart="30dp"
+                app:boxStrokeColor="@color/secondary_green"
+                app:boxStrokeWidth="2dp"
                 app:endIconDrawable="@drawable/ic_show_password"
                 app:endIconMode="password_toggle"
                 app:errorEnabled="true"
                 app:errorIconDrawable="@drawable/ic_error"
-                app:startIconDrawable="@drawable/ic_password"
-                app:boxStrokeColor="@color/secondary_green"
                 app:hintTextColor="@color/secondary_green"
-                app:boxStrokeWidth="2dp">
+                app:startIconDrawable="@drawable/ic_password">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
@@ -154,10 +154,10 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="Register"
-                android:fontFamily="@font/raleway"
-                android:textStyle="bold"
                 android:backgroundTint="@color/primary_green"
+                android:fontFamily="@font/raleway"
+                android:text="Register"
+                android:textStyle="bold"
                 app:cornerRadius="30dp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
