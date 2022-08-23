@@ -16,6 +16,8 @@ import androidx.core.content.res.ResourcesCompat;
 import com.app.dorav4.R;
 import com.google.android.material.card.MaterialCardView;
 
+import dev.shreyaspatil.MaterialDialog.MaterialDialog;
+import dev.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class HotlinesActivity extends AppCompatActivity {
@@ -70,34 +72,19 @@ public class HotlinesActivity extends AppCompatActivity {
 
         String[] perms = {Manifest.permission.CALL_PHONE};
         if (EasyPermissions.hasPermissions(this, perms)) {
-            // Initialize custom dialog
-            dialog = new Dialog(HotlinesActivity.this);
-            dialog.setContentView(R.layout.alert_dialog);
-            dialog.getWindow().setBackgroundDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.bg_alert_dialog, null));
-            dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            dialog.setCancelable(false);
+            // Show confirmation dialog
+            MaterialDialog mDialog = new MaterialDialog.Builder(this)
+                    .setTitle("Call?")
+                    .setMessage("Are you sure want to call " + number + "?")
+                    .setCancelable(false)
+                    .setPositiveButton("Call", R.drawable.ic_call, (dialogInterface, which) -> {
+                        dialogInterface.dismiss();
+                        startActivity(intent);
+                    })
+                    .setNegativeButton("Cancel", R.drawable.ic_cancel, (dialogInterface, which) -> dialogInterface.dismiss())
+                    .build();
 
-            // Set dialog details
-            TextView alertTitle = dialog.findViewById(R.id.tvAlertTitle);
-            TextView alertDescription = dialog.findViewById(R.id.tvAlertDescription);
-            ImageView alertImage = dialog.findViewById(R.id.ivAlertImage);
-            alertTitle.setText(String.format("Call %s?", number));
-            alertDescription.setText(String.format("Are you sure you want to contact %s?", number));
-            alertImage.setImageResource(R.drawable.img_call);
-
-            // Dialog confirmation button
-            Button confirm = dialog.findViewById(R.id.btnConfirm);
-            confirm.setText("Call");
-            confirm.setOnClickListener(v -> {
-                dialog.dismiss();
-                startActivity(intent);
-            });
-
-            // Dialog cancel button
-            Button cancel = dialog.findViewById(R.id.btnCancel);
-            cancel.setOnClickListener(v -> dialog.dismiss());
-
-            dialog.show();
+            mDialog.show();
         } else {
             // Do not have permissions, request them now
             EasyPermissions.requestPermissions(this, "This feature requires call permission in order to work!", 2, perms);

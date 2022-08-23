@@ -6,22 +6,10 @@
     android:background="@color/primary_green">
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/img_dora_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/secondary_green" />
-
-    <ImageView
-        android:id="@+id/imageView7"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/img_beach"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_header"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -36,6 +36,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
 
@@ -102,34 +103,19 @@ public class CommentsAdapters extends RecyclerView.Adapter<CommentsViewHolder> {
 
             // Delete is clicked
             if (id == 0) {
-                // Initialize custom dialog
-                dialog = new Dialog(context);
-                dialog.setContentView(R.layout.alert_dialog);
-                dialog.getWindow().setBackgroundDrawable(ResourcesCompat.getDrawable(context.getResources(), R.drawable.bg_alert_dialog, null));
-                dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                dialog.setCancelable(false);
+                // Show confirmation dialog
+                MaterialDialog mDialog = new MaterialDialog.Builder((Activity) context)
+                        .setTitle("Delete?")
+                        .setMessage("Are you sure want to delete your comment? This action cannot be undone.")
+                        .setCancelable(false)
+                        .setPositiveButton("Delete", R.drawable.ic_delete, (dialogInterface, which) -> {
+                            dialogInterface.dismiss();
+                            deleteComment(commentId);
+                        })
+                        .setNegativeButton("Cancel", R.drawable.ic_cancel, (dialogInterface, which) -> dialogInterface.dismiss())
+                        .build();
 
-                // Set dialog details
-                TextView alertTitle = dialog.findViewById(R.id.tvAlertTitle);
-                TextView alertDescription = dialog.findViewById(R.id.tvAlertDescription);
-                ImageView alertImage = dialog.findViewById(R.id.ivAlertImage);
-                alertTitle.setText("Delete Comment?");
-                alertDescription.setText("Are you sure you want to delete your comment? Deleted comments cannot be recovered.");
-                alertImage.setImageResource(R.drawable.img_delete);
-
-                // Dialog confirmation button
-                Button confirm = dialog.findViewById(R.id.btnConfirm);
-                confirm.setText("Delete");
-                confirm.setOnClickListener(v -> {
-                    dialog.dismiss();
-                    deleteComment(commentId);
-                });
-
-                // Dialog cancel button
-                Button cancel = dialog.findViewById(R.id.btnCancel);
-                cancel.setOnClickListener(v -> dialog.dismiss());
-
-                dialog.show();
+                mDialog.show();
             }
             return false;
         });

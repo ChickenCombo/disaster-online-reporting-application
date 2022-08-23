@@ -56,4 +56,5 @@ dependencies {
     implementation 'com.github.Drjacky:ImagePicker:2.1.16'
     implementation 'pub.devrel:easypermissions:3.0.0'
     implementation 'com.github.Spikeysanju:MotionToast:1.4'
+    implementation 'dev.shreyaspatil.MaterialDialog:MaterialDialog:2.2.3'
 }
