@@ -22,6 +22,7 @@
         android:theme="@style/Theme.DORAV4">
         <activity
             android:name=".activities.ViewUserActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.Dialog"
             android:exported="false" />
         <activity
             android:name=".activities.FindFriendsActivity"

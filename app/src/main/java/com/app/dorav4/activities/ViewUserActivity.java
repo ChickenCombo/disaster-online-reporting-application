@@ -1,6 +1,7 @@
 package com.app.dorav4.activities;
 
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,7 +22,7 @@ import com.squareup.picasso.Picasso;
 import java.util.Objects;
 
 public class ViewUserActivity extends AppCompatActivity {
-    ImageView ivUserPicture;
+    ImageView ivUserPicture, ivBack;
     TextView tvUserName;
     Button btnSendFriendRequest, btnDeclineFriendRequest;
 
@@ -32,19 +33,29 @@ public class ViewUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_view_user);
 
+        // Set background to transparent
+        getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         ivUserPicture = findViewById(R.id.ivUserPicture);
+        ivBack = findViewById(R.id.ivBack);
         tvUserName = findViewById(R.id.tvUserName);
         btnSendFriendRequest = findViewById(R.id.btnSendFriendRequest);
         btnDeclineFriendRequest = findViewById(R.id.btnDeclineFriendRequest);
 
+        // Fetch data from previous activity
         String userId = getIntent().getStringExtra("userId");
 
         usersReference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
+        // ivBack OnClickListener
+        ivBack.setOnClickListener(v -> finish());
+
+        // Load the user details
         loadUser();
     }
 
