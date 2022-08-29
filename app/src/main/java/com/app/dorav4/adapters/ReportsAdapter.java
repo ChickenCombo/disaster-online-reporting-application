@@ -12,15 +12,14 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.app.dorav4.R;
 import com.app.dorav4.activities.CommentsActivity;
 import com.app.dorav4.activities.ImageFullscreenActivity;
@@ -168,7 +167,8 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
                 // Show confirmation dialog
                 MaterialDialog mDialog = new MaterialDialog.Builder((Activity) context)
                         .setTitle("Delete?")
-                        .setMessage("Are you sure want to delete your report? This action cannot be undone.")
+                        .setMessage("Are you sure want to delete this report? This action cannot be undone.")
+                        .setAnimation(R.raw.lottie_delete)
                         .setCancelable(false)
                         .setPositiveButton("Delete", R.drawable.ic_delete, (dialogInterface, which) -> {
                             dialogInterface.dismiss();
@@ -176,6 +176,10 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
                         })
                         .setNegativeButton("Cancel", R.drawable.ic_cancel, (dialogInterface, which) -> dialogInterface.dismiss())
                         .build();
+
+                LottieAnimationView animationView = mDialog.getAnimationView();
+                animationView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                animationView.setPadding(0, 64, 0, 0);
 
                 mDialog.show();
             }

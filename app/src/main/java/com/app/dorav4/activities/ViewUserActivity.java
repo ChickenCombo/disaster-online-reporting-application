@@ -48,6 +48,7 @@ public class ViewUserActivity extends AppCompatActivity {
         loadUser();
     }
 
+    // Load other user's profile
     private void loadUser() {
         usersReference.addValueEventListener(new ValueEventListener() {
             @Override

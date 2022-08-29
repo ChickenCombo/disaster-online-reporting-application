@@ -1,30 +1,25 @@
 package com.app.dorav4.activities;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.app.dorav4.R;
 import com.google.android.material.card.MaterialCardView;
 
 import dev.shreyaspatil.MaterialDialog.MaterialDialog;
-import dev.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class HotlinesActivity extends AppCompatActivity {
     MaterialCardView cv911, cv1555, cv143, cv163, cv8888;
     ImageView ivBack;
     Intent intent;
-    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +53,7 @@ public class HotlinesActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         // Forward results to EasyPermissions
@@ -76,6 +71,7 @@ public class HotlinesActivity extends AppCompatActivity {
             MaterialDialog mDialog = new MaterialDialog.Builder(this)
                     .setTitle("Call?")
                     .setMessage("Are you sure want to call " + number + "?")
+                    .setAnimation(R.raw.lottie_call)
                     .setCancelable(false)
                     .setPositiveButton("Call", R.drawable.ic_call, (dialogInterface, which) -> {
                         dialogInterface.dismiss();
@@ -83,6 +79,10 @@ public class HotlinesActivity extends AppCompatActivity {
                     })
                     .setNegativeButton("Cancel", R.drawable.ic_cancel, (dialogInterface, which) -> dialogInterface.dismiss())
                     .build();
+
+            LottieAnimationView animationView = mDialog.getAnimationView();
+            animationView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            animationView.setPadding(0, 64, 0, 0);
 
             mDialog.show();
         } else {

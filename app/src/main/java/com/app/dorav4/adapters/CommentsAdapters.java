@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.app.dorav4.R;
 import com.app.dorav4.holders.CommentsViewHolder;
 import com.app.dorav4.models.Comments;
@@ -106,7 +107,8 @@ public class CommentsAdapters extends RecyclerView.Adapter<CommentsViewHolder> {
                 // Show confirmation dialog
                 MaterialDialog mDialog = new MaterialDialog.Builder((Activity) context)
                         .setTitle("Delete?")
-                        .setMessage("Are you sure want to delete your comment? This action cannot be undone.")
+                        .setMessage("Are you sure want to delete this comment? This action cannot be undone.")
+                        .setAnimation(R.raw.lottie_delete)
                         .setCancelable(false)
                         .setPositiveButton("Delete", R.drawable.ic_delete, (dialogInterface, which) -> {
                             dialogInterface.dismiss();
@@ -114,6 +116,10 @@ public class CommentsAdapters extends RecyclerView.Adapter<CommentsViewHolder> {
                         })
                         .setNegativeButton("Cancel", R.drawable.ic_cancel, (dialogInterface, which) -> dialogInterface.dismiss())
                         .build();
+
+                LottieAnimationView animationView = mDialog.getAnimationView();
+                animationView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                animationView.setPadding(0, 64, 0, 0);
 
                 mDialog.show();
             }
