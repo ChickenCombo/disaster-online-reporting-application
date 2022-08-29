@@ -37,19 +37,19 @@ public class HotlinesActivity extends AppCompatActivity {
         ivBack.setOnClickListener(v -> finish());
 
         // cv911 OnClickListener
-        cv911.setOnClickListener(v -> callNumber("911"));
+        cv911.setOnClickListener(v -> callNumber("911", "National Emergency"));
 
         // cv1555 OnClickListener
-        cv1555.setOnClickListener(v -> callNumber("1555"));
+        cv1555.setOnClickListener(v -> callNumber("1555", "Department of Health"));
 
         // cv143 OnClickListener
-        cv143.setOnClickListener(v -> callNumber("143"));
+        cv143.setOnClickListener(v -> callNumber("143", "Philippine Red Cross"));
 
         // cv163 OnClickListener
-        cv163.setOnClickListener(v -> callNumber("163"));
+        cv163.setOnClickListener(v -> callNumber("163", "Bantay Bata"));
 
         // cv8888 OnClickListener
-        cv8888.setOnClickListener(v -> callNumber("8888"));
+        cv8888.setOnClickListener(v -> callNumber("8888", "National Complaint"));
     }
 
     @Override
@@ -61,7 +61,7 @@ public class HotlinesActivity extends AppCompatActivity {
     }
 
     // Call emergency hotline
-    private void callNumber(String number) {
+    private void callNumber(String number, String agency) {
         intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:" + number));
 
@@ -69,7 +69,7 @@ public class HotlinesActivity extends AppCompatActivity {
         if (EasyPermissions.hasPermissions(this, perms)) {
             // Show confirmation dialog
             MaterialDialog mDialog = new MaterialDialog.Builder(this)
-                    .setTitle("Call?")
+                    .setTitle("Call " + agency + "?")
                     .setMessage("Are you sure want to call " + number + "?")
                     .setAnimation(R.raw.lottie_call)
                     .setCancelable(false)
