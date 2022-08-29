@@ -59,5 +59,6 @@ dependencies {
     implementation 'pub.devrel:easypermissions:3.0.0'
     implementation 'com.github.Spikeysanju:MotionToast:1.4'
     implementation 'dev.shreyaspatil.MaterialDialog:MaterialDialog:2.2.3'
-    implementation 'com.airbnb.android:lottie:3.3.6'
+    implementation 'com.airbnb.android:lottie:4.2.2'
+    implementation 'com.github.MikeOrtiz:TouchImageView:3.2.1'
 }

@@ -7,10 +7,11 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.dorav4.R;
+import com.ortiz.touchview.TouchImageView;
 import com.squareup.picasso.Picasso;
 
 public class ImageFullscreenActivity extends AppCompatActivity {
-    ImageView ivReportPicture;
+    TouchImageView ivReportPicture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
