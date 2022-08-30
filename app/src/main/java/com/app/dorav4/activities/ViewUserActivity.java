@@ -1,5 +1,7 @@
 package com.app.dorav4.activities;
 
+import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.app.dorav4.R;
@@ -132,6 +135,7 @@ public class ViewUserActivity extends AppCompatActivity {
                                 // If users are already friends, show unfriend button
                                 currentState = "friends";
                                 btnSendFriendRequest.setText("Unfriend");
+                                btnSendFriendRequest.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.primary_red));
                             }
                         }
 
@@ -251,6 +255,7 @@ public class ViewUserActivity extends AppCompatActivity {
                         if (task1.isSuccessful()) {
                             btnSendFriendRequest.setEnabled(true);
                             btnSendFriendRequest.setText("Send Friend Request");
+                            btnSendFriendRequest.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.primary_green));
                             currentState = "not_friends";
 
                             MotionToast.Companion.darkToast(
