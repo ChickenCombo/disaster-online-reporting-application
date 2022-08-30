@@ -1,15 +1,17 @@
 package com.app.dorav4.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.RenderMode;
 import com.app.dorav4.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -18,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
+import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
 
@@ -27,8 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     TextView tvForgotPassword;
     Intent intent;
     Button btnLogin, btnRegister;
-
-    ProgressDialog progressDialog;
 
     FirebaseAuth mAuth;
 
@@ -44,8 +45,6 @@ public class LoginActivity extends AppCompatActivity {
         tilEmailAddress = findViewById(R.id.tilEmailAddress);
         tilPassword = findViewById(R.id.tilPassword);
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
-
-        progressDialog = new ProgressDialog(LoginActivity.this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -89,16 +88,25 @@ public class LoginActivity extends AppCompatActivity {
 
         // If all inputs are valid
         if (isEmailValid && isPasswordValid) {
-            // ProgressDialog
-            progressDialog.setTitle("Login");
-            progressDialog.setMessage("Verifying your login credentials");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
+            // Progress Dialog
+            MaterialDialog pDialog = new MaterialDialog.Builder(this)
+                    .setTitle("Loading")
+                    .setMessage("Verifying your login credentials, please wait")
+                    .setAnimation(R.raw.lottie_loading)
+                    .setCancelable(false)
+                    .build();
+
+            LottieAnimationView animationView = pDialog.getAnimationView();
+            animationView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            animationView.setRenderMode(RenderMode.SOFTWARE);
+            animationView.setPadding(0, 64, 0, 0);
+
+            pDialog.show();
 
             // Sign-in using Firebase Authentication
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    progressDialog.dismiss();
+                    pDialog.dismiss();
 
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     assert user != null;
@@ -123,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 } else {
-                    progressDialog.dismiss();
+                    pDialog.dismiss();
 
                     MotionToast.Companion.darkToast(
                             this,
