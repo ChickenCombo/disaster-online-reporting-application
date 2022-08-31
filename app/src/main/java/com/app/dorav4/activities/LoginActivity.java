@@ -100,17 +100,15 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
 
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    assert user != null;
+                    FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+                    assert mUser != null;
 
                     // Email verification for first time logins.
-                    if (user.isEmailVerified()) {
+                    if (mUser.isEmailVerified()) {
                         intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
-                        user.sendEmailVerification();
-
                         MotionToast.Companion.darkToast(
                                 this,
                                 "Info",
