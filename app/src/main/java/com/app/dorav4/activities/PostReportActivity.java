@@ -303,6 +303,16 @@ public class PostReportActivity extends AppCompatActivity {
                 turnOnGPS();
             }
 
+            MotionToast.Companion.darkToast(
+                    this,
+                    "INFO",
+                    "Fetching your current location",
+                    MotionToastStyle.INFO,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(this, R.font.helvetica_regular)
+            );
+
             // Get current location
             fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
                 if (location != null) {
