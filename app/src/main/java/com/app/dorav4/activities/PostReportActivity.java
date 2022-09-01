@@ -297,42 +297,46 @@ public class PostReportActivity extends AppCompatActivity {
     // Get the user's current location
     private void getLocation() {
         // User has permission
-        if (ActivityCompat.checkSelfPermission(PostReportActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            // Turn on GPS
-            if (!isGPSEnabled()) {
-                turnOnGPS();
-            }
-
-            MotionToast.Companion.darkToast(
-                    this,
-                    "INFO",
-                    "Fetching your current location",
-                    MotionToastStyle.INFO,
-                    MotionToast.GRAVITY_BOTTOM,
-                    MotionToast.LONG_DURATION,
-                    ResourcesCompat.getFont(this, R.font.helvetica_regular)
-            );
-
-            // Get current location
-            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
-                if (location != null) {
-                    latitude = location.getLatitude();
-                    longitude = location.getLongitude();
-
-                    // Get address
-                    Geocoder geocoder = new Geocoder(PostReportActivity.this, Locale.getDefault());
-                    try {
-                        List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
-                        address = addressList.get(0).getAddressLine(0);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        } else {
+        if (!(ActivityCompat.checkSelfPermission(PostReportActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
             // Request permission
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
         }
+
+        // Turn on GPS
+        if (!isGPSEnabled()) {
+            turnOnGPS();
+        }
+
+        // Get current location
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
+            if (location != null) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+
+                // Get address
+                Geocoder geocoder = new Geocoder(PostReportActivity.this, Locale.getDefault());
+                try {
+                    while (address.equals("") || address.isEmpty()) {
+                        List<Address> addressList = geocoder.getFromLocation(latitude, longitude, 1);
+                        address = addressList.get(0).getAddressLine(0);
+                    }
+
+                    // Show toast message
+                    MotionToast.Companion.darkToast(
+                            this,
+                            "INFO",
+                            "Fetching your location",
+                            MotionToastStyle.INFO,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                    );
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     // Check if GPS in turned on
