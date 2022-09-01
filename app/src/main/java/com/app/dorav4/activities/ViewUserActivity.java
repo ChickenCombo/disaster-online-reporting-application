@@ -108,7 +108,7 @@ public class ViewUserActivity extends AppCompatActivity {
 
     // Check current request state
     private void checkState(String userId) {
-        friendRequestsReference.child(mUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        friendRequestsReference.child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 // Check if current user has already received or sent a friend request
@@ -128,7 +128,7 @@ public class ViewUserActivity extends AppCompatActivity {
                     }
                 // If friend request doesn't exist, check if they're already friends
                 } else {
-                    friendsReference.child(mUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    friendsReference.child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.hasChild(userId)) {
