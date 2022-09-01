@@ -106,6 +106,14 @@ public class ViewUserActivity extends AppCompatActivity {
         });
     }
 
+    /*
+        currentState status:
+            not_friends             # User X is not friends with user Y
+            request_sent            # User X sent a friend request to user Y
+            request_received        # User Y received a friend request from user X
+            friends                 # User X and user Y are friends
+    */
+
     // Check current request state
     private void checkState(String userId) {
         friendRequestsReference.child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
@@ -136,6 +144,12 @@ public class ViewUserActivity extends AppCompatActivity {
                                 currentState = "friends";
                                 btnSendFriendRequest.setText("Unfriend");
                                 btnSendFriendRequest.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.primary_red));
+                            } else {
+                                btnSendFriendRequest.setEnabled(true);
+                                btnSendFriendRequest.setText("Send Friend Request");
+                                btnSendFriendRequest.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.primary_green));
+                                btnDeclineFriendRequest.setVisibility(View.GONE);
+                                currentState = "not_friends";
                             }
                         }
 
