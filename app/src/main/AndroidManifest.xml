@@ -22,8 +22,8 @@
         android:theme="@style/Theme.DORAV4">
         <activity
             android:name=".activities.ViewUserActivity"
-            android:theme="@style/Theme.MaterialComponents.Light.Dialog"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.Light.Dialog" />
         <activity
             android:name=".activities.FindFriendsActivity"
             android:exported="false" />
@@ -101,6 +101,9 @@
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.OnboardingActivity"
             android:exported="false" />
 
         <service

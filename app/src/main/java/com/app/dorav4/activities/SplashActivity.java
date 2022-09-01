@@ -3,6 +3,7 @@ package com.app.dorav4.activities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class SplashActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     DatabaseReference usersReference;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,12 +72,30 @@ public class SplashActivity extends AppCompatActivity {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-
                         }
                     });
                 } else {
-                    // Redirect to LoginActivity if there is no user session
-                    intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    // Shared preferences for onboarding screen
+                    sharedPreferences = getSharedPreferences("onboarding", MODE_PRIVATE);
+                    boolean isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
+                    // If this is the first time of the user (or no user session) then the user
+                    // Then the user is redirected to the onboarding screen
+                    if(isFirstTime) {
+                        // Set shared preferences to false to store that user has
+                        // gone through the onboarding screen
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putBoolean("isFirstTime", false);
+                        editor.commit();
+
+                        // Redirect to OnboardingActivity if there is no user session
+                        // or it is the user's first time
+                        // TODO: Change to LoginActivity.class after testing slider
+                        intent = new Intent(SplashActivity.this, OnboardingActivity.class);
+                    } else {
+                        // Redirect to LoginActivity if there is a user session
+                        // or it is not the user's first time
+                        intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    }
                     startActivity(intent);
                     finish();
                 }
