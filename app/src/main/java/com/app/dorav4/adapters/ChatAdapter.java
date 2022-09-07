@@ -1,6 +1,7 @@
 package com.app.dorav4.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
+import com.app.dorav4.activities.ConversationActivity;
 import com.app.dorav4.holders.UpvotesViewHolder;
 import com.app.dorav4.holders.UsersViewHolder;
 import com.app.dorav4.models.Users;
@@ -42,6 +44,14 @@ public class ChatAdapter extends RecyclerView.Adapter<UsersViewHolder> {
         // Set user's details
         holder.tvUserName.setText(fullName);
         Picasso.get().load(profilePicture).into(holder.ivUserProfile);
+
+        // Holder OnClickListener
+        holder.itemView.setOnClickListener(view -> {
+            // Start conversation
+            Intent intent = new Intent(context, ConversationActivity.class);
+            intent.putExtra("userId", userId);
+            context.startActivity(intent);
+        });
     }
 
     @Override
