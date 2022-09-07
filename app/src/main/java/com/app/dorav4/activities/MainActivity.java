@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
     FragmentTransaction fragmentTransaction;
     BubbleNavigationConstraintView bubbleNavigationConstraintView;
     NavigationView sidebarNavigation;
-    ImageView ivProfile, ivMenu;
+    ImageView ivProfile, ivMenu, sidebarProfile;
+    TextView sidebarName, sidebarEmail;
     Intent intent;
     DrawerLayout drawerLayout;
 
@@ -65,7 +67,10 @@ public class MainActivity extends AppCompatActivity {
         usersReference = FirebaseDatabase.getInstance().getReference().child("Users");
 
         // Add sidebar header
-        sidebarNavigation.inflateHeaderView(R.layout.drawer_header);
+        View sidebarView = sidebarNavigation.inflateHeaderView(R.layout.drawer_header);
+        sidebarProfile = sidebarView.findViewById(R.id.ivProfilePicture);
+        sidebarName = sidebarView.findViewById(R.id.tvFullName);
+        sidebarEmail = sidebarView.findViewById(R.id.tvEmailAddress);
 
         // Change status bar color
         getWindow().setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.white));
@@ -146,6 +151,11 @@ public class MainActivity extends AppCompatActivity {
 
                         // Set profile picture
                         Picasso.get().load(profilePicture).into(ivProfile);
+
+                        // Set profile details on sidebar navigation
+                        Picasso.get().load(profilePicture).into(sidebarProfile);
+                        sidebarName.setText(fullName);
+                        sidebarEmail.setText(mUser.getEmail());
                     }
                 }
 

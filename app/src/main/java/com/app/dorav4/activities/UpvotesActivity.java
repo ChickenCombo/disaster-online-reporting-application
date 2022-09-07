@@ -90,6 +90,7 @@ public class UpvotesActivity extends AppCompatActivity {
                             // Show emptyView if recyclerView is empty
                             if (upvotesList.size() == 0) {
                                 recyclerView.setVisibility(View.GONE);
+                                emptyView.setVisibility(View.VISIBLE);
                             } else {
                                 recyclerView.setVisibility(View.VISIBLE);
                                 emptyView.setVisibility(View.GONE);

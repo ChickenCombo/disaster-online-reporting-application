@@ -134,6 +134,8 @@ public class SetupActivity extends AppCompatActivity {
                                     ResourcesCompat.getFont(this, R.font.helvetica_regular)
                             );
 
+                            mUser.sendEmailVerification();
+
                             intent = new Intent(SetupActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();

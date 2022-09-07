@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.GeolocationPermissions;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -29,6 +31,13 @@ public class NOAHFragment extends Fragment {
         webView.setWebViewClient(new WebViewClient());
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("https://noah.up.edu.ph/");
+
+        webView.setWebChromeClient(new WebChromeClient(){
+            public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+                // callback.invoke(String origin, boolean allow, boolean remember);
+                callback.invoke(origin, true, false);
+            }
+        });
 
         return view;
     }
