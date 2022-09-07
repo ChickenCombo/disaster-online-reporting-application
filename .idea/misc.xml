@@ -106,22 +106,19 @@
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_advisories.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_change_email.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_find_friends.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_guides.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_hotlines.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_image_fullscreen.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_onboarding.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_post_report.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_upvotes.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_view_user.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/drawer_header.xml" value="0.21285140562248997" />
-        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/fragment_reports.xml" value="0.25" />
-        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_comment.xml" value="0.1925" />
-        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_comments.xml" value="0.22" />
-        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_login.xml" value="0.275" />
-        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_main.xml" value="0.275" />
-        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_onboarding.xml" value="0.25" />
-        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_profile.xml" value="0.14722222222222223" />
-        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/fragment_chat.xml" value="0.2" />
-        <entry key="..\:/mobile-proj/disaster-online-reporting-application-v4/app/src/main/res/layout/single_onboarding_slide.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/fragment_chat.xml" value="0.264" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/fragment_disasters.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/fragment_reports.xml" value="0.264" />
       </map>
     </option>
   </component>
