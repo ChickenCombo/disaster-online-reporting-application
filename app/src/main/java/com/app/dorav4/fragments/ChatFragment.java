@@ -68,6 +68,29 @@ public class ChatFragment extends Fragment {
 
         usersList = new ArrayList<>();
 
+        // searchView OnQueryTextListener
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (!query.isEmpty()) {
+                    searchFriend(query);
+                } else {
+                    loadFriends();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                if (!query.isEmpty()) {
+                    searchFriend(query);
+                } else {
+                    loadFriends();
+                }
+                return false;
+            }
+        });
+
         loadFriends();
 
         return view;
@@ -101,6 +124,53 @@ public class ChatFragment extends Fragment {
                             } else {
                                 recyclerView.setVisibility(View.VISIBLE);
                                 emptyView.setVisibility(View.GONE);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    // Search a friend
+    private void searchFriend(String query) {
+        friendsReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                usersList.clear();
+
+                // Get the uid of the current user's friend
+                for (DataSnapshot ds: snapshot.getChildren()) {
+                    String uid = ds.getRef().getKey();
+
+                    // Get the user's details based on their uid
+                    usersReference.orderByKey().equalTo(uid).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot ds: snapshot.getChildren()) {
+                                Users users = ds.getValue(Users.class);
+
+                                // Search query
+                                if (users != null) {
+                                    boolean nameQuery = users.getFullName().toLowerCase().contains(query.toLowerCase());
+                                    if (nameQuery) {
+                                        usersList.add(users);
+                                    }
+                                }
+
+
+                                chatAdapter = new ChatAdapter(getActivity(), usersList);
+                                recyclerView.setAdapter(chatAdapter);
                             }
                         }
 
