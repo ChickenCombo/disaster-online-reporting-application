@@ -21,6 +21,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DORAV4">
         <activity
+            android:name=".activities.TermsAndConditionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PrivacyPolicyActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.ViewUserActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.Light.Dialog" />

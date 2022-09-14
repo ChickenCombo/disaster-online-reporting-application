@@ -159,6 +159,19 @@
                 android:text="Register"
                 android:textStyle="bold"
                 app:cornerRadius="30dp" />
+
+            <TextView
+                android:id="@+id/tvTermsAndPolicies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textAlignment="center"
+                android:textColorHighlight="#00FFFFFF"
+                android:textColorLink="@color/primary_green" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

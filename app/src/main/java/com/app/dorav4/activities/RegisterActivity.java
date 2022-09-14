@@ -3,9 +3,14 @@ package com.app.dorav4.activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Patterns;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
@@ -25,6 +30,7 @@ import www.sanju.motiontoast.MotionToastStyle;
 public class RegisterActivity extends AppCompatActivity {
     TextInputEditText etEmailAddress, etPassword;
     TextInputLayout tilEmailAddress, tilPassword;
+    TextView tvTermsAndPolicies;
     ImageView ivBack;
     Button btnRegister;
     Intent intent;
@@ -42,12 +48,16 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         tilEmailAddress = findViewById(R.id.tilEmailAddress);
         tilPassword = findViewById(R.id.tilPassword);
+        tvTermsAndPolicies = findViewById(R.id.tvTermsAndPolicies);
         ivBack = findViewById(R.id.ivBack);
         btnRegister = findViewById(R.id.btnRegister);
 
         progressDialog = new ProgressDialog(RegisterActivity.this);
 
         mAuth = FirebaseAuth.getInstance();
+
+        // tvTermsAndPolicies OnClickListener
+        customTextView(tvTermsAndPolicies);
 
         // btnRegister OnClickListener
         btnRegister.setOnClickListener(v -> registerUser());
@@ -140,5 +150,29 @@ public class RegisterActivity extends AppCompatActivity {
         matcher = pattern.matcher(password);
 
         return matcher.matches();
+    }
+
+    // Custom TextView with multiple onClickListeners
+    private void customTextView(TextView view) {
+        SpannableStringBuilder spanTxt = new SpannableStringBuilder("By signing up, you agree to DORA's  ");
+        spanTxt.append("Terms and Conditions");
+        spanTxt.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                intent = new Intent(RegisterActivity.this, TermsAndConditionsActivity.class);
+                startActivity(intent);
+            }
+        }, spanTxt.length() - "Terms and Conditions".length(), spanTxt.length(), 0);
+        spanTxt.append(" & ");
+        spanTxt.append("Privacy Policy");
+        spanTxt.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(View widget) {
+                intent = new Intent(RegisterActivity.this, PrivacyPolicyActivity.class);
+                startActivity(intent);
+            }
+        }, spanTxt.length() - "Privacy Policy".length(), spanTxt.length(), 0);
+        view.setMovementMethod(LinkMovementMethod.getInstance());
+        view.setText(spanTxt, TextView.BufferType.SPANNABLE);
     }
 }
