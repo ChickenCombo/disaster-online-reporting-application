@@ -61,7 +61,7 @@ public class ConversationActivity extends AppCompatActivity {
         currentUserId = mUser.getUid();
 
         usersReference = FirebaseDatabase.getInstance().getReference("Users");
-        chatsReference = FirebaseDatabase.getInstance().getReference("Users");
+        chatsReference = FirebaseDatabase.getInstance().getReference("Chats");
 
         // Fetch receiver's information
         getUserInfo(receiverUserId);
