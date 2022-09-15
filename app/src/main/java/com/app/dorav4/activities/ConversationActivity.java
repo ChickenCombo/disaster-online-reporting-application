@@ -1,15 +1,15 @@
 package com.app.dorav4.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,7 +21,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.Objects;
+
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class ConversationActivity extends AppCompatActivity {
     TextView tvToolbarHeader;
@@ -31,7 +35,7 @@ public class ConversationActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseUser mUser;
-    DatabaseReference usersReference;
+    DatabaseReference usersReference, chatsReference;
 
     String receiverUserId;
     String currentUserId;
@@ -57,15 +61,45 @@ public class ConversationActivity extends AppCompatActivity {
         currentUserId = mUser.getUid();
 
         usersReference = FirebaseDatabase.getInstance().getReference("Users");
+        chatsReference = FirebaseDatabase.getInstance().getReference("Users");
 
         // Fetch receiver's information
         getUserInfo(receiverUserId);
 
         // ivSend OnClickListener
-        ivSend.setOnClickListener(v -> {});
+        ivSend.setOnClickListener(v -> sendMessage());
 
         // ivBack OnClickListener
         ivBack.setOnClickListener(v -> finish());
+    }
+
+    // Send message
+    private void sendMessage() {
+        String message = etChat.getText().toString();
+
+        if (message.isEmpty()) {
+            MotionToast.Companion.darkToast(
+                    this,
+                    "Error",
+                    "Message cannot be empty",
+                    MotionToastStyle.ERROR,
+                    MotionToast.GRAVITY_BOTTOM,
+                    MotionToast.LONG_DURATION,
+                    ResourcesCompat.getFont(this, R.font.helvetica_regular)
+            );
+        } else {
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("message", message);
+            hashMap.put("userId", currentUserId);
+
+            chatsReference.child(receiverUserId).child(currentUserId).push().updateChildren(hashMap).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    chatsReference.child(currentUserId).child(receiverUserId).push().updateChildren(hashMap).addOnCompleteListener(task1 -> {
+                       etChat.getText().clear();
+                    });
+                }
+            });
+        }
     }
 
     // Fetch receiver's information
