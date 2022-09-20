@@ -1,12 +1,11 @@
 package com.app.dorav4.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
@@ -14,37 +13,20 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
-import com.app.dorav4.activities.FindFriendsActivity;
-import com.app.dorav4.activities.MainActivity;
-import com.app.dorav4.activities.UpvotesActivity;
-import com.app.dorav4.adapters.ChatAdapter;
-import com.app.dorav4.adapters.UpvotesAdapter;
-import com.app.dorav4.adapters.UsersAdapter;
-import com.app.dorav4.models.Upvotes;
-import com.app.dorav4.models.Users;
+import com.app.dorav4.activities.SearchFriendsActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ChatFragment extends Fragment {
     SearchView searchView;
     NestedScrollView nestedScrollView;
     RecyclerView recyclerView;
     ConstraintLayout emptyView;
+    FloatingActionButton searchFriends;
 
-    DatabaseReference friendsReference, usersReference;
     FirebaseAuth mAuth;
     FirebaseUser mUser;
-
-    List<Users> usersList;
-    ChatAdapter chatAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,133 +41,17 @@ public class ChatFragment extends Fragment {
         nestedScrollView = view.findViewById(R.id.nestedScrollView);
         recyclerView = view.findViewById(R.id.recyclerView);
         emptyView = view.findViewById(R.id.emptyView);
+        searchFriends = view.findViewById(R.id.searchFriends);
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
-        friendsReference = FirebaseDatabase.getInstance().getReference("Friends").child(mUser.getUid());
-        usersReference = FirebaseDatabase.getInstance().getReference("Users");
-
-        usersList = new ArrayList<>();
-
-        // searchView OnQueryTextListener
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                if (!query.isEmpty()) {
-                    searchFriend(query);
-                } else {
-                    loadFriends();
-                }
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String query) {
-                if (!query.isEmpty()) {
-                    searchFriend(query);
-                } else {
-                    loadFriends();
-                }
-                return false;
-            }
+        // searchFriends OnClickListener
+        searchFriends.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), SearchFriendsActivity.class);
+            startActivity(intent);
         });
-
-        loadFriends();
 
         return view;
-    }
-
-    // Fetch all user's friends from the database
-    private void loadFriends() {
-        friendsReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                usersList.clear();
-
-                // Get the uid of the current user's friend
-                for (DataSnapshot ds: snapshot.getChildren()) {
-                    String uid = ds.getRef().getKey();
-
-                    // Get the user's details based on their uid
-                    usersReference.orderByKey().equalTo(uid).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot ds: snapshot.getChildren()) {
-                                Users users = ds.getValue(Users.class);
-                                usersList.add(users);
-                                chatAdapter = new ChatAdapter(getActivity(), usersList);
-                                recyclerView.setAdapter(chatAdapter);
-                            }
-
-                            // Show emptyView if recyclerView is empty
-                            if (usersList.size() == 0) {
-                                recyclerView.setVisibility(View.GONE);
-                            } else {
-                                recyclerView.setVisibility(View.VISIBLE);
-                                emptyView.setVisibility(View.GONE);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    // Search a friend
-    private void searchFriend(String query) {
-        friendsReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                usersList.clear();
-
-                // Get the uid of the current user's friend
-                for (DataSnapshot ds: snapshot.getChildren()) {
-                    String uid = ds.getRef().getKey();
-
-                    // Get the user's details based on their uid
-                    usersReference.orderByKey().equalTo(uid).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot ds: snapshot.getChildren()) {
-                                Users users = ds.getValue(Users.class);
-
-                                // Search query
-                                if (users != null) {
-                                    boolean nameQuery = users.getFullName().toLowerCase().contains(query.toLowerCase());
-                                    if (nameQuery) {
-                                        usersList.add(users);
-                                    }
-                                }
-
-
-                                chatAdapter = new ChatAdapter(getActivity(), usersList);
-                                recyclerView.setAdapter(chatAdapter);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 }
