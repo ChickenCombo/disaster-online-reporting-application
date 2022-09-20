@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
-import com.app.dorav4.activities.SearchFriendsActivity;
+import com.app.dorav4.activities.StartConversationActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,7 +24,7 @@ public class ChatFragment extends Fragment {
     RecyclerView recyclerView;
     ConstraintLayout emptyView;
     FloatingActionButton searchFriends;
-
+    
     FirebaseAuth mAuth;
     FirebaseUser mUser;
 
@@ -48,7 +48,7 @@ public class ChatFragment extends Fragment {
 
         // searchFriends OnClickListener
         searchFriends.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), SearchFriendsActivity.class);
+            Intent intent = new Intent(getActivity(), StartConversationActivity.class);
             startActivity(intent);
         });
 

@@ -9,19 +9,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
+import com.app.dorav4.adapters.ConversationAdapter;
+import com.app.dorav4.models.Chats;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 import www.sanju.motiontoast.MotionToast;
@@ -37,7 +43,12 @@ public class ConversationActivity extends AppCompatActivity {
     FirebaseUser mUser;
     DatabaseReference usersReference, chatsReference;
 
+    List<Chats> chatsList;
+    ConversationAdapter conversationAdapter;
+
     String receiverUserId;
+    String receiverFullName;
+    String receiverProfilePicture;
     String currentUserId;
 
     @Override
@@ -63,6 +74,12 @@ public class ConversationActivity extends AppCompatActivity {
         usersReference = FirebaseDatabase.getInstance().getReference("Users");
         chatsReference = FirebaseDatabase.getInstance().getReference("Chats");
 
+        // Setup recyclerView
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ConversationActivity.this);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
         // Fetch receiver's information
         getUserInfo(receiverUserId);
 
@@ -71,6 +88,34 @@ public class ConversationActivity extends AppCompatActivity {
 
         // ivBack OnClickListener
         ivBack.setOnClickListener(v -> finish());
+
+        // Get messages
+        getMessages();
+    }
+
+    // Get messages
+    private void getMessages() {
+        chatsList = new ArrayList<>();
+
+        Query query = chatsReference.child(currentUserId).child(receiverUserId);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                chatsList.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Chats chats = ds.getValue(Chats.class);
+                    chatsList.add(chats);
+                    conversationAdapter = new ConversationAdapter(ConversationActivity.this, chatsList, receiverProfilePicture);
+                    recyclerView.setAdapter(conversationAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     // Send message
@@ -109,8 +154,8 @@ public class ConversationActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds: snapshot.getChildren()) {
                     // Fetch data from the database
-                    String receiverFullName = Objects.requireNonNull(ds.child("fullName").getValue()).toString();
-                    String receiverProfilePicture = Objects.requireNonNull(ds.child("profilePicture").getValue()).toString();
+                    receiverFullName = Objects.requireNonNull(ds.child("fullName").getValue()).toString();
+                    receiverProfilePicture = Objects.requireNonNull(ds.child("profilePicture").getValue()).toString();
 
                     // Set data
                     tvToolbarHeader.setText(receiverFullName);

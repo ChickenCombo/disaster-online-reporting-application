@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DORAV4">
         <activity
-            android:name=".activities.SearchFriendsActivity"
+            android:name=".activities.StartConversationActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ConversationActivity"

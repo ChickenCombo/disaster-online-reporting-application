@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchFriendsActivity extends AppCompatActivity {
+public class StartConversationActivity extends AppCompatActivity {
     SearchView searchView;
     NestedScrollView nestedScrollView;
     RecyclerView recyclerView;
@@ -44,7 +44,7 @@ public class SearchFriendsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_friends);
+        setContentView(R.layout.activity_start_conversation);
 
         searchView = findViewById(R.id.searchView);
         nestedScrollView = findViewById(R.id.nestedScrollView);
@@ -61,7 +61,7 @@ public class SearchFriendsActivity extends AppCompatActivity {
         usersList = new ArrayList<>();
 
         // Set header text
-        tvToolbarHeader.setText("Search Friends");
+        tvToolbarHeader.setText("Start Conversation");
 
         // searchView OnQueryTextListener
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -111,7 +111,7 @@ public class SearchFriendsActivity extends AppCompatActivity {
                             for (DataSnapshot ds: snapshot.getChildren()) {
                                 Users users = ds.getValue(Users.class);
                                 usersList.add(users);
-                                chatAdapter = new ChatAdapter(SearchFriendsActivity.this, usersList);
+                                chatAdapter = new ChatAdapter(StartConversationActivity.this, usersList);
                                 recyclerView.setAdapter(chatAdapter);
                             }
 
@@ -166,7 +166,7 @@ public class SearchFriendsActivity extends AppCompatActivity {
                                 }
 
 
-                                chatAdapter = new ChatAdapter(SearchFriendsActivity.this, usersList);
+                                chatAdapter = new ChatAdapter(StartConversationActivity.this, usersList);
                                 recyclerView.setAdapter(chatAdapter);
                             }
                         }
