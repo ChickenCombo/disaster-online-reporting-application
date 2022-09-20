@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.NestedScrollView;
@@ -14,9 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
 import com.app.dorav4.activities.StartConversationActivity;
+import com.app.dorav4.adapters.MessagesAdapter;
+import com.app.dorav4.models.Users;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChatFragment extends Fragment {
     SearchView searchView;
@@ -24,7 +35,12 @@ public class ChatFragment extends Fragment {
     RecyclerView recyclerView;
     ConstraintLayout emptyView;
     FloatingActionButton searchFriends;
-    
+
+    List<Users> usersList;
+    MessagesAdapter messagesAdapter;
+
+    DatabaseReference chatsReference, usersReference;
+
     FirebaseAuth mAuth;
     FirebaseUser mUser;
 
@@ -46,12 +62,81 @@ public class ChatFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
+        chatsReference = FirebaseDatabase.getInstance().getReference().child("Chats").child(mUser.getUid());
+        usersReference = FirebaseDatabase.getInstance().getReference().child("Users");
+
         // searchFriends OnClickListener
         searchFriends.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), StartConversationActivity.class);
             startActivity(intent);
         });
 
+        loadMessages();
+
         return view;
+    }
+
+    // Get all chat conversations
+    private void loadMessages() {
+        usersList = new ArrayList<>();
+
+        // Get chat id's
+        chatsReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                usersList.clear();
+
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    String uid = ds.getRef().getKey();
+
+                    // Get user's info
+                    usersReference.orderByKey().equalTo(uid).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot ds : snapshot.getChildren()) {
+                                Users users = ds.getValue(Users.class);
+                                usersList.add(users);
+
+                                // Set recycler view's data
+                                chatsReference.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        messagesAdapter = new MessagesAdapter(getActivity(), usersList);
+                                        recyclerView.setAdapter(messagesAdapter);
+
+                                        // Show emptyView if recyclerView is empty
+                                        if (usersList.size() == 0) {
+                                            searchView.setVisibility(View.GONE);
+                                            recyclerView.setVisibility(View.GONE);
+                                            emptyView.setVisibility(View.VISIBLE);
+                                        } else {
+                                            searchView.setVisibility(View.VISIBLE);
+                                            recyclerView.setVisibility(View.VISIBLE);
+                                            emptyView.setVisibility(View.GONE);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

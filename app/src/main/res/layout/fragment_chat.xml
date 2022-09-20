@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:backgroundTint="@color/white">
+        android:backgroundTint="@color/white"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/imageView6"
@@ -87,11 +88,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:paddingTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/single_view_user"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:paddingTop="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/single_view_user" />
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
