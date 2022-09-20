@@ -104,16 +104,8 @@ public class ChatFragment extends Fragment {
                                         messagesAdapter = new MessagesAdapter(getActivity(), usersList);
                                         recyclerView.setAdapter(messagesAdapter);
 
-                                        // Show emptyView if recyclerView is empty
-                                        if (usersList.size() == 0) {
-                                            searchView.setVisibility(View.GONE);
-                                            recyclerView.setVisibility(View.GONE);
-                                            emptyView.setVisibility(View.VISIBLE);
-                                        } else {
-                                            searchView.setVisibility(View.VISIBLE);
-                                            recyclerView.setVisibility(View.VISIBLE);
-                                            emptyView.setVisibility(View.GONE);
-                                        }
+                                        // Show empty view if list is empty
+                                        showEmptyView();
                                     }
 
                                     @Override
@@ -131,6 +123,8 @@ public class ChatFragment extends Fragment {
                     });
                 }
 
+                // Show empty view if list is empty
+                showEmptyView();
             }
 
             @Override
@@ -138,5 +132,18 @@ public class ChatFragment extends Fragment {
 
             }
         });
+    }
+
+    // Show emptyView if list is empty
+    private void showEmptyView() {
+        if (usersList.size() == 0) {
+            searchView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            searchView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 }
