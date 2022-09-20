@@ -53,8 +53,6 @@ public class UpvotesActivity extends AppCompatActivity {
         Intent intent = getIntent();
         reportId = intent.getStringExtra("reportId");
 
-        upvotesList = new ArrayList<>();
-
         upvotesReference = FirebaseDatabase.getInstance().getReference("Reports").child(reportId).child("Upvotes").child(reportId);
         usersReference = FirebaseDatabase.getInstance().getReference("Users");
 
@@ -66,34 +64,41 @@ public class UpvotesActivity extends AppCompatActivity {
 
     // Get the list of all users who upvoted
     private void loadUpvotes() {
+        upvotesList = new ArrayList<>();
+
+        // Get upvote id's
         upvotesReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 upvotesList.clear();
 
-                // Get the uid of the user who upvoted
                 for (DataSnapshot ds: snapshot.getChildren()) {
                     String uid = ds.getRef().getKey();
 
-                    // Get the user's details based on their uid
+                    // Get user's info
                     usersReference.orderByKey().equalTo(uid).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot ds: snapshot.getChildren()) {
-                                // Add the user's info into the list
                                 Upvotes upvotes = ds.getValue(Upvotes.class);
                                 upvotesList.add(upvotes);
-                                upvotesAdapter = new UpvotesAdapter(UpvotesActivity.this, upvotesList);
-                                recyclerView.setAdapter(upvotesAdapter);
-                            }
 
-                            // Show emptyView if recyclerView is empty
-                            if (upvotesList.size() == 0) {
-                                recyclerView.setVisibility(View.GONE);
-                                emptyView.setVisibility(View.VISIBLE);
-                            } else {
-                                recyclerView.setVisibility(View.VISIBLE);
-                                emptyView.setVisibility(View.GONE);
+                                // Set recycler view's data
+                                upvotesReference.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        upvotesAdapter = new UpvotesAdapter(UpvotesActivity.this, upvotesList);
+                                        recyclerView.setAdapter(upvotesAdapter);
+
+                                        // Show empty view if list is empty
+                                        showEmptyView();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                             }
                         }
 
@@ -103,6 +108,9 @@ public class UpvotesActivity extends AppCompatActivity {
                         }
                     });
                 }
+
+                // Show empty view if list is empty
+                showEmptyView();
             }
 
             @Override
@@ -110,5 +118,16 @@ public class UpvotesActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    // Show emptyView if list is empty
+    private void showEmptyView() {
+        if (upvotesList.size() == 0) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 }
