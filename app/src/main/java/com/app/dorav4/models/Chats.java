@@ -1,14 +1,23 @@
 package com.app.dorav4.models;
 
 public class Chats {
-    private String message, userId;
+    private String chatId, message, userId;
 
     public Chats() {
     }
 
-    public Chats(String message, String userId) {
+    public Chats(String chatId, String message, String userId) {
+        this.chatId = chatId;
         this.message = message;
         this.userId = userId;
+    }
+
+    public String getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(String chatId) {
+        this.chatId = chatId;
     }
 
     public String getMessage() {

@@ -106,7 +106,7 @@ public class ConversationActivity extends AppCompatActivity {
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     Chats chats = ds.getValue(Chats.class);
                     chatsList.add(chats);
-                    conversationAdapter = new ConversationAdapter(ConversationActivity.this, chatsList, receiverProfilePicture);
+                    conversationAdapter = new ConversationAdapter(ConversationActivity.this, chatsList, receiverProfilePicture, receiverUserId);
                     recyclerView.setAdapter(conversationAdapter);
                 }
             }
@@ -133,13 +133,16 @@ public class ConversationActivity extends AppCompatActivity {
                     ResourcesCompat.getFont(this, R.font.helvetica_regular)
             );
         } else {
+            String chatId = String.valueOf(System.currentTimeMillis());
+
             HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("chatId", chatId);
             hashMap.put("message", message);
             hashMap.put("userId", currentUserId);
 
-            chatsReference.child(receiverUserId).child(currentUserId).push().updateChildren(hashMap).addOnCompleteListener(task -> {
+            chatsReference.child(receiverUserId).child(currentUserId).child(chatId).updateChildren(hashMap).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    chatsReference.child(currentUserId).child(receiverUserId).push().updateChildren(hashMap).addOnCompleteListener(task1 -> {
+                    chatsReference.child(currentUserId).child(receiverUserId).child(chatId).updateChildren(hashMap).addOnCompleteListener(task1 -> {
                        etChat.getText().clear();
                     });
                 }
