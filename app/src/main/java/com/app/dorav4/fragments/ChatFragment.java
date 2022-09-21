@@ -80,7 +80,7 @@ public class ChatFragment extends Fragment {
     private void loadMessages() {
         usersList = new ArrayList<>();
 
-        // Get chat id's
+        // Get chat ids
         chatsReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

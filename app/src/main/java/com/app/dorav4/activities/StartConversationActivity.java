@@ -58,8 +58,6 @@ public class StartConversationActivity extends AppCompatActivity {
         friendsReference = FirebaseDatabase.getInstance().getReference("Friends").child(mUser.getUid());
         usersReference = FirebaseDatabase.getInstance().getReference("Users");
 
-        usersList = new ArrayList<>();
-
         // Set header text
         tvToolbarHeader.setText("Start Conversation");
 
@@ -95,33 +93,42 @@ public class StartConversationActivity extends AppCompatActivity {
 
     // Fetch all user's friends from the database
     private void loadFriends() {
+        usersList = new ArrayList<>();
+
+        // Get friend ids
         friendsReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 usersList.clear();
 
-                // Get the uid of the current user's friend
                 for (DataSnapshot ds: snapshot.getChildren()) {
                     String uid = ds.getRef().getKey();
 
-                    // Get the user's details based on their uid
+                    // Get user's info
                     usersReference.orderByKey().equalTo(uid).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             for (DataSnapshot ds: snapshot.getChildren()) {
                                 Users users = ds.getValue(Users.class);
                                 usersList.add(users);
-                                chatAdapter = new ChatAdapter(StartConversationActivity.this, usersList);
-                                recyclerView.setAdapter(chatAdapter);
                             }
 
-                            // Show emptyView if recyclerView is empty
-                            if (usersList.size() == 0) {
-                                recyclerView.setVisibility(View.GONE);
-                            } else {
-                                recyclerView.setVisibility(View.VISIBLE);
-                                emptyView.setVisibility(View.GONE);
-                            }
+                            // Set recycler view's data
+                            friendsReference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    chatAdapter = new ChatAdapter(StartConversationActivity.this, usersList);
+                                    recyclerView.setAdapter(chatAdapter);
+
+                                    // Show empty view if list is empty
+                                    showEmptyView();
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                         }
 
                         @Override
@@ -130,6 +137,9 @@ public class StartConversationActivity extends AppCompatActivity {
                         }
                     });
                 }
+
+                // Show empty view if list is empty
+                showEmptyView();
             }
 
             @Override
@@ -184,5 +194,18 @@ public class StartConversationActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    // Show emptyView if list is empty
+    private void showEmptyView() {
+        if (usersList.size() == 0) {
+            searchView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            searchView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 }
