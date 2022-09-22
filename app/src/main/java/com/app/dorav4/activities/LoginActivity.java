@@ -17,7 +17,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.HashMap;
 import java.util.Objects;
 
 import dev.shreyaspatil.MaterialDialog.MaterialDialog;
@@ -31,7 +35,9 @@ public class LoginActivity extends AppCompatActivity {
     Intent intent;
     Button btnLogin, btnRegister;
 
+    DatabaseReference tokensReference;
     FirebaseAuth mAuth;
+    FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
 
         mAuth = FirebaseAuth.getInstance();
+        tokensReference = FirebaseDatabase.getInstance().getReference().child("Tokens");
 
         // btnLogin OnClickListener
         btnLogin.setOnClickListener(v -> loginUser());
@@ -108,8 +115,11 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     pDialog.dismiss();
 
-                    FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+                    mUser = FirebaseAuth.getInstance().getCurrentUser();
                     assert mUser != null;
+
+                    // Get user token for push notification
+                    getToken();
 
                     // Email verification for first time logins.
                     if (mUser.isEmailVerified()) {
@@ -152,5 +162,19 @@ public class LoginActivity extends AppCompatActivity {
         Objects.requireNonNull(etPassword.getText()).clear();
         etEmailAddress.clearFocus();
         etPassword.clearFocus();
+    }
+
+    // Get user token
+    private void getToken() {
+        FirebaseMessaging.getInstance().getToken()
+            .addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("token", task.getResult());
+
+                    // Store user's token to the database
+                    tokensReference.child(mUser.getUid()).setValue(hashMap);
+                }
+            });
     }
 }

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.app.dorav4.R;
 import com.app.dorav4.adapters.ConversationAdapter;
 import com.app.dorav4.models.Chats;
+import com.app.dorav4.utils.PushNotificationService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -144,6 +145,9 @@ public class ConversationActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     chatsReference.child(currentUserId).child(receiverUserId).child(chatId).updateChildren(hashMap).addOnCompleteListener(task1 -> {
                        etChat.getText().clear();
+
+                       // Send push notification
+                       PushNotificationService.pushNotification(ConversationActivity.this, receiverUserId, receiverFullName, message);
                     });
                 }
             });
