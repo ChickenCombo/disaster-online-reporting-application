@@ -42,7 +42,7 @@ public class ConversationActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseUser mUser;
-    DatabaseReference usersReference, chatsReference;
+    DatabaseReference usersReference, chatsReference, tokensReference;
 
     List<Chats> chatsList;
     ConversationAdapter conversationAdapter;
@@ -74,6 +74,7 @@ public class ConversationActivity extends AppCompatActivity {
 
         usersReference = FirebaseDatabase.getInstance().getReference("Users");
         chatsReference = FirebaseDatabase.getInstance().getReference("Chats");
+        tokensReference = FirebaseDatabase.getInstance().getReference("Tokens");
 
         // Setup recyclerView
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ConversationActivity.this);
@@ -147,7 +148,7 @@ public class ConversationActivity extends AppCompatActivity {
                        etChat.getText().clear();
 
                        // Send push notification
-                       PushNotificationService.pushNotification(ConversationActivity.this, receiverUserId, receiverFullName, message);
+                       sendNotification(message);
                     });
                 }
             });
@@ -167,6 +168,24 @@ public class ConversationActivity extends AppCompatActivity {
                     // Set data
                     tvToolbarHeader.setText(receiverFullName);
                     Picasso.get().load(receiverProfilePicture).into(ivReceiverPicture);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    // Send push notification
+    private void sendNotification(String message) {
+        tokensReference.child(receiverUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String token = Objects.requireNonNull(snapshot.child("token").getValue()).toString();
+                    PushNotificationService.pushNotification(ConversationActivity.this, token, receiverFullName, message);
                 }
             }
 
