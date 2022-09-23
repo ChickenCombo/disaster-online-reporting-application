@@ -26,6 +26,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.app.dorav4.R;
+import com.app.dorav4.utils.PushNotificationService;
 import com.github.drjacky.imagepicker.ImagePicker;
 import com.github.drjacky.imagepicker.constant.ImageProvider;
 import com.google.android.gms.common.api.ApiException;
@@ -39,12 +40,16 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -75,17 +80,20 @@ public class PostReportActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
 
-    DatabaseReference usersReference, reportsReference;
+    DatabaseReference usersReference, reportsReference, tokensReference;
     StorageReference reportStorageReference;
 
     double longitude, latitude;
     String address = "";
+
+    JSONArray tokens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_report);
 
+        tokens = new JSONArray();
         geocoder = new Geocoder(PostReportActivity.this, Locale.getDefault());
 
         tilDisasterType = findViewById(R.id.tilDisasterType);
@@ -101,6 +109,7 @@ public class PostReportActivity extends AppCompatActivity {
 
         usersReference = FirebaseDatabase.getInstance().getReference().child("Users");
         reportsReference = FirebaseDatabase.getInstance().getReference().child("Reports");
+        tokensReference = FirebaseDatabase.getInstance().getReference().child("Tokens");
         reportStorageReference = FirebaseStorage.getInstance().getReference().child("ReportPictures");
 
         // Set disasters dropdown menu items
@@ -123,6 +132,9 @@ public class PostReportActivity extends AppCompatActivity {
 
         // btnReport OnClickListener
         btnReport.setOnClickListener(v -> postReport());
+
+        // Get notification tokens
+        getTokens();
     }
 
     @Override
@@ -253,6 +265,9 @@ public class PostReportActivity extends AppCompatActivity {
                                        MotionToast.LONG_DURATION,
                                        ResourcesCompat.getFont(this, R.font.helvetica_regular)
                                );
+
+                               // Send push notification
+                               PushNotificationService.multicastNotification(PostReportActivity.this, tokens, disasterType, address);
 
                                finish();
                            } else {
@@ -395,5 +410,23 @@ public class PostReportActivity extends AppCompatActivity {
                         launcher.launch(it);
                     }
                 });
+    }
+
+    // Get tokens for push notification
+    private void getTokens() {
+        tokensReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    String token = String.valueOf(ds.child("token").getValue());
+                    tokens.put(token);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
