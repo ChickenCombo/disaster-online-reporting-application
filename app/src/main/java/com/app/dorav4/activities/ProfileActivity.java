@@ -116,8 +116,9 @@ public class ProfileActivity extends AppCompatActivity {
         showProfile();
     }
 
-    // Log out
+    // Remove user's token then log-out
     private void logout() {
+        FirebaseDatabase.getInstance().getReference("Tokens").child(mUser.getUid()).removeValue();
         FirebaseAuth.getInstance().signOut();
         intent = new Intent(ProfileActivity.this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

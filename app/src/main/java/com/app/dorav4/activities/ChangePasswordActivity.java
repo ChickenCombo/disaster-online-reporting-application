@@ -18,6 +18,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -164,6 +165,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                             MotionToast.LONG_DURATION,
                             ResourcesCompat.getFont(this, R.font.helvetica_regular)
                     );
+                    FirebaseDatabase.getInstance().getReference("Tokens").child(mUser.getUid()).removeValue();
                     FirebaseAuth.getInstance().signOut();
                     intent = new Intent(ChangePasswordActivity.this, LoginActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

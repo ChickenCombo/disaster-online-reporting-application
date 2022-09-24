@@ -1,10 +1,10 @@
 package com.app.dorav4.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -14,14 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
-import com.app.dorav4.activities.FindFriendsActivity;
-import com.app.dorav4.activities.MainActivity;
-import com.app.dorav4.activities.UpvotesActivity;
-import com.app.dorav4.adapters.ChatAdapter;
-import com.app.dorav4.adapters.UpvotesAdapter;
-import com.app.dorav4.adapters.UsersAdapter;
-import com.app.dorav4.models.Upvotes;
+import com.app.dorav4.activities.StartConversationActivity;
+import com.app.dorav4.adapters.MessagesAdapter;
 import com.app.dorav4.models.Users;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,13 +34,15 @@ public class ChatFragment extends Fragment {
     NestedScrollView nestedScrollView;
     RecyclerView recyclerView;
     ConstraintLayout emptyView;
-
-    DatabaseReference friendsReference, usersReference;
-    FirebaseAuth mAuth;
-    FirebaseUser mUser;
+    FloatingActionButton searchFriends;
 
     List<Users> usersList;
-    ChatAdapter chatAdapter;
+    MessagesAdapter messagesAdapter;
+
+    DatabaseReference chatsReference, usersReference;
+
+    FirebaseAuth mAuth;
+    FirebaseUser mUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,48 +57,62 @@ public class ChatFragment extends Fragment {
         nestedScrollView = view.findViewById(R.id.nestedScrollView);
         recyclerView = view.findViewById(R.id.recyclerView);
         emptyView = view.findViewById(R.id.emptyView);
+        searchFriends = view.findViewById(R.id.searchFriends);
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
-        friendsReference = FirebaseDatabase.getInstance().getReference("Friends").child(mUser.getUid());
-        usersReference = FirebaseDatabase.getInstance().getReference("Users");
+        chatsReference = FirebaseDatabase.getInstance().getReference().child("Chats").child(mUser.getUid());
+        usersReference = FirebaseDatabase.getInstance().getReference().child("Users");
 
-        usersList = new ArrayList<>();
+        // searchFriends OnClickListener
+        searchFriends.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), StartConversationActivity.class);
+            startActivity(intent);
+        });
 
-        loadFriends();
+        loadMessages();
 
         return view;
     }
 
-    // Fetch all user's friends from the database
-    private void loadFriends() {
-        friendsReference.addValueEventListener(new ValueEventListener() {
+    // Get all chat conversations
+    private void loadMessages() {
+        usersList = new ArrayList<>();
+
+        // Get chat ids
+        chatsReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 usersList.clear();
 
-                // Get the uid of the current user's friend
-                for (DataSnapshot ds: snapshot.getChildren()) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
                     String uid = ds.getRef().getKey();
 
-                    // Get the user's details based on their uid
+                    // Get user's info
                     usersReference.orderByKey().equalTo(uid).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot ds: snapshot.getChildren()) {
+                            for (DataSnapshot ds : snapshot.getChildren()) {
                                 Users users = ds.getValue(Users.class);
                                 usersList.add(users);
-                                chatAdapter = new ChatAdapter(getActivity(), usersList);
-                                recyclerView.setAdapter(chatAdapter);
-                            }
 
-                            // Show emptyView if recyclerView is empty
-                            if (usersList.size() == 0) {
-                                recyclerView.setVisibility(View.GONE);
-                            } else {
-                                recyclerView.setVisibility(View.VISIBLE);
-                                emptyView.setVisibility(View.GONE);
+                                // Set recycler view's data
+                                chatsReference.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        messagesAdapter = new MessagesAdapter(getActivity(), usersList);
+                                        recyclerView.setAdapter(messagesAdapter);
+
+                                        // Show empty view if list is empty
+                                        showEmptyView();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                             }
                         }
 
@@ -110,6 +122,9 @@ public class ChatFragment extends Fragment {
                         }
                     });
                 }
+
+                // Show empty view if list is empty
+                showEmptyView();
             }
 
             @Override
@@ -117,5 +132,18 @@ public class ChatFragment extends Fragment {
 
             }
         });
+    }
+
+    // Show emptyView if list is empty
+    private void showEmptyView() {
+        if (usersList.size() == 0) {
+            searchView.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        } else {
+            searchView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
     }
 }

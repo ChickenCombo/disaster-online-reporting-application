@@ -21,10 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DORAV4">
         <activity
-            android:name=".activities.TermsAndConditionsActivity"
+            android:name=".activities.StartConversationActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.PrivacyPolicyActivity"
+            android:name=".activities.ConversationActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ViewUserActivity"

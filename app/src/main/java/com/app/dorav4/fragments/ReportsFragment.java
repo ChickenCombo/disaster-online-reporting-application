@@ -44,7 +44,6 @@ public class ReportsFragment extends Fragment {
     Button btnJumpToTop;
     Animation slideUp, slideDown;
 
-
     DatabaseReference reportsReference;
 
     @Override

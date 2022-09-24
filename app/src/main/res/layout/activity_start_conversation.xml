@@ -4,18 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#e5e5e5"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
-    tools:context=".fragments.ChatFragment">
+    tools:context=".activities.StartConversationActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/emptyView"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:backgroundTint="@color/white"
-        android:visibility="gone">
+        android:backgroundTint="@color/white">
 
         <ImageView
             android:id="@+id/imageView6"
@@ -23,7 +27,7 @@
             android:layout_height="200dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/img_messages"
+            android:src="@drawable/img_add_friends"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +41,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/raleway"
-            android:text="You have no messages!"
+            android:text="You have no friends!"
             android:textAlignment="center"
             android:textColor="@color/safe_black"
             android:textSize="24sp"
@@ -53,7 +57,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:fontFamily="@font/raleway"
-            android:text="Tap the floating button to start a conversation"
+            android:text="Navigate to Friends List to add some friends"
             android:textAlignment="center"
             android:textColor="@color/safe_black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +75,7 @@
         app:iconifiedByDefault="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:queryBackground="@android:color/transparent"
         app:queryHint="Search..."
         app:searchIcon="@drawable/ic_search"
@@ -88,24 +92,10 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
+            android:paddingTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="8dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/single_view_user" />
+            tools:listitem="@layout/single_view_user"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
     </androidx.core.widget.NestedScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/searchFriends"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/primary_green"
-        android:elevation="2dp"
-        android:src="@drawable/ic_post"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@android:color/white"
-        tools:ignore="ContentDescription, SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

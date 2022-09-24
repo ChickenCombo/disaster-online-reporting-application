@@ -11,18 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
 import com.app.dorav4.activities.ConversationActivity;
-import com.app.dorav4.holders.UpvotesViewHolder;
 import com.app.dorav4.holders.UsersViewHolder;
 import com.app.dorav4.models.Users;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ChatAdapter extends RecyclerView.Adapter<UsersViewHolder> {
+public class MessagesAdapter extends RecyclerView.Adapter<UsersViewHolder> {
     Context context;
     List<Users> usersList;
 
-    public ChatAdapter(Context context, List<Users> usersList) {
+    public MessagesAdapter(Context context, List<Users> usersList) {
         this.context = context;
         this.usersList = usersList;
     }

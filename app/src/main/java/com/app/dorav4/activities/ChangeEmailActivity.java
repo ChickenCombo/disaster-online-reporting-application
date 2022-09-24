@@ -19,6 +19,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
@@ -164,6 +165,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
                             MotionToast.LONG_DURATION,
                             ResourcesCompat.getFont(this, R.font.helvetica_regular)
                     );
+                    FirebaseDatabase.getInstance().getReference("Tokens").child(mUser.getUid()).removeValue();
                     mUser.sendEmailVerification();
                     FirebaseAuth.getInstance().signOut();
                     intent = new Intent(ChangeEmailActivity.this, LoginActivity.class);
