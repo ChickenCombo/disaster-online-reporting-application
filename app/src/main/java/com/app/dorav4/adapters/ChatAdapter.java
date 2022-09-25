@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
 import com.app.dorav4.activities.ConversationActivity;
-import com.app.dorav4.holders.UpvotesViewHolder;
 import com.app.dorav4.holders.UsersViewHolder;
 import com.app.dorav4.models.Users;
 import com.squareup.picasso.Picasso;
