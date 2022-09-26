@@ -46,7 +46,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
@@ -58,17 +57,11 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
 
     DatabaseReference reportsReference;
 
-    List<Double> longitudeList;
-    List<Double> latitudeList;
-    List<String> disasterTypeList;
-    List<String> addressList;
-
     boolean isPermissionGranted;
-    Double currentLongitude = 0.0, currentLatitude = 0.0;
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
-        public void onMapReady(GoogleMap googleMap) {
+        public void onMapReady(@NonNull GoogleMap googleMap) {
             // Permission Check
             if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
@@ -96,8 +89,8 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
                 return false;
             });
 
-            // Add disaster markers
-            addMarker(googleMap);
+            // Get disaster reports data
+            getReports(googleMap);
         }
     };
 
@@ -108,9 +101,6 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
 
         // Permission Check
         checkPermission();
-
-        // Get reports list
-        getReportsList();
 
         // Initialize Google Maps
         initializeMap();
@@ -124,7 +114,7 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         // Forward results to EasyPermissions
@@ -142,52 +132,6 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
 
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
-    }
-
-    // Add disasters marker
-    private void addMarker(GoogleMap googleMap) {
-        int iconId = 0;
-
-        // Check if list is empty
-        if (!longitudeList.isEmpty() && !latitudeList.isEmpty()) {
-            for (int i = 0; i < longitudeList.size(); i++) {
-                // Set icon id for custom marker
-                switch(disasterTypeList.get(i)) {
-                    case "Typhoon":
-                        iconId = R.drawable.ic_map_typhoon;
-                        break;
-                    case "Heavy Rain":
-                        iconId = R.drawable.ic_map_heavy_rain;
-                        break;
-                    case "Landslide":
-                        iconId = R.drawable.ic_map_landslide;
-                        break;
-                    case "Earthquake":
-                        iconId = R.drawable.ic_map_earthquake;
-                        break;
-                    case "Fire":
-                        iconId = R.drawable.ic_map_fire;
-                        break;
-                    case "Flood":
-                        iconId = R.drawable.ic_map_flood;
-                        break;
-                    case "Tsunami":
-                        iconId = R.drawable.ic_map_tsunami;
-                        break;
-                    case "Volcanic Eruption":
-                        iconId = R.drawable.ic_map_volcanic_eruption;
-                        break;
-                }
-
-                // Add marker to the map
-                LatLng latLng = new LatLng(latitudeList.get(i), longitudeList.get(i));
-                googleMap.addMarker(new MarkerOptions()
-                        .position(latLng)
-                        .icon(bitmapDescriptor(requireActivity().getApplicationContext(), iconId))
-                        .snippet("Address: " + addressList.get(i))
-                        .title(disasterTypeList.get(i)));
-            }
-        }
     }
 
     // Initialize map
@@ -219,34 +163,56 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
     }
 
     // Get reports list
-    private void getReportsList() {
-        longitudeList = new ArrayList<>();
-        latitudeList = new ArrayList<>();
-        disasterTypeList = new ArrayList<>();
-        addressList = new ArrayList<>();
-
+    private void getReports(GoogleMap googleMap) {
         reportsReference = FirebaseDatabase.getInstance().getReference().child("Reports");
         reportsReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                longitudeList.clear();
-                latitudeList.clear();
-                disasterTypeList.clear();
-                addressList.clear();
-
-                // Add database data inside the list
                 for (DataSnapshot ds : snapshot.getChildren()) {
-                    // Fetch values in the database
-                    Double longitude = Double.valueOf(String.valueOf(ds.child("longitude").getValue()));
-                    Double latitude = Double.valueOf(String.valueOf(ds.child("latitude").getValue()));
-                    String disasterType = String.valueOf(ds.child("disasterType").getValue());
-                    String address = String.valueOf(ds.child("address").getValue());
+                    if (snapshot.exists()) {
+                        // Fetch disaster report data from the database
+                        double longitude = Double.parseDouble(String.valueOf(ds.child("longitude").getValue()));
+                        double latitude = Double.parseDouble(String.valueOf(ds.child("latitude").getValue()));
+                        String disasterType = String.valueOf(ds.child("disasterType").getValue());
+                        String address = String.valueOf(ds.child("address").getValue());
 
-                    // Add values inside the list
-                    longitudeList.add(longitude);
-                    latitudeList.add(latitude);
-                    disasterTypeList.add(disasterType);
-                    addressList.add(address);
+                        // Set icon id for custom marker
+                        int iconId = 0;
+                        switch (disasterType) {
+                            case "Typhoon":
+                                iconId = R.drawable.ic_map_typhoon;
+                                break;
+                            case "Heavy Rain":
+                                iconId = R.drawable.ic_map_heavy_rain;
+                                break;
+                            case "Landslide":
+                                iconId = R.drawable.ic_map_landslide;
+                                break;
+                            case "Earthquake":
+                                iconId = R.drawable.ic_map_earthquake;
+                                break;
+                            case "Fire":
+                                iconId = R.drawable.ic_map_fire;
+                                break;
+                            case "Flood":
+                                iconId = R.drawable.ic_map_flood;
+                                break;
+                            case "Tsunami":
+                                iconId = R.drawable.ic_map_tsunami;
+                                break;
+                            case "Volcanic Eruption":
+                                iconId = R.drawable.ic_map_volcanic_eruption;
+                                break;
+                        }
+
+                        // Add markers
+                        LatLng latLng = new LatLng(latitude, longitude);
+                        googleMap.addMarker(new MarkerOptions()
+                                .position(latLng)
+                                .icon(bitmapDescriptor(requireActivity().getApplicationContext(), iconId))
+                                .snippet("Address: " + address)
+                                .title(disasterType));
+                    }
                 }
             }
 
