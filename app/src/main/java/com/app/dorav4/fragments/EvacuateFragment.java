@@ -38,9 +38,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
+import java.util.Objects;
 
 import pub.devrel.easypermissions.EasyPermissions;
 import www.sanju.motiontoast.MotionToast;
@@ -49,11 +56,13 @@ import www.sanju.motiontoast.MotionToastStyle;
 public class EvacuateFragment extends Fragment implements EasyPermissions.PermissionCallbacks {
     LocationRequest locationRequest;
 
+    DatabaseReference evacuationCentersReference;
+
     boolean isPermissionGranted;
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
-        public void onMapReady(GoogleMap googleMap) {
+        public void onMapReady(@NonNull GoogleMap googleMap) {
             // Permission Check
             if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 return;
@@ -80,6 +89,9 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
                 }
                 return false;
             });
+
+            // Get evacuation centers data
+            getEvacuationCenters(googleMap);
         }
     };
 
@@ -103,7 +115,7 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         // Forward results to EasyPermissions
@@ -149,6 +161,38 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
                     ResourcesCompat.getFont(requireActivity(), R.font.helvetica_regular)
             );
         }
+    }
+
+    // Get evacuation areas list
+    private void getEvacuationCenters(GoogleMap googleMap) {
+        evacuationCentersReference = FirebaseDatabase.getInstance().getReference("EvacuationCenters");
+        evacuationCentersReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    if (snapshot.exists()) {
+                        // Fetch evacuation center data from the database
+                        double longitude = Objects.requireNonNull((Double) ds.child("longitude").getValue());
+                        double latitude =  Objects.requireNonNull((Double) ds.child("latitude").getValue());
+                        String evacuationCenterName = (String) ds.child("evacuationCenterName").getValue();
+                        String address = (String) ds.child("location").getValue();
+
+                        // Add markers
+                        LatLng latLng = new LatLng(latitude, longitude);
+                        googleMap.addMarker(new MarkerOptions()
+                                .position(latLng)
+                                .icon(bitmapDescriptor(requireActivity().getApplicationContext(), R.drawable.ic_map_evacuate))
+                                .snippet("Address: " + address)
+                                .title(evacuationCenterName));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     // Check if GPS in turned on
