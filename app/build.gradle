@@ -62,4 +62,5 @@ dependencies {
     implementation 'com.airbnb.android:lottie:4.2.2'
     implementation 'com.github.MikeOrtiz:TouchImageView:3.2.1'
     implementation 'com.android.volley:volley:1.2.1'
+    implementation 'com.github.niedev:BluetoothCommunicator:1.0.6'
 }
