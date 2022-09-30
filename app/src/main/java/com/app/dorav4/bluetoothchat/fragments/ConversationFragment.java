@@ -23,8 +23,8 @@ import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
+import com.app.dorav4.activities.OfflineDashboardActivity;
 import com.app.dorav4.bluetoothchat.BluetoothChatActivity;
-import com.app.dorav4.Global;
 import com.app.dorav4.bluetoothchat.gui.CustomAnimator;
 import com.app.dorav4.bluetoothchat.gui.GuiTools;
 import com.app.dorav4.bluetoothchat.gui.MessagesAdapter;
@@ -42,13 +42,12 @@ public class ConversationFragment extends Fragment {
     protected TextView description;
     private ConstraintLayout constraintLayout;
     private BluetoothCommunicator.Callback communicatorCallback;
-    private Global global;
+    private OfflineDashboardActivity offlineDashboardActivity;
     private BluetoothChatActivity activity;
     private MessagesAdapter mAdapter;
     private RecyclerView.SmoothScroller smoothScroller;
 
     public ConversationFragment() {
-        //an empty constructor is always needed for fragments
     }
 
     @Override
@@ -113,7 +112,6 @@ public class ConversationFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         activity = (BluetoothChatActivity) requireActivity();
-        global = (Global) activity.getApplication();
         Toolbar toolbar = activity.findViewById(R.id.toolbarConversation);
         activity.setActionBar(toolbar);
         // we give the constraint layout the information on the system measures (status bar etc.), which has the fragmentContainer,
@@ -133,7 +131,7 @@ public class ConversationFragment extends Fragment {
             }
         };
 
-        mAdapter = new MessagesAdapter(global.getBluetoothCommunicator().getUniqueName(), new MessagesAdapter.Callback() {
+        mAdapter = new MessagesAdapter(OfflineDashboardActivity.getBluetoothCommunicator().getUniqueName(), new MessagesAdapter.Callback() {
             @Override
             public void onFirstItemAdded() {
                 description.setVisibility(View.GONE);
@@ -145,12 +143,12 @@ public class ConversationFragment extends Fragment {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (global.getBluetoothCommunicator().getConnectedPeersList().size() > 0) {
+                if (OfflineDashboardActivity.getBluetoothCommunicator().getConnectedPeersList().size() > 0) {
                     //sending message
                     if (editText.getText().length() > 0) {
                         //the sender will be inserted by the receiver device, so you don't need to enter it
-                        Message message = new Message(global, "m", editText.getText().toString(), global.getBluetoothCommunicator().getConnectedPeersList().get(0));
-                        global.getBluetoothCommunicator().sendMessage(message);
+                        Message message = new Message(offlineDashboardActivity, "m", editText.getText().toString(), OfflineDashboardActivity.getBluetoothCommunicator().getConnectedPeersList().get(0));
+                        OfflineDashboardActivity.getBluetoothCommunicator().sendMessage(message);
                         editText.setText("");
                         //aggiunta del messaggio alla lista dei messaggi
                         mAdapter.addMessage(message);
@@ -166,13 +164,13 @@ public class ConversationFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        global.getBluetoothCommunicator().addCallback(communicatorCallback);
+        OfflineDashboardActivity.getBluetoothCommunicator().addCallback(communicatorCallback);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        global.getBluetoothCommunicator().removeCallback(communicatorCallback);
+        OfflineDashboardActivity.getBluetoothCommunicator().removeCallback(communicatorCallback);
     }
 
     @Override

@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.app.dorav4.Global;
 import com.app.dorav4.R;
+import com.app.dorav4.activities.OfflineDashboardActivity;
 import com.app.dorav4.bluetoothchat.fragments.ConversationFragment;
 import com.app.dorav4.bluetoothchat.fragments.PairingFragment;
 import com.app.dorav4.bluetoothchat.tools.Tools;
@@ -34,7 +34,6 @@ public class BluetoothChatActivity extends AppCompatActivity {
             Manifest.permission.BLUETOOTH_ADMIN,
             Manifest.permission.ACCESS_COARSE_LOCATION,
     };
-    private Global global;
     private int currentFragment = -1;
     private ArrayList<Callback> clientsCallbacks = new ArrayList<>();
     private CoordinatorLayout fragmentContainer;
@@ -44,13 +43,13 @@ public class BluetoothChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bluetooth_chat);
 
-        global = (Global) getApplication();
-
+        // Clean fragments (only if the app is recreated (When user disable permission))
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (fragmentManager.getBackStackEntryCount() > 0) {
             fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         }
 
+        // Remove previous fragments (case of the app was restarted after changed permission on android 6 and higher)
         List<Fragment> fragmentList = fragmentManager.getFragments();
         for (Fragment fragment : fragmentList) {
             if (fragment != null) {
@@ -63,11 +62,11 @@ public class BluetoothChatActivity extends AppCompatActivity {
 
         fragmentContainer = findViewById(R.id.fragment_container);
 
-        global.getBluetoothCommunicator().addCallback(new BluetoothCommunicator.Callback() {
+        OfflineDashboardActivity.getBluetoothCommunicator().addCallback(new BluetoothCommunicator.Callback() {
             @Override
             public void onAdvertiseStarted() {
                 super.onAdvertiseStarted();
-                if (global.getBluetoothCommunicator().isDiscovering()) {
+                if (OfflineDashboardActivity.getBluetoothCommunicator().isDiscovering()) {
                     notifySearchStarted();
                 }
             }
@@ -75,7 +74,7 @@ public class BluetoothChatActivity extends AppCompatActivity {
             @Override
             public void onDiscoveryStarted() {
                 super.onDiscoveryStarted();
-                if (global.getBluetoothCommunicator().isAdvertising()) {
+                if (OfflineDashboardActivity.getBluetoothCommunicator().isAdvertising()) {
                     notifySearchStarted();
                 }
             }
@@ -83,7 +82,7 @@ public class BluetoothChatActivity extends AppCompatActivity {
             @Override
             public void onAdvertiseStopped() {
                 super.onAdvertiseStopped();
-                if (!global.getBluetoothCommunicator().isDiscovering()) {
+                if (!OfflineDashboardActivity.getBluetoothCommunicator().isDiscovering()) {
                     notifySearchStopped();
                 }
             }
@@ -91,7 +90,7 @@ public class BluetoothChatActivity extends AppCompatActivity {
             @Override
             public void onDiscoveryStopped() {
                 super.onDiscoveryStopped();
-                if (!global.getBluetoothCommunicator().isAdvertising()) {
+                if (!OfflineDashboardActivity.getBluetoothCommunicator().isAdvertising()) {
                     notifySearchStopped();
                 }
             }
@@ -102,7 +101,7 @@ public class BluetoothChatActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         // when we return to the app's gui we choose which fragment to start based on connection status
-        if (global.getBluetoothCommunicator().getConnectedPeersList().size() == 0) {
+        if (OfflineDashboardActivity.getBluetoothCommunicator().getConnectedPeersList().size() == 0) {
             setFragment(DEFAULT_FRAGMENT);
         } else {
             setFragment(CONVERSATION_FRAGMENT);
@@ -176,13 +175,13 @@ public class BluetoothChatActivity extends AppCompatActivity {
     }
 
     public void exitFromConversation() {
-        if (global.getBluetoothCommunicator().getConnectedPeersList().size() > 0) {
+        if (OfflineDashboardActivity.getBluetoothCommunicator().getConnectedPeersList().size() > 0) {
             Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
             if (fragment instanceof ConversationFragment) {
                 ConversationFragment conversationFragment = (ConversationFragment) fragment;
                 conversationFragment.appearLoading();
             }
-            global.getBluetoothCommunicator().disconnectFromAll();
+            OfflineDashboardActivity.getBluetoothCommunicator().disconnectFromAll();
         } else {
             setFragment(DEFAULT_FRAGMENT);
         }
@@ -201,10 +200,10 @@ public class BluetoothChatActivity extends AppCompatActivity {
     }
 
     public int startSearch() {
-        if (global.getBluetoothCommunicator().isBluetoothLeSupported() == BluetoothCommunicator.SUCCESS) {
+        if (OfflineDashboardActivity.getBluetoothCommunicator().isBluetoothLeSupported() == BluetoothCommunicator.SUCCESS) {
             if (Tools.hasPermissions(this, REQUIRED_PERMISSIONS)) {
-                int advertisingCode = global.getBluetoothCommunicator().startAdvertising();
-                int discoveringCode = global.getBluetoothCommunicator().startDiscovery();
+                int advertisingCode = OfflineDashboardActivity.getBluetoothCommunicator().startAdvertising();
+                int discoveringCode = OfflineDashboardActivity.getBluetoothCommunicator().startDiscovery();
                 if (advertisingCode == discoveringCode) {
                     return advertisingCode;
                 }
@@ -227,8 +226,8 @@ public class BluetoothChatActivity extends AppCompatActivity {
     }
 
     public int stopSearch(boolean tryRestoreBluetoothStatus) {
-        int advertisingCode = global.getBluetoothCommunicator().stopAdvertising(tryRestoreBluetoothStatus);
-        int discoveringCode = global.getBluetoothCommunicator().stopDiscovery(tryRestoreBluetoothStatus);
+        int advertisingCode = OfflineDashboardActivity.getBluetoothCommunicator().stopAdvertising(tryRestoreBluetoothStatus);
+        int discoveringCode = OfflineDashboardActivity.getBluetoothCommunicator().stopDiscovery(tryRestoreBluetoothStatus);
         if (advertisingCode == discoveringCode) {
             return advertisingCode;
         }
@@ -244,24 +243,24 @@ public class BluetoothChatActivity extends AppCompatActivity {
     }
 
     public boolean isSearching() {
-        return global.getBluetoothCommunicator().isAdvertising() && global.getBluetoothCommunicator().isDiscovering();
+        return OfflineDashboardActivity.getBluetoothCommunicator().isAdvertising() && OfflineDashboardActivity.getBluetoothCommunicator().isDiscovering();
     }
 
     public void connect(Peer peer) {
         stopSearch(false);
-        global.getBluetoothCommunicator().connect(peer);
+        OfflineDashboardActivity.getBluetoothCommunicator().connect(peer);
     }
 
     public void acceptConnection(Peer peer) {
-        global.getBluetoothCommunicator().acceptConnection(peer);
+        OfflineDashboardActivity.getBluetoothCommunicator().acceptConnection(peer);
     }
 
     public void rejectConnection(Peer peer) {
-        global.getBluetoothCommunicator().rejectConnection(peer);
+        OfflineDashboardActivity.getBluetoothCommunicator().rejectConnection(peer);
     }
 
     public int disconnect(Peer peer) {
-        return global.getBluetoothCommunicator().disconnect(peer);
+        return OfflineDashboardActivity.getBluetoothCommunicator().disconnect(peer);
     }
 
     public CoordinatorLayout getFragmentContainer() {
@@ -272,12 +271,12 @@ public class BluetoothChatActivity extends AppCompatActivity {
 
     public void addCallback(Callback callback) {
         // in this way the listener will listen to both this activity and the communicatorexample
-        global.getBluetoothCommunicator().addCallback(callback);
+        OfflineDashboardActivity.getBluetoothCommunicator().addCallback(callback);
         clientsCallbacks.add(callback);
     }
 
     public void removeCallback(Callback callback) {
-        global.getBluetoothCommunicator().removeCallback(callback);
+        OfflineDashboardActivity.getBluetoothCommunicator().removeCallback(callback);
         clientsCallbacks.remove(callback);
     }
 

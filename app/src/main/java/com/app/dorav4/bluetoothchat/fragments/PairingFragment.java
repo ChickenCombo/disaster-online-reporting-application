@@ -21,8 +21,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.app.dorav4.R;
+import com.app.dorav4.activities.OfflineDashboardActivity;
 import com.app.dorav4.bluetoothchat.BluetoothChatActivity;
-import com.app.dorav4.Global;
 import com.app.dorav4.bluetoothchat.gui.ButtonSearch;
 import com.app.dorav4.bluetoothchat.gui.CustomAnimator;
 import com.app.dorav4.bluetoothchat.gui.GuiTools;
@@ -55,7 +55,7 @@ public class PairingFragment extends Fragment {
     private BluetoothChatActivity.Callback communicatorCallback;
     private CustomAnimator animator = new CustomAnimator();
     private Peer connectingPeer;
-    protected Global global;
+    protected OfflineDashboardActivity offlineDashboardActivity;
     protected BluetoothChatActivity activity;
     private static final float LOADING_SIZE_DP = 24;
     protected boolean isLoadingVisible = false;
@@ -144,7 +144,7 @@ public class PairingFragment extends Fragment {
                 super.onPeerFound(peer);
                 synchronized (lock) {
                     if (listView != null) {
-                        BluetoothAdapter bluetoothAdapter = global.getBluetoothCommunicator().getBluetoothAdapter();
+                        BluetoothAdapter bluetoothAdapter = OfflineDashboardActivity.getBluetoothCommunicator().getBluetoothAdapter();
                         int index = listView.indexOfPeer(peer.getUniqueName());
                         if (index == -1) {
                             listView.add(peer);
@@ -242,7 +242,6 @@ public class PairingFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         activity = (BluetoothChatActivity) requireActivity();
-        global = (Global) activity.getApplication();
         Toolbar toolbar = activity.findViewById(R.id.toolbarPairing);
         activity.setActionBar(toolbar);
         // we give the constraint layout the information on the system measures (status bar etc.), which has the fragmentContainer,

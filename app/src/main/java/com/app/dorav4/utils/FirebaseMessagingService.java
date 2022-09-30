@@ -43,8 +43,11 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 // Store user's token to the database
                 mAuth = FirebaseAuth.getInstance();
                 mUser = mAuth.getCurrentUser();
-                tokensReference = FirebaseDatabase.getInstance().getReference("Tokens");
-                tokensReference.child(mUser.getUid()).setValue(hashMap);
+
+                if (mUser != null) {
+                    tokensReference = FirebaseDatabase.getInstance().getReference("Tokens");
+                    tokensReference.child(mUser.getUid()).setValue(hashMap);
+                }
             }
         });
     }
