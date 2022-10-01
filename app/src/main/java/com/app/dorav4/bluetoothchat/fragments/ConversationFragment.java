@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -69,12 +68,7 @@ public class ConversationFragment extends Fragment {
             @Override
             public void onMessageReceived(Message message, int source) {
                 super.onMessageReceived(message, source);
-                /* means that we have received a message containing TEXT, for know the sender we can call message.getSender() that return
-                the peer that have sent the message, we can ignore source, it indicate only if we have received the message
-                as clients or as servers
-                 */
                 mAdapter.addMessage(message);
-                //smooth scroll
                 smoothScroller.setTargetPosition(mAdapter.getItemCount() - 1);
                 mRecyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
             }
@@ -82,8 +76,6 @@ public class ConversationFragment extends Fragment {
             @Override
             public void onDisconnected(Peer peer, int peersLeft) {
                 super.onDisconnected(peer, peersLeft);
-                /*means that the peer is disconnected, peersLeft indicate the number of connected peers remained
-                 */
                 if (peersLeft == 0) {
                     activity.setFragment(BluetoothChatActivity.DEFAULT_FRAGMENT);
                 }
@@ -93,7 +85,6 @@ public class ConversationFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_conversation, container, false);
     }
 
@@ -112,10 +103,6 @@ public class ConversationFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         activity = (BluetoothChatActivity) requireActivity();
-        Toolbar toolbar = activity.findViewById(R.id.toolbarConversation);
-        activity.setActionBar(toolbar);
-        // we give the constraint layout the information on the system measures (status bar etc.), which has the fragmentContainer,
-        // because they are not passed to it if started with a Transaction and therefore it overlaps the status bar because it fitsSystemWindows does not work
         WindowInsets windowInsets = activity.getFragmentContainer().getRootWindowInsets();
         if (windowInsets != null) {
             constraintLayout.dispatchApplyWindowInsets(windowInsets.replaceSystemWindowInsets(windowInsets.getSystemWindowInsetLeft(), windowInsets.getSystemWindowInsetTop(), windowInsets.getSystemWindowInsetRight(), 0));
@@ -131,31 +118,22 @@ public class ConversationFragment extends Fragment {
             }
         };
 
-        mAdapter = new MessagesAdapter(OfflineDashboardActivity.getBluetoothCommunicator().getUniqueName(), new MessagesAdapter.Callback() {
-            @Override
-            public void onFirstItemAdded() {
-                description.setVisibility(View.GONE);
-                mRecyclerView.setVisibility(View.VISIBLE);
-            }
+        mAdapter = new MessagesAdapter(OfflineDashboardActivity.getBluetoothCommunicator().getUniqueName(), () -> {
+            description.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
         });
+
         mRecyclerView.setAdapter(mAdapter);
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (OfflineDashboardActivity.getBluetoothCommunicator().getConnectedPeersList().size() > 0) {
-                    //sending message
-                    if (editText.getText().length() > 0) {
-                        //the sender will be inserted by the receiver device, so you don't need to enter it
-                        Message message = new Message(offlineDashboardActivity, "m", editText.getText().toString(), OfflineDashboardActivity.getBluetoothCommunicator().getConnectedPeersList().get(0));
-                        OfflineDashboardActivity.getBluetoothCommunicator().sendMessage(message);
-                        editText.setText("");
-                        //aggiunta del messaggio alla lista dei messaggi
-                        mAdapter.addMessage(message);
-                        //smooth scroll
-                        smoothScroller.setTargetPosition(mAdapter.getItemCount() - 1);
-                        mRecyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
-                    }
+        sendButton.setOnClickListener(v -> {
+            if (OfflineDashboardActivity.getBluetoothCommunicator().getConnectedPeersList().size() > 0) {
+                if (editText.getText().length() > 0) {
+                    Message message = new Message(offlineDashboardActivity, "m", editText.getText().toString(), OfflineDashboardActivity.getBluetoothCommunicator().getConnectedPeersList().get(0));
+                    OfflineDashboardActivity.getBluetoothCommunicator().sendMessage(message);
+                    editText.setText("");
+                    mAdapter.addMessage(message);
+                    smoothScroller.setTargetPosition(mAdapter.getItemCount() - 1);
+                    mRecyclerView.getLayoutManager().startSmoothScroll(smoothScroller);
                 }
             }
         });

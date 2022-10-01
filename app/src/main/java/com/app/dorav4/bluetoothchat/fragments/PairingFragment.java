@@ -2,22 +2,20 @@ package com.app.dorav4.bluetoothchat.fragments;
 
 import android.animation.Animator;
 import android.bluetooth.BluetoothAdapter;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowInsets;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.app.dorav4.R;
@@ -37,6 +35,9 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
+
 public class PairingFragment extends Fragment {
     public static final int CONNECTION_TIMEOUT = 5000;
     private RequestDialog connectionRequestDialog;
@@ -47,7 +48,6 @@ public class PairingFragment extends Fragment {
     private Timer connectionTimer;
     @Nullable
     private PeerListAdapter listView;
-    private TextView discoveryDescription;
     private TextView noDevices;
     private TextView noPermissions;
     private TextView noBluetoothLe;
@@ -60,7 +60,7 @@ public class PairingFragment extends Fragment {
     private static final float LOADING_SIZE_DP = 24;
     protected boolean isLoadingVisible = false;
     private boolean appearSearchButton = false;
-    protected boolean isLoadingAnimating;  // animation appearance or disappearance of the loading
+    protected boolean isLoadingAnimating;
     protected ButtonSearch buttonSearch;
     private ProgressBar loading;
     private ArrayList<CustomAnimator.EndListener> listeners = new ArrayList<>();
@@ -87,23 +87,8 @@ public class PairingFragment extends Fragment {
                 super.onConnectionRequest(peer);
                 if (peer != null) {
                     String time = DateFormat.getDateTimeInstance().format(new Date());
-                    connectionRequestDialog = new RequestDialog(activity, "Accept connection request from " + peer.getName() + " ?", 15000, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            activity.acceptConnection(peer);
-                        }
-                    }, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            activity.rejectConnection(peer);
-                        }
-                    });
-                    connectionRequestDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                        @Override
-                        public void onCancel(DialogInterface dialog) {
-                            connectionRequestDialog = null;
-                        }
-                    });
+                    connectionRequestDialog = new RequestDialog(activity, "Accept connection request from " + peer.getName() + " ?", 15000, (dialog, which) -> activity.acceptConnection(peer), (dialog, which) -> activity.rejectConnection(peer));
+                    connectionRequestDialog.setOnCancelListener(dialog -> connectionRequestDialog = null);
                     connectionRequestDialog.show();
                 }
             }
@@ -196,7 +181,6 @@ public class PairingFragment extends Fragment {
                     // appearance of the written of missing permission
                     listViewGui.setVisibility(View.GONE);
                     noDevices.setVisibility(View.GONE);
-                    discoveryDescription.setVisibility(View.GONE);
                     noPermissions.setVisibility(View.VISIBLE);
                 }
             }
@@ -208,7 +192,6 @@ public class PairingFragment extends Fragment {
                     // disappearance of the written of missing permission
                     noPermissions.setVisibility(View.GONE);
                     noDevices.setVisibility(View.VISIBLE);
-                    discoveryDescription.setVisibility(View.VISIBLE);
                     initializePeerList();
                 } else {
                     //reset list view
@@ -221,7 +204,6 @@ public class PairingFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_pairing, container, false);
     }
 
@@ -230,7 +212,6 @@ public class PairingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         constraintLayout = view.findViewById(R.id.container);
         listViewGui = view.findViewById(R.id.list_view);
-        discoveryDescription = view.findViewById(R.id.discoveryDescription);
         noDevices = view.findViewById(R.id.noDevices);
         noPermissions = view.findViewById(R.id.noPermission);
         noBluetoothLe = view.findViewById(R.id.noBluetoothLe);
@@ -242,29 +223,20 @@ public class PairingFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         activity = (BluetoothChatActivity) requireActivity();
-        Toolbar toolbar = activity.findViewById(R.id.toolbarPairing);
-        activity.setActionBar(toolbar);
-        // we give the constraint layout the information on the system measures (status bar etc.), which has the fragmentContainer,
-        // because they are not passed to it if started with a Transaction and therefore it overlaps the status bar because it fitsSystemWindows does not work
         WindowInsets windowInsets = activity.getFragmentContainer().getRootWindowInsets();
         if (windowInsets != null) {
             constraintLayout.dispatchApplyWindowInsets(windowInsets.replaceSystemWindowInsets(windowInsets.getSystemWindowInsetLeft(), windowInsets.getSystemWindowInsetTop(), windowInsets.getSystemWindowInsetRight(), 0));
         }
 
-        // setting of array adapter
         initializePeerList();
-        listViewGui.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                synchronized (lock) {
-                    if (listView != null) {
-                        // start the pop up and then connect to the peer
-                        if (listView.isClickable()) {
-                            Peer item = listView.get(i);
-                            connect(item);
-                        } else {
-                            listView.getCallback().onClickNotAllowed(listView.getShowToast());
-                        }
+        listViewGui.setOnItemClickListener((adapterView, view, i, l) -> {
+            synchronized (lock) {
+                if (listView != null) {
+                    if (listView.isClickable()) {
+                        Peer item = listView.get(i);
+                        connect(item);
+                    } else {
+                        listView.getCallback().onClickNotAllowed(listView.getShowToast());
                     }
                 }
             }
@@ -274,23 +246,18 @@ public class PairingFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        // release buttons and eliminate any loading
         activateInputs();
         disappearLoading(true, null);
-        // if you don't have permission to search, activate from here
         if (!Tools.hasPermissions(activity, BluetoothChatActivity.REQUIRED_PERMISSIONS)) {
             startSearch();
         }
 
-        buttonSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activity.isSearching()) {
-                    activity.stopSearch(false);
-                    clearFoundPeers();
-                } else {
-                    startSearch();
-                }
+        buttonSearch.setOnClickListener(v -> {
+            if (activity.isSearching()) {
+                activity.stopSearch(false);
+                clearFoundPeers();
+            } else {
+                startSearch();
             }
         });
     }
@@ -322,21 +289,15 @@ public class PairingFragment extends Fragment {
     private void connect(final Peer peer) {
         connectingPeer = peer;
         confirmConnectionPeer = peer;
-        connectionConfirmDialog = new RequestDialog(activity, "Are you sure to connect with " + peer.getName() + "?", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                deactivateInputs();
-                appearLoading(null);
-                activity.connect(peer);
-                startConnectionTimer();
-            }
+        connectionConfirmDialog = new RequestDialog(activity, "Are you sure to connect with " + peer.getName() + "?", (dialog, which) -> {
+            deactivateInputs();
+            appearLoading(null);
+            activity.connect(peer);
+            startConnectionTimer();
         }, null);
-        connectionConfirmDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                confirmConnectionPeer = null;
-                connectionConfirmDialog = null;
-            }
+        connectionConfirmDialog.setOnCancelListener(dialog -> {
+            confirmConnectionPeer = null;
+            connectionConfirmDialog = null;
         });
         connectionConfirmDialog.show();
     }
@@ -345,13 +306,19 @@ public class PairingFragment extends Fragment {
         int result = activity.startSearch();
         if (result != BluetoothCommunicator.SUCCESS) {
             if (result == BluetoothCommunicator.BLUETOOTH_LE_NOT_SUPPORTED && noBluetoothLe.getVisibility() != View.VISIBLE) {
-                // appearance of the bluetooth le missing sign
                 listViewGui.setVisibility(View.GONE);
                 noDevices.setVisibility(View.GONE);
-                discoveryDescription.setVisibility(View.GONE);
                 noBluetoothLe.setVisibility(View.VISIBLE);
             } else if (result != BluetoothChatActivity.NO_PERMISSIONS && result != BluetoothCommunicator.ALREADY_STARTED) {
-                Toast.makeText(activity, "Error starting search", Toast.LENGTH_SHORT).show();
+                MotionToast.Companion.darkToast(
+                        requireActivity(),
+                        "Error",
+                        "Cannot search for devices",
+                        MotionToastStyle.ERROR,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(requireActivity(), R.font.helvetica_regular)
+                );
             }
         }
     }
@@ -395,7 +362,6 @@ public class PairingFragment extends Fragment {
             @Override
             public void onFirstItemAdded() {
                 super.onFirstItemAdded();
-                discoveryDescription.setVisibility(View.GONE);
                 noDevices.setVisibility(View.GONE);
                 listViewGui.setVisibility(View.VISIBLE);
             }
@@ -405,7 +371,6 @@ public class PairingFragment extends Fragment {
                 super.onLastItemRemoved();
                 listViewGui.setVisibility(View.GONE);
                 if (noPermissions.getVisibility() != View.VISIBLE) {
-                    discoveryDescription.setVisibility(View.VISIBLE);
                     noDevices.setVisibility(View.VISIBLE);
                 }
             }
@@ -417,7 +382,7 @@ public class PairingFragment extends Fragment {
             }
         };
 
-        listView = new PeerListAdapter(activity, new ArrayList<Peer>(), callback);
+        listView = new PeerListAdapter(activity, new ArrayList<>(), callback);
         listViewGui.setAdapter(listView);
     }
 
@@ -433,19 +398,13 @@ public class PairingFragment extends Fragment {
         }
     }
 
-
-    /**
-     * In this method we not only make the loading appear but first we make the ButtonSearch disappear,
-     * these two animations will be considered the loading appearance animation
-     **/
     public void appearLoading(@Nullable CustomAnimator.EndListener responseListener) {
         if (responseListener != null) {
             listeners.add(responseListener);
         }
         isLoadingVisible = true;
         if (!isLoadingAnimating) {
-            if (loading.getVisibility() != View.VISIBLE) {  // if the object has not already appeared graphically
-                //animation execution
+            if (loading.getVisibility() != View.VISIBLE) {
                 isLoadingAnimating = true;
                 buttonSearch.setVisible(false, new CustomAnimator.EndListener() {
                     @Override
@@ -461,7 +420,7 @@ public class PairingFragment extends Fragment {
                             @Override
                             public void onAnimationEnd(Animator animation) {
                                 isLoadingAnimating = false;
-                                if (!isLoadingVisible) {   // if isLoadingVisible has changed in the meantime
+                                if (!isLoadingVisible) {
                                     disappearLoading(appearSearchButton, null);
                                 } else {
                                     notifyLoadingAnimationEnd();
