@@ -135,6 +135,7 @@
                 android:backgroundTint="@color/primary_green"
                 android:fontFamily="@font/raleway"
                 android:text="Save Profile"
+                android:textAllCaps="false"
                 android:textStyle="bold"
                 app:cornerRadius="30dp" />
         </LinearLayout>

@@ -142,6 +142,7 @@
                 android:backgroundTint="@color/primary_green"
                 android:fontFamily="@font/raleway"
                 android:text="Authenticate"
+                android:textAllCaps="false"
                 android:textColor="@color/safe_white"
                 android:textStyle="bold"
                 app:cornerRadius="30dp" />
@@ -236,6 +237,7 @@
                 android:backgroundTint="@color/primary_green"
                 android:fontFamily="@font/raleway"
                 android:text="Change Email Address"
+                android:textAllCaps="false"
                 android:textColor="@color/safe_white"
                 android:textStyle="bold"
                 app:cornerRadius="30dp" />

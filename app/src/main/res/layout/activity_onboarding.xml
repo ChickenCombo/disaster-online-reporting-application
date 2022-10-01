@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.OnboardingActivity"
     android:background="@color/safe_white"
-    android:padding="20dp" >
+    android:padding="20dp"
+    tools:context=".activities.OnboardingActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vpOnboardingSlider"
@@ -34,18 +34,18 @@
             android:layout_height="60dp"
             android:backgroundTint="@color/primary_green"
             android:fontFamily="@font/raleway"
-            android:textStyle="bold"
-            app:cornerRadius="30dp"
-            android:text="Let's get started"
             android:onClick="getStarted"
-            android:visibility="invisible" />
+            android:text="Let's get started"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:cornerRadius="30dp" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:id="@+id/linearDots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal" />
 
         <Button
             android:id="@+id/btnNext"
@@ -55,10 +55,11 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:backgroundTint="@color/safe_white"
-            android:drawableEnd="@drawable/ic_baseline_arrow_forward_24"
+            android:drawableEnd="@drawable/ic_continue"
             android:drawableTint="@color/primary_green"
+            android:onClick="next"
             android:text="Next"
-            android:textColor="@color/primary_green"
-            android:onClick="next" />
+            android:textAllCaps="false"
+            android:textColor="@color/primary_green" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

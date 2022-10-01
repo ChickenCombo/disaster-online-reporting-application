@@ -26,6 +26,7 @@
         android:backgroundTint="@color/primary_green"
         android:fontFamily="@font/raleway"
         android:text="Report"
+        android:textAllCaps="false"
         android:textStyle="bold"
         app:cornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,9 +51,9 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etDescription"
-            android:inputType="textMultiLine"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:inputType="textMultiLine" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
