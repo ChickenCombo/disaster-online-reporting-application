@@ -2,7 +2,6 @@ package com.app.dorav4.adapters;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.text.format.DateUtils;
@@ -19,6 +18,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.RenderMode;
 import com.app.dorav4.R;
 import com.app.dorav4.activities.CommentsActivity;
 import com.app.dorav4.activities.ImageFullscreenActivity;
@@ -50,8 +50,6 @@ import www.sanju.motiontoast.MotionToastStyle;
 public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
     Context context;
     List<Reports> reportsList;
-
-    ProgressDialog progressDialog;
 
     DatabaseReference reportsReference;
 
@@ -187,12 +185,20 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
 
     // Remove report from the database
     private void deleteReport(String reportId, String reportPicture) {
-        // ProgressDialog
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setTitle("Delete");
-        progressDialog.setMessage("Deleting your disaster report");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.show();
+        // Progress Dialog
+        MaterialDialog pDialog = new MaterialDialog.Builder((Activity) context)
+                .setTitle("Loading")
+                .setMessage("Deleting your disaster report, please wait")
+                .setAnimation(R.raw.lottie_loading)
+                .setCancelable(false)
+                .build();
+
+        LottieAnimationView animationView = pDialog.getAnimationView();
+        animationView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        animationView.setRenderMode(RenderMode.SOFTWARE);
+        animationView.setPadding(0, 64, 0, 0);
+
+        pDialog.show();
 
         // Delete image from storage
         StorageReference reportPictureReference = FirebaseStorage.getInstance().getReferenceFromUrl(reportPicture);
@@ -211,7 +217,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
                 public void onCancelled(@NonNull DatabaseError error) {
                 }
             });
-            progressDialog.dismiss();
+            pDialog.dismiss();
             MotionToast.Companion.darkToast(
                     (Activity) context,
                     "Delete",
@@ -223,7 +229,7 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
             );
         }).addOnFailureListener(e -> {
             // Report deletion failed
-            progressDialog.dismiss();
+            pDialog.dismiss();
             MotionToast.Companion.darkToast(
                     (Activity) context,
                     "Delete",
@@ -286,7 +292,6 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
         });
     }
 
-    // TODO: Fix bug with timezone
     // Convert time into "time ago"
     private String calculateTime (String strDate) {
         @SuppressLint("SimpleDateFormat")

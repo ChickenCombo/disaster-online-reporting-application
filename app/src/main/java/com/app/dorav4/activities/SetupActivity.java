@@ -1,17 +1,19 @@
 package com.app.dorav4.activities;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.RenderMode;
 import com.app.dorav4.R;
 import com.github.drjacky.imagepicker.ImagePicker;
 import com.github.drjacky.imagepicker.constant.ImageProvider;
@@ -30,6 +32,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
@@ -43,8 +46,6 @@ public class SetupActivity extends AppCompatActivity {
     CircleImageView ivProfilePicture;
     Intent intent;
     Uri photoUri;
-
-    ProgressDialog progressDialog;
 
     FirebaseAuth mAuth;
     FirebaseUser mUser;
@@ -60,8 +61,6 @@ public class SetupActivity extends AppCompatActivity {
         etFullName = findViewById(R.id.etFullName);
         ivProfilePicture = findViewById(R.id.ivProfilePicture);
         btnSave = findViewById(R.id.btnSave);
-
-        progressDialog = new ProgressDialog(SetupActivity.this);
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
@@ -104,11 +103,20 @@ public class SetupActivity extends AppCompatActivity {
 
         // Save profile to Firebase Database and Storage
         if (isFullNameEmpty && isImageEmpty) {
-            // ProgressDialog
-            progressDialog.setTitle("Profile Setup");
-            progressDialog.setMessage("Saving your profile");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
+            // Progress Dialog
+            MaterialDialog pDialog = new MaterialDialog.Builder(this)
+                    .setTitle("Loading")
+                    .setMessage("Saving your profile")
+                    .setAnimation(R.raw.lottie_loading)
+                    .setCancelable(false)
+                    .build();
+
+            LottieAnimationView animationView = pDialog.getAnimationView();
+            animationView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            animationView.setRenderMode(RenderMode.SOFTWARE);
+            animationView.setPadding(0, 64, 0, 0);
+
+            pDialog.show();
 
             // Save image to storage
             storageReference.child(mUser.getUid()).putFile(photoUri).addOnCompleteListener(task -> {
@@ -122,7 +130,7 @@ public class SetupActivity extends AppCompatActivity {
 
                         // Save user details to database
                         usersReference.child(mUser.getUid()).updateChildren(hashMap).addOnSuccessListener(o -> {
-                            progressDialog.dismiss();
+                            pDialog.dismiss();
 
                             MotionToast.Companion.darkToast(
                                     this,
@@ -140,7 +148,7 @@ public class SetupActivity extends AppCompatActivity {
                             startActivity(intent);
                             finish();
                         }).addOnFailureListener(e -> {
-                            progressDialog.dismiss();
+                            pDialog.dismiss();
 
                             MotionToast.Companion.darkToast(
                                     this,
@@ -154,7 +162,7 @@ public class SetupActivity extends AppCompatActivity {
                         });
                     });
                 } else {
-                    progressDialog.dismiss();
+                    pDialog.dismiss();
 
                     MotionToast.Companion.darkToast(
                             this,

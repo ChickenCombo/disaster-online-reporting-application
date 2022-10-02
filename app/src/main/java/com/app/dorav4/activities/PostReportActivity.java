@@ -3,7 +3,6 @@ package com.app.dorav4.activities;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -13,6 +12,7 @@ import android.location.Geocoder;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -23,8 +23,11 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.RenderMode;
 import com.app.dorav4.R;
 import com.app.dorav4.utils.PushNotificationService;
 import com.github.drjacky.imagepicker.ImagePicker;
@@ -58,6 +61,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
@@ -78,8 +82,6 @@ public class PostReportActivity extends AppCompatActivity {
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat format = new SimpleDateFormat("MMMM dd, yyyy hh:mm:ss");
 
-    ProgressDialog progressDialog;
-
     DatabaseReference usersReference, reportsReference, tokensReference;
     StorageReference reportStorageReference;
 
@@ -93,6 +95,10 @@ public class PostReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_report);
 
+        // Change status bar color
+        getWindow().setStatusBarColor(ContextCompat.getColor(PostReportActivity.this, R.color.white));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
         tokens = new JSONArray();
         geocoder = new Geocoder(PostReportActivity.this, Locale.getDefault());
 
@@ -104,8 +110,6 @@ public class PostReportActivity extends AppCompatActivity {
         ivAddImage = findViewById(R.id.ivAddImage);
         ivGetLocation = findViewById(R.id.ivGetLocation);
         btnReport = findViewById(R.id.btnReport);
-
-        progressDialog = new ProgressDialog(PostReportActivity.this);
 
         usersReference = FirebaseDatabase.getInstance().getReference().child("Users");
         reportsReference = FirebaseDatabase.getInstance().getReference().child("Reports");
@@ -222,11 +226,20 @@ public class PostReportActivity extends AppCompatActivity {
 
         // Add to Firebase
         if (isDisasterTypeEmpty && isDescriptionEmpty && isImageEmpty && isAddressEmpty) {
-            // ProgressDialog
-            progressDialog.setTitle("Report");
-            progressDialog.setMessage("Posting your disaster report");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
+            // Progress Dialog
+            MaterialDialog pDialog = new MaterialDialog.Builder(this)
+                    .setTitle("Loading")
+                    .setMessage("Posting your disaster report, please wait")
+                    .setAnimation(R.raw.lottie_loading)
+                    .setCancelable(false)
+                    .build();
+
+            LottieAnimationView animationView = pDialog.getAnimationView();
+            animationView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            animationView.setRenderMode(RenderMode.SOFTWARE);
+            animationView.setPadding(0, 64, 0, 0);
+
+            pDialog.show();
 
             // Get date and time of post
             Date date = new Date();
@@ -254,7 +267,7 @@ public class PostReportActivity extends AppCompatActivity {
 
                        reportsReference.child(String.valueOf(epochDate)).updateChildren(hashMap).addOnCompleteListener(o -> {
                            if (task.isSuccessful()) {
-                               progressDialog.dismiss();
+                               pDialog.dismiss();
 
                                MotionToast.Companion.darkToast(
                                        this,
@@ -271,7 +284,7 @@ public class PostReportActivity extends AppCompatActivity {
 
                                finish();
                            } else {
-                               progressDialog.dismiss();
+                               pDialog.dismiss();
                                MotionToast.Companion.darkToast(
                                        this,
                                        "Error",
@@ -285,7 +298,7 @@ public class PostReportActivity extends AppCompatActivity {
                        });
                    });
                } else {
-                   progressDialog.dismiss();
+                   pDialog.dismiss();
                    MotionToast.Companion.darkToast(
                            this,
                            "Error",
@@ -405,7 +418,7 @@ public class PostReportActivity extends AppCompatActivity {
                         return Unit.INSTANCE;
                     }
 
-                    public final void invoke(@NotNull Intent it) {
+                    public void invoke(@NotNull Intent it) {
                         Intrinsics.checkNotNullParameter(it, "it");
                         launcher.launch(it);
                     }

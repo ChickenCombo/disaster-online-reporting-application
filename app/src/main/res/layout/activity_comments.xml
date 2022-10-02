@@ -253,46 +253,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/safe_white"
-        android:padding="8dp">
+        android:background="@color/safe_white">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/ivCommentProfile"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:src="@drawable/ic_profile" />
-
-        <!-- TODO: Update comment text box UI -->
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="UselessParent">
 
         <EditText
             android:id="@+id/etComment"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
-            android:layout_toStartOf="@id/ivSubmitComment"
-            android:layout_toEndOf="@id/ivCommentProfile"
-            android:background="@drawable/bg_edittext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="15dp"
+            android:background="@null"
             android:hint="@string/edit_text_enter_a_comment"
             android:importantForAutofill="no"
-            android:inputType="text"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textColorHint="@color/primary_gray"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:inputType="text" />
 
-        <ImageView
-            android:id="@+id/ivSubmitComment"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:scaleType="center"
-            android:src="@drawable/ic_reply"
-            app:tint="@color/primary_green"
-            tools:ignore="ContentDescription" />
+            <ImageView
+                android:id="@+id/ivSubmitComment"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="center"
+                android:src="@drawable/ic_reply"
+                app:tint="@color/primary_green"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

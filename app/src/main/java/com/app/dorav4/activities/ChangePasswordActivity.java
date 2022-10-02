@@ -1,6 +1,5 @@
 package com.app.dorav4.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +10,8 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.RenderMode;
 import com.app.dorav4.R;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputLayout;
@@ -24,6 +25,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
 
@@ -34,8 +36,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
     Button btnAuthenticate, btnChangePassword;
     Intent intent;
     MaterialCardView cvAuthenticate, cvPassword;
-
-    ProgressDialog progressDialog;
 
     FirebaseAuth mAuth;
     FirebaseUser mUser;
@@ -58,8 +58,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         btnChangePassword = findViewById(R.id.btnChangePassword);
         cvAuthenticate = findViewById(R.id.cvAuthenticate);
         cvPassword = findViewById(R.id.cvPassword);
-
-        progressDialog = new ProgressDialog(ChangePasswordActivity.this);
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
@@ -96,16 +94,25 @@ public class ChangePasswordActivity extends AppCompatActivity {
         }
 
         if (isPasswordValid) {
-            // ProgressDialog
-            progressDialog.setTitle("Authenticating");
-            progressDialog.setMessage("Verifying your account");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
+            // Progress Dialog
+            MaterialDialog pDialog = new MaterialDialog.Builder(this)
+                    .setTitle("Loading")
+                    .setMessage("Verifying your login credentials, please wait")
+                    .setAnimation(R.raw.lottie_loading)
+                    .setCancelable(false)
+                    .build();
+
+            LottieAnimationView animationView = pDialog.getAnimationView();
+            animationView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            animationView.setRenderMode(RenderMode.SOFTWARE);
+            animationView.setPadding(0, 64, 0, 0);
+
+            pDialog.show();
 
             AuthCredential credential = EmailAuthProvider.getCredential(email, currentPassword);
             mUser.reauthenticate(credential).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    progressDialog.dismiss();
+                    pDialog.dismiss();
                     MotionToast.Companion.darkToast(
                             this,
                             "Success",
@@ -120,7 +127,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     cvAuthenticate.setVisibility(View.GONE);
                     cvPassword.setVisibility(View.VISIBLE);
                 } else {
-                    progressDialog.dismiss();
+                    pDialog.dismiss();
                     MotionToast.Companion.darkToast(
                             this,
                             "Error",

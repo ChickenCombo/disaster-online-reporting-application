@@ -1,6 +1,5 @@
 package com.app.dorav4.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
@@ -15,6 +14,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.RenderMode;
 import com.app.dorav4.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -24,6 +25,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
 
@@ -34,8 +36,6 @@ public class RegisterActivity extends AppCompatActivity {
     ImageView ivBack;
     Button btnRegister;
     Intent intent;
-
-    ProgressDialog progressDialog;
 
     FirebaseAuth mAuth;
 
@@ -51,8 +51,6 @@ public class RegisterActivity extends AppCompatActivity {
         tvTermsAndPolicies = findViewById(R.id.tvTermsAndPolicies);
         ivBack = findViewById(R.id.ivBack);
         btnRegister = findViewById(R.id.btnRegister);
-
-        progressDialog = new ProgressDialog(RegisterActivity.this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -90,16 +88,25 @@ public class RegisterActivity extends AppCompatActivity {
 
         // If all inputs are valid
         if (isEmailValid && isPasswordValid) {
-            // ProgressDialog
-            progressDialog.setTitle("Register");
-            progressDialog.setMessage("Creating your account");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
+            // Progress Dialog
+            MaterialDialog pDialog = new MaterialDialog.Builder(this)
+                    .setTitle("Loading")
+                    .setMessage("Verifying your login credentials, please wait")
+                    .setAnimation(R.raw.lottie_loading)
+                    .setCancelable(false)
+                    .build();
+
+            LottieAnimationView animationView = pDialog.getAnimationView();
+            animationView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            animationView.setRenderMode(RenderMode.SOFTWARE);
+            animationView.setPadding(0, 64, 0, 0);
+
+            pDialog.show();
 
             // Create a new user using Firebase Authentication
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    progressDialog.dismiss();
+                    pDialog.dismiss();
 
                     MotionToast.Companion.darkToast(
                             this,
@@ -115,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    progressDialog.dismiss();
+                    pDialog.dismiss();
 
                     MotionToast.Companion.darkToast(
                             this,

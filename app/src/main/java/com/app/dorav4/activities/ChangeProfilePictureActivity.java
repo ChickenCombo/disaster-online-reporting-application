@@ -1,7 +1,6 @@
 package com.app.dorav4.activities;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.RenderMode;
 import com.app.dorav4.R;
 import com.github.drjacky.imagepicker.ImagePicker;
 import com.github.drjacky.imagepicker.constant.ImageProvider;
@@ -33,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
+import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
@@ -48,8 +50,6 @@ public class ChangeProfilePictureActivity extends AppCompatActivity {
     DatabaseReference usersReference, reportsReference;
     StorageReference storageReference;
 
-    ProgressDialog progressDialog;
-
     Uri photoUri;
 
     @Override
@@ -60,8 +60,6 @@ public class ChangeProfilePictureActivity extends AppCompatActivity {
         ivBack = findViewById(R.id.ivBack);
         ivProfilePicture = findViewById(R.id.ivProfilePicture);
         btnSaveProfile = findViewById(R.id.btnSaveProfile);
-
-        progressDialog = new ProgressDialog(ChangeProfilePictureActivity.this);
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
@@ -102,11 +100,20 @@ public class ChangeProfilePictureActivity extends AppCompatActivity {
         }
 
         if (isImageEmpty) {
-            // ProgressDialog
-            progressDialog.setTitle("Update Profile");
-            progressDialog.setMessage("Saving your profile");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
+            // Progress Dialog
+            MaterialDialog pDialog = new MaterialDialog.Builder(this)
+                    .setTitle("Loading")
+                    .setMessage("Saving your profile picture, please wait")
+                    .setAnimation(R.raw.lottie_loading)
+                    .setCancelable(false)
+                    .build();
+
+            LottieAnimationView animationView = pDialog.getAnimationView();
+            animationView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            animationView.setRenderMode(RenderMode.SOFTWARE);
+            animationView.setPadding(0, 64, 0, 0);
+
+            pDialog.show();
 
             // Upload new image to cloud storage
             storageReference.child(mUser.getUid()).putFile(photoUri).addOnCompleteListener(task -> {
@@ -179,7 +186,7 @@ public class ChangeProfilePictureActivity extends AppCompatActivity {
                                 }
                             });
 
-                            progressDialog.dismiss();
+                            pDialog.dismiss();
                             MotionToast.Companion.darkToast(
                                     this,
                                     "Success",
@@ -191,7 +198,7 @@ public class ChangeProfilePictureActivity extends AppCompatActivity {
                             );
                             finish();
                         }).addOnFailureListener(e -> {
-                            progressDialog.dismiss();
+                            pDialog.dismiss();
                             MotionToast.Companion.darkToast(
                                     this,
                                     "Error",
@@ -204,7 +211,7 @@ public class ChangeProfilePictureActivity extends AppCompatActivity {
                         });
                     });
                 } else {
-                    progressDialog.dismiss();
+                    pDialog.dismiss();
                     MotionToast.Companion.darkToast(
                             this,
                             "Error",
@@ -240,7 +247,7 @@ public class ChangeProfilePictureActivity extends AppCompatActivity {
                         return Unit.INSTANCE;
                     }
 
-                    public final void invoke(@NotNull Intent it) {
+                    public void invoke(@NotNull Intent it) {
                         Intrinsics.checkNotNullParameter(it, "it");
                         launcher.launch(it);
                     }

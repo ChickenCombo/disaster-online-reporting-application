@@ -1,7 +1,6 @@
 package com.app.dorav4.activities;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -16,6 +15,8 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.RenderMode;
 import com.app.dorav4.R;
 import com.app.dorav4.adapters.CommentsAdapters;
 import com.app.dorav4.models.Comments;
@@ -36,11 +37,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
+import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
 
 public class CommentsActivity extends AppCompatActivity {
-    ImageView ivReportProfile, ivReportPicture, ivReportUpvote, ivCommentProfile, ivSubmitComment, ivBack;
+    ImageView ivReportProfile, ivReportPicture, ivReportUpvote, ivSubmitComment, ivBack;
     TextView tvToolbarHeader, tvReportName, tvReportDate, tvReportDisasterType, tvReportAddress, tvReportDescription, tvReportUpvoteCount, tvReportCommentCount, tvEmptyViewHeader, tvEmptyViewSubHeader;
     EditText etComment;
     Intent intent;
@@ -49,14 +51,12 @@ public class CommentsActivity extends AppCompatActivity {
     List<Comments> commentsList;
     CommentsAdapters commentsAdapters;
 
-    ProgressDialog progressDialog;
-
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat format = new SimpleDateFormat("MMMM dd, yyyy hh:mm:ss");
 
     DatabaseReference upvotesReference, reportsReference;
 
-    String date, description, disasterType, fullName, profilePicture, reportPicture, userId, reportId, upvotes, latitude, longitude, address, comments;
+    String date, description, disasterType, fullName, profilePicture, reportPicture, reportId, upvotes, address, comments;
 
     boolean processComment = false;
     boolean processUpvote = false;
@@ -69,7 +69,6 @@ public class CommentsActivity extends AppCompatActivity {
         ivReportProfile = findViewById(R.id.ivReportProfile);
         ivReportPicture = findViewById(R.id.ivReportPicture);
         ivReportUpvote = findViewById(R.id.ivReportUpvote);
-        ivCommentProfile = findViewById(R.id.ivCommentProfile);
         ivSubmitComment = findViewById(R.id.ivSubmitComment);
         ivBack = findViewById(R.id.ivBack);
         tvToolbarHeader = findViewById(R.id.tvToolbarHeader);
@@ -85,9 +84,7 @@ public class CommentsActivity extends AppCompatActivity {
         etComment = findViewById(R.id.etComment);
         recyclerView = findViewById(R.id.recyclerView);
 
-        tvToolbarHeader.setText("Comments");
-
-        progressDialog = new ProgressDialog(CommentsActivity.this);
+        tvToolbarHeader.setText(R.string.comments_header);
 
         reportsReference = FirebaseDatabase.getInstance().getReference().child("Reports");
 
@@ -153,7 +150,6 @@ public class CommentsActivity extends AppCompatActivity {
                     tvReportCommentCount.setText(String.format("%s comments", comments));
                     Picasso.get().load(profilePicture).into(ivReportProfile);
                     Picasso.get().load(reportPicture).into(ivReportPicture);
-                    Picasso.get().load(MainActivity.profilePicture).into(ivCommentProfile);
                 }
             }
 
@@ -219,11 +215,20 @@ public class CommentsActivity extends AppCompatActivity {
                     ResourcesCompat.getFont(this, R.font.helvetica_regular)
             );
         } else {
-            // ProgressDialog
-            progressDialog.setTitle("Comment");
-            progressDialog.setMessage("Posting your comment");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.show();
+            // Progress Dialog
+            MaterialDialog pDialog = new MaterialDialog.Builder(this)
+                    .setTitle("Loading")
+                    .setMessage("Adding your comment, please wait")
+                    .setAnimation(R.raw.lottie_loading)
+                    .setCancelable(false)
+                    .build();
+
+            LottieAnimationView animationView = pDialog.getAnimationView();
+            animationView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            animationView.setRenderMode(RenderMode.SOFTWARE);
+            animationView.setPadding(0, 64, 0, 0);
+
+            pDialog.show();
 
             // Get date and time of comment
             Date date = new Date();
@@ -241,7 +246,7 @@ public class CommentsActivity extends AppCompatActivity {
             // Upload comment to the database
             DatabaseReference commentsReference = FirebaseDatabase.getInstance().getReference("Reports").child(reportId).child("Comments");
             commentsReference.child(String.valueOf(epochDate)).setValue(hashMap).addOnSuccessListener(unused -> {
-                progressDialog.dismiss();
+                pDialog.dismiss();
                 MotionToast.Companion.darkToast(
                         this,
                         "Success",
@@ -254,7 +259,7 @@ public class CommentsActivity extends AppCompatActivity {
                 etComment.getText().clear();
                 commentCount();
             }).addOnFailureListener(e -> {
-                progressDialog.dismiss();
+                pDialog.dismiss();
                 MotionToast.Companion.darkToast(
                         this,
                         "Error",
@@ -339,7 +344,6 @@ public class CommentsActivity extends AppCompatActivity {
         });
     }
 
-    // TODO: Fix bug with timezone
     // Convert time into "time ago"
     private String calculateTime (String strDate) {
         @SuppressLint("SimpleDateFormat")
