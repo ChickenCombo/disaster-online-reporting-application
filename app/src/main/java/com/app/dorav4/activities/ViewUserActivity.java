@@ -1,7 +1,5 @@
 package com.app.dorav4.activities;
 
-import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -15,8 +13,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.app.dorav4.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -124,14 +120,14 @@ public class ViewUserActivity extends AppCompatActivity {
                     String request = Objects.requireNonNull(snapshot.child(userId).child("request").getValue()).toString();
                     if (request.equals("received")) {
                         // If the other user has received a friend request, show accept friend request button
-                        btnSendFriendRequest.setText("Accept Friend Request");
+                        btnSendFriendRequest.setText(R.string.accept_friend_request);
                         currentState = "request_received";
 
                         // If the other user has received a friend request, show accept friend request button
                         btnDeclineFriendRequest.setVisibility(View.VISIBLE);
                     } else if (request.equals("sent")) {
                         // If current user has sent a friend request, show cancel request button
-                        btnSendFriendRequest.setText("Cancel Friend Request");
+                        btnSendFriendRequest.setText(R.string.cancel_friend_request);
                         currentState = "request_sent";
                     }
                 // If friend request doesn't exist, check if they're already friends
@@ -142,11 +138,11 @@ public class ViewUserActivity extends AppCompatActivity {
                             if (snapshot.hasChild(userId)) {
                                 // If users are already friends, show unfriend button
                                 currentState = "friends";
-                                btnSendFriendRequest.setText("Unfriend");
+                                btnSendFriendRequest.setText(R.string.unfriend);
                                 btnSendFriendRequest.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.primary_red));
                             } else {
                                 btnSendFriendRequest.setEnabled(true);
-                                btnSendFriendRequest.setText("Send Friend Request");
+                                btnSendFriendRequest.setText(R.string.send_friend_request);
                                 btnSendFriendRequest.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.primary_green));
                                 btnDeclineFriendRequest.setVisibility(View.GONE);
                                 currentState = "not_friends";
@@ -179,7 +175,7 @@ public class ViewUserActivity extends AppCompatActivity {
                     friendRequestsReference.child(userId).child(mUser.getUid()).child("request").setValue("received").addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
                             btnSendFriendRequest.setEnabled(true);
-                            btnSendFriendRequest.setText("Cancel Friend Request");
+                            btnSendFriendRequest.setText(R.string.cancel_friend_request);
                             currentState = "request_sent";
 
                             MotionToast.Companion.darkToast(
@@ -204,7 +200,7 @@ public class ViewUserActivity extends AppCompatActivity {
                     friendRequestsReference.child(userId).child(mUser.getUid()).removeValue().addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
                             btnSendFriendRequest.setEnabled(true);
-                            btnSendFriendRequest.setText("Send Friend Request");
+                            btnSendFriendRequest.setText(R.string.send_friend_request);
                             currentState = "not_friends";
 
                             MotionToast.Companion.darkToast(
@@ -238,7 +234,7 @@ public class ViewUserActivity extends AppCompatActivity {
                                    friendRequestsReference.child(userId).child(mUser.getUid()).removeValue().addOnCompleteListener(task3 -> {
                                        if (task3.isSuccessful()) {
                                            btnSendFriendRequest.setEnabled(true);
-                                           btnSendFriendRequest.setText("Unfriend");
+                                           btnSendFriendRequest.setText(R.string.unfriend);
                                            currentState = "friends";
 
                                            MotionToast.Companion.darkToast(
@@ -268,7 +264,7 @@ public class ViewUserActivity extends AppCompatActivity {
                     friendsReference.child(userId).child(mUser.getUid()).removeValue().addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
                             btnSendFriendRequest.setEnabled(true);
-                            btnSendFriendRequest.setText("Send Friend Request");
+                            btnSendFriendRequest.setText(R.string.send_friend_request);
                             btnSendFriendRequest.setBackgroundTintList(ContextCompat.getColorStateList(getApplicationContext(), R.color.primary_green));
                             currentState = "not_friends";
 
@@ -295,7 +291,7 @@ public class ViewUserActivity extends AppCompatActivity {
                 friendRequestsReference.child(userId).child(mUser.getUid()).removeValue().addOnCompleteListener(task1 -> {
                     if (task1.isSuccessful()) {
                         btnSendFriendRequest.setEnabled(true);
-                        btnSendFriendRequest.setText("Send Friend Request");
+                        btnSendFriendRequest.setText(R.string.send_friend_request);
                         currentState = "not_friends";
 
                         MotionToast.Companion.darkToast(

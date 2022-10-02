@@ -59,7 +59,7 @@ public class StartConversationActivity extends AppCompatActivity {
         usersReference = FirebaseDatabase.getInstance().getReference("Users");
 
         // Set header text
-        tvToolbarHeader.setText("Start Conversation");
+        tvToolbarHeader.setText(R.string.start_conversation_header);
 
         // searchView OnQueryTextListener
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

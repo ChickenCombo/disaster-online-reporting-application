@@ -27,7 +27,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/primary_green" />
+        app:tint="@color/primary_green"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/whiteLogo"
@@ -38,5 +39,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
+        app:tint="@color/white"
+        tools:ignore="ContentDescription" />
 </androidx.constraintlayout.motion.widget.MotionLayout>

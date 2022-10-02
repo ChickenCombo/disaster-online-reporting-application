@@ -35,7 +35,7 @@
             android:backgroundTint="@color/primary_green"
             android:fontFamily="@font/raleway"
             android:onClick="getStarted"
-            android:text="Let's get started"
+            android:text="@string/button_lets_get_started"
             android:textStyle="bold"
             android:visibility="invisible"
             app:cornerRadius="30dp" />
@@ -52,14 +52,15 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:backgroundTint="@color/safe_white"
             android:drawableEnd="@drawable/ic_continue"
             android:drawableTint="@color/primary_green"
             android:onClick="next"
-            android:text="Next"
+            android:text="@string/button_next"
             android:textAllCaps="false"
-            android:textColor="@color/primary_green" />
+            android:textColor="@color/primary_green"
+            tools:ignore="RelativeOverlap" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

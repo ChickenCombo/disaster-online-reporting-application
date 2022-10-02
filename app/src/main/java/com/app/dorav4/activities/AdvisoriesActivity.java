@@ -34,7 +34,7 @@ public class AdvisoriesActivity extends AppCompatActivity {
         tvToolbarHeader = findViewById(R.id.tvToolbarHeader);
         ivBack = findViewById(R.id.ivBack);
 
-        tvToolbarHeader.setText("Advisories");
+        tvToolbarHeader.setText(R.string.advisories_header);
 
         // Initialize fragments
         pagasaFragment = new PAGASAFragment();

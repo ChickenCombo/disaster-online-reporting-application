@@ -41,7 +41,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/raleway"
-                android:text="Juan Dela Cruz"
+                android:text="@string/placeholder_name"
                 android:textColor="@color/safe_black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -57,7 +57,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/raleway"
-                android:text="0 days ago"
+                android:text="@string/placeholder_date"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/ivReportProfile"
@@ -71,7 +71,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/raleway"
-                android:text="Heavy Rain"
+                android:text="@string/placeholder_disaster_type"
                 android:textColor="@color/primary_green"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -87,7 +87,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/raleway"
-                android:text="España Blvd, Sampaloc, Manila, 1008 Metro Manila"
+                android:text="@string/placeholder_address"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -116,7 +116,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/raleway"
-                android:text="There’s heavy rain in España Boulevard right now nearby UST."
+                android:text="@string/placeholder_description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +130,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/tvReportCommentCount"
                 app:layout_constraintTop_toBottomOf="@+id/tvReportDescription"
-                app:srcCompat="@drawable/ic_comment" />
+                app:srcCompat="@drawable/ic_comment"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tvReportCommentCount"
@@ -139,7 +140,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/raleway"
-                android:text="0 comments"
+                android:text="@string/placeholder_comments"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvReportDescription" />
 
@@ -153,7 +154,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvReportDescription"
-                app:srcCompat="@drawable/ic_upvote" />
+                app:srcCompat="@drawable/ic_upvote"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tvReportUpvoteCount"
@@ -162,7 +164,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/raleway"
-                android:text="0 upvotes"
+                android:text="@string/placeholder_upvotes"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivReportUpvote"
                 app:layout_constraintTop_toBottomOf="@+id/tvReportDescription"
@@ -175,10 +177,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tvReportName"
                 app:layout_constraintEnd_toEndOf="@+id/tvReportName"
                 app:layout_constraintTop_toTopOf="@+id/tvReportName"
-                app:srcCompat="@drawable/ic_more" />
-
+                app:srcCompat="@drawable/ic_more"
+                tools:ignore="ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

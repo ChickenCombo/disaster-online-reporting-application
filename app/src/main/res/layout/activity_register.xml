@@ -54,13 +54,14 @@
                 android:layout_height="75dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
-                android:src="@drawable/img_dora_logo" />
+                android:src="@drawable/img_dora_logo"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway"
-                android:text="We’re glad to have you!"
+                android:text="@string/register_header"
                 android:textAlignment="center"
                 android:textColor="@color/safe_black"
                 android:textSize="24sp"
@@ -73,7 +74,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="8dp"
                 android:paddingEnd="16dp"
-                android:text="DORA keeps you updated with current disaster situations"
+                android:text="@string/register_description"
                 android:textAlignment="center" />
 
             <TextView
@@ -84,7 +85,7 @@
                 android:fontFamily="@font/raleway"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:text="Account Setup"
+                android:text="@string/account_setup"
                 android:textAlignment="center"
                 android:textColor="@color/safe_black"
                 android:textSize="17sp"
@@ -97,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:hint="Email Address"
+                android:hint="@string/edit_text_email"
                 app:boxCornerRadiusBottomEnd="30dp"
                 app:boxCornerRadiusBottomStart="30dp"
                 app:boxCornerRadiusTopEnd="30dp"
@@ -126,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:hint="Password"
+                android:hint="@string/edit_text_password"
                 app:boxCornerRadiusBottomEnd="30dp"
                 app:boxCornerRadiusBottomStart="30dp"
                 app:boxCornerRadiusTopEnd="30dp"
@@ -156,7 +157,7 @@
                 android:layout_marginEnd="16dp"
                 android:backgroundTint="@color/primary_green"
                 android:fontFamily="@font/raleway"
-                android:text="Register"
+                android:text="@string/button_register"
                 android:textAllCaps="false"
                 android:textStyle="bold"
                 app:cornerRadius="30dp" />

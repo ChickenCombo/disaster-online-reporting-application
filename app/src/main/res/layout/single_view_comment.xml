@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -38,7 +39,8 @@
                 android:src="@drawable/ic_more"
                 app:layout_constraintBottom_toBottomOf="@+id/tvCommentName"
                 app:layout_constraintEnd_toEndOf="@+id/tvCommentName"
-                app:layout_constraintTop_toTopOf="@+id/tvCommentName" />
+                app:layout_constraintTop_toTopOf="@+id/tvCommentName"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tvCommentName"
@@ -48,7 +50,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/raleway"
-                android:text="Juan Dela Cruz"
+                android:text="@string/placeholder_name"
                 android:textColor="@color/safe_black"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -63,7 +65,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/raleway"
-                android:text="This is a comment"
+                android:text="@string/placeholder_comment"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivCommentProfile"
                 app:layout_constraintTop_toBottomOf="@+id/tvCommentName" />
@@ -76,13 +78,12 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/raleway"
-                android:text="January 1, 1999"
+                android:text="@string/placeholder_date"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivCommentProfile"
                 app:layout_constraintTop_toBottomOf="@+id/tvCommentComment" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

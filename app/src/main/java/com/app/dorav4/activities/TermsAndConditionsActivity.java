@@ -23,7 +23,7 @@ public class TermsAndConditionsActivity extends AppCompatActivity {
         ivBack = findViewById(R.id.ivBack);
         wvTermsAndConditions = findViewById(R.id.wvTermsAndConditions);
 
-        tvToolbarHeader.setText("Terms and Conditions");
+        tvToolbarHeader.setText(R.string.terms_and_conditions_header);
 
         String fileName = "terms_and_conditions.html";
         wvTermsAndConditions.loadUrl("file:///android_asset/" + fileName);

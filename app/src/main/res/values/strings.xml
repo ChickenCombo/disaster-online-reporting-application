@@ -1,6 +1,8 @@
 <resources>
+    <!-- App Name -->
     <string name="app_name">DORA</string>
 
+    <!-- String for dropdown menu -->
     <string-array name="disasters">
         <item>Typhoon</item>
         <item>Heavy Rain</item>
@@ -12,35 +14,162 @@
         <item>Volcanic Eruption</item>
     </string-array>
 
-    <string name="no_devices_found">No BLE devices found</string>
-    <string name="chat_title">Chat</string>
-    <string name="device_list_title">Pair with new device</string>
-    <string name="location_required_error">The location permission is required to support Bluetooth Low Energy communication</string>
-    <string name="grant_permission_prompt">Grant Location Permission</string>
-    <string name="active_scan_message">Scanning for devices</string>
-    <string name="bt_not_enabled">Please enable Bluetooth in order to scan for devices</string>
-    <string name="enable_bluetooth_prompt">Enable Bluetooth</string>
-    <string name="bt_ads_not_supported">Bluetooth Advertisements are not supported on this device</string>
-    <string name="chat_confirm_message">Would you like to chat with %1$s</string>
-    <string name="chat_deny_button">No</string>
-    <string name="chat_confirm_button">Yes</string>
-    <string name="no_connected_device_message">Not connected to a device</string>
-    <string name="connect_device_prompt">Connect with nearby devices</string>
-    <string name="send_message_button">Send Message</string>
-    <string name="chatting_with_device">Chatting with %1$s</string>
-    <string name="your_device_address">Your device address:</string>
-    <string name="scanning_header">Choose a device to chat with:</string>
-    <string name="title_activity_view_friend">ViewFriendActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-
     <!-- String used for onboarding slider -->
     <string name="slider_first_title">Slider First Title</string>
     <string name="slider_first_desc">Slider First Description</string>
+    <string name="title_onboarding">Title Onboarding</string>
+    <string name="onboarding_description">Onboarding Description</string>
+
+    <!-- String used for account login -->
+    <string name="login_header">Welcome to DORA!</string>
+    <string name="login_description">This app requires login to enjoy all the features of this application</string>
+    <string name="forgot_password">Forgot password?</string>
+
+    <!-- String used for account registration -->
+    <string name="register_header">We’re glad to have you!</string>
+    <string name="register_description">DORA keeps you updated with current disaster situations</string>
+    <string name="account_setup">Account Setup</string>
+
+    <!-- String used for account setup -->
+    <string name="setup_header">Welcome to DORA!</string>
+    <string name="setup_description">We just need a few more details from you</string>
+    <string name="profile_setup">Profile Setup</string>
+    <string name="profile_picture">Profile Picture</string>
+
+    <!-- String used for forgotten password -->
+    <string name="forgot_your_password_header">Forgot your password?</string>
+    <string name="forgot_your_password_description">Don\'t worry, please enter your email address and we\'ll send you a password reset link</string>
+
+    <!-- String used for no internet connection -->
+    <string name="no_internet_header">Whoops!</string>
+    <string name="no_internet_description">No internet connection, please make sure that Wi-Fi or mobile data is turned on.</string>
+
+    <!-- Strings used for change password and email -->
+    <string name="authenticate">Authenticate</string>
+    <string name="authenticate_description">Please take a moment to verify your account by entering your password, this helps us confirm your identity and secure your account.</string>
+    <string name="change_password">Change Password</string>
+    <string name="new_password">Please enter your new password</string>
+    <string name="update_email_address">Update Email Address</string>
+    <string name="new_email_address">Please enter your new email address.</string>
+
+    <!-- String used for offline dashboard -->
+    <string name="offline_header">Be disaster resilient</string>
+    <string name="offline_description">DORA is your disaster preparedness assistant</string>
+    <string name="disaster_preparedness_guides">Disaster Preparedness Guides</string>
+    <string name="disaster_preparedness_guides_description">Be prepared for disasters with the help of our expert-validated guides</string>
+    <string name="emergency_hotlines">Emergency Hotlines</string>
+    <string name="emergency_hotlines_description">DORA has prepared the emergency hotlines that might come handy in disaster situations</string>
+    <string name="bluetooth_chat">Bluetooth Chat</string>
+    <string name="bluetooth_chat_description">Send a message via Bluetooth which doesn\'t require an internet connection</string>
+    <string name="access_online_features">Access Online Features</string>
+    <string name="access_online_features_description">To access the full DORA experience, a sign in is necessary</string>
+
+    <!-- Strings used for emergency hotlines -->
+    <string name="hotlines_header">Emergency Hotlines</string>
+    <string name="available_nationwide">Available Nationwide</string>
+    <string name="_911">911</string>
+    <string name="national_emergency">National Emergency</string>
+    <string name="_911_description">For police and firefighting aid</string>
+    <string name="hotlines_warning">Please only access this area when in need to avoid butt-dialing or accidentally calling the hotline.</string>
+    <string name="_1555">1555</string>
+    <string name="department_of_health">Department of Health</string>
+    <string name="_1555_description">For medical aid</string>
+    <string name="_143">143</string>
+    <string name="philippine_red_cross">Philippine Red Cross</string>
+    <string name="_143_description">For humanitarian aid</string>
+    <string name="_163">163</string>
+    <string name="bantay_bata">Bantay Bata</string>
+    <string name="_163_description">For child protection aid</string>
+    <string name="_8888">8888</string>
+    <string name="national_complaint">National Complaint</string>
+    <string name="_8888_description">For complaints in public service</string>
+
+    <!-- Strings used for disaster preparedness guides -->
+    <string name="disaster_preparedness_guides_header">Disaster Preparedness Guides</string>
+    <string name="disaster_preparedness_description">Here are some of the guides validated by experts</string>
+    <string name="earthquake">Earthquake</string>
+    <string name="earthquake_description">What to do before, during, and after an earthquake</string>
+    <string name="fire">Fire</string>
+    <string name="fire_description">What to do before, during, and after a fire</string>
+    <string name="typhoon">Typhoon</string>
+    <string name="typhoon_description">What to do before, during, and after a typhoon</string>
+    <string name="volcanic_eruption">Volcanic Eruption</string>
+    <string name="volcanic_eruption_description">What to do before, during, and after a volcanic eruption</string>
+    <string name="tsunami">Tsunami</string>
+    <string name="tsunami_description">What to do before, during, and after a tsunami</string>
+    <string name="landslide">Landslide</string>
+    <string name="landslide_description">What to do before, during, and after a landslide</string>
+
+    <!-- Placeholder strings -->
+    <string name="placeholder_header">Header</string>
+    <string name="placeholder_name">Juan Dela Cruz</string>
+    <string name="placeholder_date">0 days ago</string>
+    <string name="placeholder_disaster_type">Heavy Rain</string>
+    <string name="placeholder_address">España Blvd, Sampaloc, Manila, 1008 Metro Manila</string>
+    <string name="placeholder_description">There’s heavy rain in España Boulevard right now nearby UST.</string>
+    <string name="placeholder_comments">0 comments</string>
+    <string name="placeholder_upvotes">0 upvotes</string>
+    <string name="placeholder_comment">This is a comment</string>
+    <string name="placeholder_email">juandelacruz@email.com</string>
+
+    <!-- Header texts -->
+    <string name="advisories_header">Advisories</string>
+    <string name="comments_header">Comments</string>
+    <string name="find_friends_header">Find Friends</string>
+    <string name="upvotes_header">Upvotes</string>
+    <string name="terms_and_conditions_header">Terms and Conditions</string>
+    <string name="privacy_policy_header">Privacy Policy</string>
+    <string name="start_conversation_header">Start Conversation</string>
+
+    <!-- String used for empty views -->
+    <string name="empty_reports">No reports found!</string>
+    <string name="empty_reports_description">Tap the floating button to submit a disaster report</string>
+    <string name="empty_friends">You have no friends!</string>
+    <string name="empty_friends_description">Navigate to Friends List to add some friends</string>
+    <string name="empty_upvotes">Report has no upvotes!</string>
+    <string name="empty_upvotes_description">Verify the report by clicking the upvote button</string>
+    <string name="empty_comments">No comments yet</string>
+    <string name="empty_comments_description">Be the first to comment</string>
+    <string name="empty_messages">You have no messages!</string>
+    <string name="empty_messages_description">Tap the floating button to start a conversation</string>
+
+    <!-- String used for friends system -->
+    <string name="send_friend_request">Send Friend Request</string>
+    <string name="decline_friend_request">Decline Friend Request</string>
+    <string name="accept_friend_request">Accept Friend Request</string>
+    <string name="cancel_friend_request">Cancel Friend Request</string>
+    <string name="unfriend">Unfriend</string>
+
+    <!-- String used for EditText -->
+    <string name="edit_text_full_name">Full Name</string>
+    <string name="edit_text_email">Email Address</string>
+    <string name="edit_text_password">Password</string>
+    <string name="edit_text_report_details">What\'s the details of the report?</string>
+    <string name="edit_text_disaster_type">Disaster Type</string>
+    <string name="edit_text_enter_a_message">Enter a message…</string>
+    <string name="edit_text_enter_a_comment">Enter a comment…</string>
+    <string name="edit_text_new_password">New Password</string>
+    <string name="edit_text_new_email_address">New Email Address</string>
+    <string name="edit_text_write_message">Write a message…</string>
+
+    <!-- String used for Button -->
+    <string name="button_save_profile">Save Profile</string>
+    <string name="button_register">Register</string>
+    <string name="button_change_profile_picture">Change Profile Picture</string>
+    <string name="button_change_email">Change Email Address</string>
+    <string name="button_change_password">Change Password</string>
+    <string name="button_logout">Logout</string>
+    <string name="button_report">Report</string>
+    <string name="button_lets_get_started">Let\'s get started</string>
+    <string name="button_next">Next</string>
+    <string name="button_reconnect">Reconnect</string>
+    <string name="button_offline_mode">Offline Mode</string>
+    <string name="button_login">Login</string>
+    <string name="button_reset_password">Reset Password</string>
+    <string name="button_save_profile_picture">Save Profile Picture</string>
+    <string name="button_authenticate">Authenticate</string>
+
+    <!-- Miscellaneous Texts -->
+    <string name="jump_to_top">Jump to Top</string>
+    <string name="comments">Comments</string>
 </resources>

@@ -47,7 +47,7 @@
         android:layout_marginEnd="32dp"
         android:backgroundTint="@color/primary_green"
         android:fontFamily="@font/raleway"
-        android:text="Save Profile Picture"
+        android:text="@string/button_save_profile_picture"
         android:textAllCaps="false"
         android:textColor="@color/safe_white"
         android:textStyle="bold"

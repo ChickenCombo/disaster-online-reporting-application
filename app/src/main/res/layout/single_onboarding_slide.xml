@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/safe_white" >
+    android:background="@color/safe_white">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -22,6 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
         tools:srcCompat="@drawable/illu_verify_photo" />
 
     <TextView
@@ -29,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway"
-        android:text="Title Onboarding"
+        android:text="@string/slider_first_title"
         android:textColor="@color/primary_green"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -45,7 +46,7 @@
         android:layout_marginTop="8dp"
         android:fontFamily="@font/raleway"
         android:gravity="center"
-        android:text="Onboarding Description"
+        android:text="@string/slider_first_desc"
         android:textColor="@color/safe_black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"

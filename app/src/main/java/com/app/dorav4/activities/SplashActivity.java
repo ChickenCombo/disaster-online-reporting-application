@@ -85,7 +85,7 @@ public class SplashActivity extends AppCompatActivity {
                         // gone through the onboarding screen
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putBoolean("isFirstTime", false);
-                        editor.commit();
+                        editor.apply();
 
                         // Redirect to OnboardingActivity if there is no user session
                         // or it is the user's first time

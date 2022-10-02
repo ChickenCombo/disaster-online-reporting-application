@@ -20,8 +20,8 @@
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
         android:background="@color/white"
-        android:visibility="gone"
-        android:backgroundTint="@color/white">
+        android:backgroundTint="@color/white"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/imageView6"
@@ -33,7 +33,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/textView10"
@@ -43,7 +44,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/raleway"
-            android:text="Report has no upvotes!"
+            android:text="@string/empty_upvotes"
             android:textAlignment="center"
             android:textColor="@color/safe_black"
             android:textSize="24sp"
@@ -59,7 +60,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:fontFamily="@font/raleway"
-            android:text="Verify the report by clicking the upvote button"
+            android:text="@string/empty_upvotes_description"
             android:textAlignment="center"
             android:textColor="@color/safe_black"
             app:layout_constraintEnd_toEndOf="parent"

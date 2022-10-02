@@ -2,7 +2,6 @@ package com.app.dorav4.adapters;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -53,8 +52,6 @@ public class ReportsAdapter extends RecyclerView.Adapter<ReportsViewHolder> {
     List<Reports> reportsList;
 
     ProgressDialog progressDialog;
-
-    Dialog dialog;
 
     DatabaseReference reportsReference;
 

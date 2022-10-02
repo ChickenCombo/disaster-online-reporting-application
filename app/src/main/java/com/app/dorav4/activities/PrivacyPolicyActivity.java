@@ -23,7 +23,7 @@ public class PrivacyPolicyActivity extends AppCompatActivity {
         ivBack = findViewById(R.id.ivBack);
         wvPrivacyPolicy = findViewById(R.id.wvPrivacyPolicy);
 
-        tvToolbarHeader.setText("Privacy Policy");
+        tvToolbarHeader.setText(R.string.privacy_policy_header);
 
         String fileName = "privacy_policy.html";
         wvPrivacyPolicy.loadUrl("file:///android_asset/" + fileName);

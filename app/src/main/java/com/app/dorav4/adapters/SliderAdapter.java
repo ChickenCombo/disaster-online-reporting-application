@@ -22,7 +22,7 @@ public class SliderAdapter extends PagerAdapter {
     }
 
     // List of slide image resource
-    int images[] = {
+    int[] images = {
             R.drawable.illu_welcome_photo,
             R.drawable.illu_take_photo,
             R.drawable.illu_verify_photo,
@@ -30,7 +30,7 @@ public class SliderAdapter extends PagerAdapter {
     };
 
     // List of slide titles TODO: Convert to values.strings.xml
-    int titles[] = {
+    int[] titles = {
             R.string.slider_first_title,
             R.string.slider_first_title,
             R.string.slider_first_title,
@@ -38,7 +38,7 @@ public class SliderAdapter extends PagerAdapter {
     };
 
     // List of slide descriptions TODO: Convert to values.string.xml
-    int descriptions[] = {
+    int[] descriptions = {
             R.string.slider_first_desc,
             R.string.slider_first_desc,
             R.string.slider_first_desc,
@@ -60,7 +60,7 @@ public class SliderAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         // Inflate view with layout
-        layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.single_onboarding_slide, container, false);
 
         // Instantiate views

@@ -74,14 +74,15 @@
         android:background="@null"
         android:ems="10"
         android:focusableInTouchMode="true"
-        android:hint="Write a message"
+        android:hint="@string/edit_text_write_message"
         android:inputType="none|text|textAutoCorrect|textAutoComplete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_send"
         app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/description"

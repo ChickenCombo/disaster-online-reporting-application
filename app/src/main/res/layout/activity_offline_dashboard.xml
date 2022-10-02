@@ -14,7 +14,8 @@
         android:layout_marginTop="16dp"
         android:src="@drawable/img_dora_logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/textView"
@@ -24,7 +25,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/raleway"
-        android:text="Be disaster resilient"
+        android:text="@string/offline_header"
         android:textColor="@color/safe_black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -39,7 +40,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/raleway"
-        android:text="DORA is your disaster preparedness assistant"
+        android:text="@string/offline_description"
         android:textColor="@color/primary_gray"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="3dp"
                     android:fontFamily="@font/raleway"
-                    android:text="Disaster Preparedness Guide"
+                    android:text="@string/disaster_preparedness_guides"
                     android:textColor="@color/primary_green"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -97,14 +98,15 @@
                     android:layout_marginTop="5dp"
                     android:src="@drawable/ic_offline_guides"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/raleway"
-                    android:text="Be prepared for disasters with the help of our expert-validated guides"
+                    android:text="@string/disaster_preparedness_guides_description"
                     android:textColor="@color/primary_gray"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/raleway"
-                    android:text="Emergency Hotlines"
+                    android:text="@string/emergency_hotlines"
                     android:textColor="@color/primary_green"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -152,14 +154,15 @@
                     android:layout_marginTop="5dp"
                     android:src="@drawable/ic_offline_hotlines"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/raleway"
-                    android:text="DORA has prepared the emergency hotlines that might come handy in disaster situations"
+                    android:text="@string/emergency_hotlines_description"
                     android:textColor="@color/primary_gray"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -192,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/raleway"
-                    android:text="Bluetooth Chat"
+                    android:text="@string/bluetooth_chat"
                     android:textColor="@color/primary_green"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -207,14 +210,15 @@
                     android:layout_marginTop="5dp"
                     android:src="@drawable/ic_offline_bluetooth"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent " />
+                    app:layout_constraintTop_toTopOf="parent "
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/raleway"
-                    android:text="Send a message via Bluetooth which doesn't require an internet connection"
+                    android:text="@string/bluetooth_chat_description"
                     android:textColor="@color/primary_gray"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -247,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:fontFamily="@font/raleway"
-                    android:text="Access Online Features"
+                    android:text="@string/access_online_features"
                     android:textColor="@color/primary_green"
                     android:textSize="20sp"
                     android:textStyle="bold"
@@ -262,14 +266,15 @@
                     android:layout_marginTop="5dp"
                     android:src="@drawable/ic_offline_online"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent " />
+                    app:layout_constraintTop_toTopOf="parent "
+                    tools:ignore="ContentDescription" />
 
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/raleway"
-                    android:text="To access the full DORA experience, a sign in is necessary"
+                    android:text="@string/access_online_features_description"
                     android:textColor="@color/primary_gray"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"

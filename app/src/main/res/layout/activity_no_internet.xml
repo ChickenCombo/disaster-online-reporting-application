@@ -24,7 +24,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
-            app:srcCompat="@drawable/img_no_internet" />
+            app:srcCompat="@drawable/img_no_internet"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:layout_width="match_parent"
@@ -32,7 +33,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/raleway"
-            android:text="Whoops!"
+            android:text="@string/no_internet_header"
             android:textAlignment="center"
             android:textColor="@color/safe_black"
             android:textSize="24sp"
@@ -47,7 +48,7 @@
             android:paddingStart="16dp"
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
-            android:text="No internet connection, please make sure that Wi-Fi or mobile data is turned on."
+            android:text="@string/no_internet_description"
             android:textAlignment="center"
             android:textColor="@color/safe_black" />
 
@@ -60,7 +61,7 @@
             android:layout_marginEnd="16dp"
             android:backgroundTint="@color/primary_green"
             android:fontFamily="@font/raleway"
-            android:text="Reconnect"
+            android:text="@string/button_reconnect"
             android:textAllCaps="false"
             android:textStyle="bold"
             app:cornerRadius="30dp" />
@@ -73,7 +74,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/raleway"
-            android:text="Offline Mode"
+            android:text="@string/button_offline_mode"
             android:textAllCaps="false"
             android:textColor="@color/primary_green"
             android:textStyle="bold"

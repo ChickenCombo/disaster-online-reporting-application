@@ -47,7 +47,7 @@ public class UpvotesActivity extends AppCompatActivity {
         emptyView = findViewById(R.id.emptyView);
 
         // Set toolbar header
-        tvToolbarHeader.setText("Upvotes");
+        tvToolbarHeader.setText(R.string.upvotes_header);
 
         // Get reportId from previous activity
         Intent intent = getIntent();

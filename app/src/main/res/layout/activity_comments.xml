@@ -62,7 +62,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/raleway"
-                        android:text="Juan Dela Cruz"
+                        android:text="@string/placeholder_name"
                         android:textColor="@color/safe_black"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -78,7 +78,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/raleway"
-                        android:text="0 days ago"
+                        android:text="@string/placeholder_date"
                         android:textColor="@color/primary_gray"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -93,7 +93,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/raleway"
-                        android:text="Heavy Rain"
+                        android:text="@string/placeholder_disaster_type"
                         android:textColor="@color/primary_green"
                         android:textSize="20sp"
                         android:textStyle="bold"
@@ -109,7 +109,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/raleway"
-                        android:text="España Blvd, Sampaloc, Manila, 1008 Metro Manila"
+                        android:text="@string/placeholder_address"
                         android:textColor="@color/primary_gray"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -139,13 +139,12 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/raleway"
-                        android:text="There’s heavy rain in España Boulevard right now nearby UST."
+                        android:text="@string/placeholder_description"
                         android:textColor="@color/safe_black"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/ivReportPicture" />
-
 
                     <ImageView
                         android:id="@+id/ivReportUpvote"
@@ -157,7 +156,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvReportDescription"
-                        app:srcCompat="@drawable/ic_upvote" />
+                        app:srcCompat="@drawable/ic_upvote"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:id="@+id/tvReportUpvoteCount"
@@ -166,7 +166,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/raleway"
-                        android:text="0 upvotes"
+                        android:text="@string/placeholder_upvotes"
                         android:textColor="@color/primary_gray"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/ivReportUpvote"
@@ -181,7 +181,8 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/tvReportCommentCount"
                         app:layout_constraintTop_toBottomOf="@+id/tvReportDescription"
-                        app:srcCompat="@drawable/ic_comment" />
+                        app:srcCompat="@drawable/ic_comment"
+                        tools:ignore="ContentDescription" />
 
                     <TextView
                         android:id="@+id/tvReportCommentCount"
@@ -190,7 +191,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/raleway"
-                        android:text="0 comments"
+                        android:text="@string/placeholder_comments"
                         android:textColor="@color/primary_gray"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvReportDescription" />
@@ -198,14 +199,13 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/raleway"
-                android:text=" Comments"
+                android:text="@string/comments"
                 android:textColor="@color/safe_black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -225,7 +225,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/raleway"
-                android:text="No comments yet"
+                android:text="@string/empty_comments"
                 android:textAlignment="center"
                 android:textColor="@color/safe_black"
                 android:textSize="16sp"
@@ -239,7 +239,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/raleway"
-                android:text="Be the first to comment"
+                android:text="@string/empty_comments_description"
                 android:textAlignment="center"
                 android:textColor="@color/safe_black"
                 android:textSize="12sp"
@@ -263,6 +263,8 @@
             android:layout_centerVertical="true"
             android:src="@drawable/ic_profile" />
 
+        <!-- TODO: Update comment text box UI -->
+
         <EditText
             android:id="@+id/etComment"
             android:layout_width="match_parent"
@@ -274,7 +276,9 @@
             android:layout_toStartOf="@id/ivSubmitComment"
             android:layout_toEndOf="@id/ivCommentProfile"
             android:background="@drawable/bg_edittext"
-            android:hint="Enter a comment..."
+            android:hint="@string/edit_text_enter_a_comment"
+            android:importantForAutofill="no"
+            android:inputType="text"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textColorHint="@color/primary_gray"
@@ -288,7 +292,7 @@
             android:layout_centerVertical="true"
             android:scaleType="center"
             android:src="@drawable/ic_reply"
-            app:tint="@color/primary_green" />
-
+            app:tint="@color/primary_green"
+            tools:ignore="ContentDescription" />
     </RelativeLayout>
 </RelativeLayout>

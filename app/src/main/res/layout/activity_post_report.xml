@@ -25,7 +25,7 @@
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/primary_green"
         android:fontFamily="@font/raleway"
-        android:text="Report"
+        android:text="@string/button_report"
         android:textAllCaps="false"
         android:textStyle="bold"
         app:cornerRadius="30dp"
@@ -41,7 +41,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="40dp"
-        android:hint="What's the details of the report?"
+        android:hint="@string/edit_text_report_details"
         app:errorEnabled="true"
         app:errorIconDrawable="@drawable/ic_error"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,7 +65,8 @@
         android:padding="4dp"
         android:src="@drawable/ic_image_add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnReport" />
+        app:layout_constraintTop_toBottomOf="@+id/btnReport"
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/ivGetLocation"
@@ -76,7 +77,8 @@
         android:padding="4dp"
         android:src="@drawable/ic_get_location"
         app:layout_constraintEnd_toStartOf="@+id/ivAddImage"
-        app:layout_constraintTop_toBottomOf="@+id/btnReport" />
+        app:layout_constraintTop_toBottomOf="@+id/btnReport"
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilDisasterType"
@@ -99,6 +101,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:inputType="none"
-            android:text="Disaster Type" />
+            android:text="@string/edit_text_disaster_type"
+            tools:ignore="LabelFor" />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

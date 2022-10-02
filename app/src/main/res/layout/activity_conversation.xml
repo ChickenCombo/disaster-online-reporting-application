@@ -37,9 +37,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="15dp"
             android:background="@null"
-            android:hint="Enter a message..." />
+            android:hint="@string/edit_text_enter_a_message"
+            android:importantForAutofill="no"
+            android:padding="15dp"
+            android:inputType="text" />
 
         <ImageView
             android:id="@+id/ivSend"
@@ -47,6 +49,7 @@
             android:layout_height="50dp"
             android:scaleType="center"
             android:src="@drawable/ic_reply"
-            app:tint="@color/primary_green" />
+            app:tint="@color/primary_green"
+            tools:ignore="ContentDescription" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
