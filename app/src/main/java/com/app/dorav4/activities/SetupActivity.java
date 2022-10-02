@@ -1,6 +1,7 @@
 package com.app.dorav4.activities;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -44,7 +45,6 @@ public class SetupActivity extends AppCompatActivity {
     TextInputEditText etFullName;
     Button btnSave;
     CircleImageView ivProfilePicture;
-    Intent intent;
     Uri photoUri;
 
     FirebaseAuth mAuth;
@@ -66,6 +66,14 @@ public class SetupActivity extends AppCompatActivity {
         mUser = mAuth.getCurrentUser();
         usersReference = FirebaseDatabase.getInstance().getReference().child("Users");
         storageReference = FirebaseStorage.getInstance().getReference().child("ProfilePictures");
+
+        // Set default profile picture
+        photoUri = Uri.parse(
+                ContentResolver.SCHEME_ANDROID_RESOURCE +
+                "://" + getResources().getResourcePackageName(R.drawable.img_default_avatar)
+                + '/' + getResources().getResourceTypeName(R.drawable.img_default_avatar) + '/' + getResources().getResourceEntryName(R.drawable.img_default_avatar)
+        );
+        ivProfilePicture.setImageURI(photoUri);
 
         // ivProfilePicture OnClickListener
         ivProfilePicture.setOnClickListener(v -> chooseImage());
@@ -143,9 +151,6 @@ public class SetupActivity extends AppCompatActivity {
                             );
 
                             mUser.sendEmailVerification();
-
-                            intent = new Intent(SetupActivity.this, LoginActivity.class);
-                            startActivity(intent);
                             finish();
                         }).addOnFailureListener(e -> {
                             pDialog.dismiss();

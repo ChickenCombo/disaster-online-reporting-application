@@ -34,7 +34,7 @@
     <string name="setup_header">Welcome to DORA!</string>
     <string name="setup_description">We just need a few more details from you</string>
     <string name="profile_setup">Profile Setup</string>
-    <string name="profile_picture">Profile Picture</string>
+    <string name="profile_picture">Add Profile Picture\n<i>(Optional)</i></string>
 
     <!-- String used for forgotten password -->
     <string name="forgot_your_password_header">Forgot your password?</string>
