@@ -93,7 +93,7 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
             });
 
             // Get disaster reports data
-            getReports(googleMap);
+            getReports();
         }
     };
 
@@ -161,7 +161,9 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
     }
 
     // Get reports list
-    private void getReports(GoogleMap googleMap) {
+    private void getReports() {
+        clusterManager.clearItems();
+
         reportsReference = FirebaseDatabase.getInstance().getReference().child("Reports");
         reportsReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -179,6 +181,7 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
                         clusterManager.addItem(offsetItem);
                     }
                 }
+                clusterManager.cluster();
             }
 
             @Override

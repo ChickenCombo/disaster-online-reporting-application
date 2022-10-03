@@ -94,7 +94,7 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
             });
 
             // Get evacuation centers data
-            getEvacuationCenters(googleMap);
+            getEvacuationCenters();
         }
     };
 
@@ -162,7 +162,9 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
     }
 
     // Get evacuation areas list
-    private void getEvacuationCenters(GoogleMap googleMap) {
+    private void getEvacuationCenters() {
+        clusterManager.clearItems();
+
         evacuationCentersReference = FirebaseDatabase.getInstance().getReference("EvacuationCenters");
         evacuationCentersReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -180,6 +182,7 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
                         clusterManager.addItem(offsetItem);
                     }
                 }
+                clusterManager.cluster();
             }
 
             @Override
