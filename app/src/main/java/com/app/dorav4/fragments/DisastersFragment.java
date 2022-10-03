@@ -1,12 +1,10 @@
 package com.app.dorav4.fragments;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,11 +14,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.app.dorav4.R;
+import com.app.dorav4.models.Markers;
+import com.app.dorav4.utils.MarkerClusterRenderer;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.ApiException;
@@ -35,16 +34,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;
 
@@ -53,13 +50,13 @@ import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
 
 public class DisastersFragment extends Fragment implements EasyPermissions.PermissionCallbacks {
+    ClusterManager<Markers> clusterManager;
     LocationRequest locationRequest;
-
     DatabaseReference reportsReference;
-
     boolean isPermissionGranted;
 
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
+        @SuppressLint("PotentialBehaviorOverride")
         @Override
         public void onMapReady(@NonNull GoogleMap googleMap) {
             // Permission Check
@@ -68,7 +65,13 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
             }
 
             // Set default map camera starting location
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(11.6737, 122.4816), 5.4f) );
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(11.6737, 122.4816), 5.4f));
+
+            // Setup markers clustering
+            clusterManager = new ClusterManager<>(requireActivity(), googleMap);
+            clusterManager.setRenderer(new MarkerClusterRenderer(requireActivity(), googleMap, clusterManager));
+            googleMap.setOnCameraIdleListener(clusterManager);
+            googleMap.setOnMarkerClickListener(clusterManager);
 
             // Google Map UI Settings
             googleMap.getUiSettings().setZoomControlsEnabled(true);
@@ -106,11 +109,6 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
         initializeMap();
 
         return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -176,42 +174,9 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
                         String disasterType = String.valueOf(ds.child("disasterType").getValue());
                         String address = String.valueOf(ds.child("address").getValue());
 
-                        // Set icon id for custom marker
-                        int iconId = 0;
-                        switch (disasterType) {
-                            case "Typhoon":
-                                iconId = R.drawable.ic_map_typhoon;
-                                break;
-                            case "Heavy Rain":
-                                iconId = R.drawable.ic_map_heavy_rain;
-                                break;
-                            case "Landslide":
-                                iconId = R.drawable.ic_map_landslide;
-                                break;
-                            case "Earthquake":
-                                iconId = R.drawable.ic_map_earthquake;
-                                break;
-                            case "Fire":
-                                iconId = R.drawable.ic_map_fire;
-                                break;
-                            case "Flood":
-                                iconId = R.drawable.ic_map_flood;
-                                break;
-                            case "Tsunami":
-                                iconId = R.drawable.ic_map_tsunami;
-                                break;
-                            case "Volcanic Eruption":
-                                iconId = R.drawable.ic_map_volcanic_eruption;
-                                break;
-                        }
-
-                        // Add markers
-                        LatLng latLng = new LatLng(latitude, longitude);
-                        googleMap.addMarker(new MarkerOptions()
-                                .position(latLng)
-                                .icon(bitmapDescriptor(requireActivity().getApplicationContext(), iconId))
-                                .snippet("Address: " + address)
-                                .title(disasterType));
+                        // Add data to map cluster manager
+                        Markers offsetItem = new Markers(latitude, longitude, disasterType, "Address: " + address);
+                        clusterManager.addItem(offsetItem);
                     }
                 }
             }
@@ -284,17 +249,5 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
         GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
         int result = googleApiAvailability.isGooglePlayServicesAvailable(requireActivity());
         return result == ConnectionResult.SUCCESS;
-    }
-
-    // Bitmap Descriptor for custom marker icons
-    private BitmapDescriptor bitmapDescriptor (Context context, int vectorResId) {
-        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
-        assert vectorDrawable != null;
-        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
-        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        vectorDrawable.draw(canvas);
-
-        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 }
