@@ -155,6 +155,7 @@
     <!-- String used for Button -->
     <string name="button_save_profile">Save Profile</string>
     <string name="button_register">Register</string>
+    <string name="button_change_name">Change Name</string>
     <string name="button_change_profile_picture">Change Profile Picture</string>
     <string name="button_change_email">Change Email Address</string>
     <string name="button_change_password">Change Password</string>
@@ -168,6 +169,8 @@
     <string name="button_reset_password">Reset Password</string>
     <string name="button_save_profile_picture">Save Profile Picture</string>
     <string name="button_authenticate">Authenticate</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_submit">Submit</string>
 
     <!-- Miscellaneous Texts -->
     <string name="jump_to_top">Jump to Top</string>

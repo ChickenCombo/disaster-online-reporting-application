@@ -2,34 +2,45 @@ package com.app.dorav4.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.app.dorav4.R;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.Objects;
+
+import www.sanju.motiontoast.MotionToast;
+import www.sanju.motiontoast.MotionToastStyle;
 
 public class ProfileActivity extends AppCompatActivity {
     TextView tvFullName, tvEmailAddress;
     ImageView ivProfilePicture, ivBack;
-    Button btnChangeProfile, btnChangeEmail, btnChangePassword, btnLogout;
+    Button btnChangeProfile, btnChangeEmail, btnChangePassword, btnLogout, btnChangeName;
     Intent intent;
+    AlertDialog dialog;
 
     FirebaseAuth mAuth;
     FirebaseUser mUser;
-    DatabaseReference usersReference;
+    DatabaseReference usersReference, reportsReference;
 
     String profilePicture;
 
@@ -42,6 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvEmailAddress = findViewById(R.id.tvEmailAddress);
         ivProfilePicture = findViewById(R.id.ivProfilePicture);
         ivBack = findViewById(R.id.ivBack);
+        btnChangeName = findViewById(R.id.btnChangeName);
         btnChangeProfile = findViewById(R.id.btnChangeProfile);
         btnChangeEmail = findViewById(R.id.btnChangeEmail);
         btnChangePassword = findViewById(R.id.btnChangePassword);
@@ -50,6 +62,10 @@ public class ProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         usersReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        reportsReference = FirebaseDatabase.getInstance().getReference().child("Reports");
+
+        // btnChangeName OnClickListener
+        btnChangeName.setOnClickListener(v -> changeName());
 
         // btnChangeProfile OnClickListener
         btnChangeProfile.setOnClickListener(v -> {
@@ -114,6 +130,126 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         showProfile();
+    }
+
+    // Change user's name
+    private void changeName() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        View view = getLayoutInflater().inflate(R.layout.dialog_change_name, null);
+        EditText etFullName = view.findViewById(R.id.etFullName);
+        TextInputLayout tilFullName = view.findViewById(R.id.tilFullName);
+        Button btnCancel = view.findViewById(R.id.btnCancel);
+        Button btnSubmit = view.findViewById(R.id.btnSubmit);
+
+        // btnCancel OnClickListener
+        btnCancel.setOnClickListener(v -> dialog.dismiss());
+
+        // btnSubmit OnClickListener
+        btnSubmit.setOnClickListener(v -> {
+            String fullName = etFullName.getText().toString().trim();
+
+            // Input validation
+            if (!fullName.isEmpty()) {
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("fullName", fullName);
+
+                // Change name on users database
+                usersReference.child(mUser.getUid()).updateChildren(hashMap).addOnSuccessListener(o -> {
+                    // Change name on reports database
+                    Query query = reportsReference.orderByChild("userId").equalTo(mUser.getUid());
+                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot ds : snapshot.getChildren()) {
+                                String child = ds.getKey();
+                                if (child != null) {
+                                    if (snapshot.child(child).hasChild("fullName")) {
+                                        snapshot.getRef().child(child).child("fullName").setValue(fullName).addOnSuccessListener(o1 -> {
+                                            // Change name on comments database
+                                            reportsReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                    for (DataSnapshot ds: snapshot.getChildren()) {
+                                                        String child = ds.getKey();
+
+                                                        if (child != null) {
+                                                            if (snapshot.child(child).hasChild("Comments")) {
+                                                                String child1 = String.valueOf(snapshot.child(child).getKey());
+                                                                Query query = reportsReference.child(child1).child("Comments").orderByChild("userId").equalTo(mUser.getUid());
+                                                                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                    @Override
+                                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                        for (DataSnapshot ds: snapshot.getChildren()) {
+                                                                            String child = ds.getKey();
+
+                                                                            if (child != null) {
+                                                                                if (snapshot.child(child).hasChild("name")) {
+                                                                                    snapshot.getRef().child(child).child("name").setValue(fullName).addOnCompleteListener(task -> {
+                                                                                        if (task.isSuccessful()) {
+                                                                                            // Show success confirmation toast
+                                                                                            MotionToast.Companion.darkToast(
+                                                                                                    ProfileActivity.this,
+                                                                                                    "Success",
+                                                                                                    "Name has been changed",
+                                                                                                    MotionToastStyle.SUCCESS,
+                                                                                                    MotionToast.GRAVITY_BOTTOM,
+                                                                                                    MotionToast.LONG_DURATION,
+                                                                                                    ResourcesCompat.getFont(ProfileActivity.this, R.font.helvetica_regular)
+                                                                                            );
+                                                                                        } else {
+                                                                                            // Show success confirmation toast
+                                                                                            MotionToast.Companion.darkToast(
+                                                                                                    ProfileActivity.this,
+                                                                                                    "Error",
+                                                                                                    "Name change failed, please try again",
+                                                                                                    MotionToastStyle.ERROR,
+                                                                                                    MotionToast.GRAVITY_BOTTOM,
+                                                                                                    MotionToast.LONG_DURATION,
+                                                                                                    ResourcesCompat.getFont(ProfileActivity.this, R.font.helvetica_regular)
+                                                                                            );
+                                                                                        }
+                                                                                        dialog.dismiss();
+                                                                                    });
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+
+                                                                    @Override
+                                                                    public void onCancelled(@NonNull DatabaseError error) {
+                                                                    }
+                                                                });
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                }
+                                            });
+                                        });
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                });
+            } else {
+                tilFullName.setError("Full name cannot be empty");
+            }
+        });
+
+        builder.setView(view);
+        dialog = builder.create();
+        dialog.show();
     }
 
     // Remove user's token then log-out

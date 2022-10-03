@@ -72,11 +72,26 @@
         app:layout_constraintTop_toBottomOf="@+id/tvFullName" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnChangeProfile"
+        android:id="@+id/btnChangeName"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/raleway"
+        android:text="@string/button_change_name"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:cornerRadius="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEmailAddress" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnChangeProfile"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/raleway"
         android:text="@string/button_change_profile_picture"
@@ -85,7 +100,7 @@
         app:cornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/btnChangeName" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnChangeEmail"
