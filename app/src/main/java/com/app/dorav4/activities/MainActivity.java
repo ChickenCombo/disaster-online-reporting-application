@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -103,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.navAdvisories) {
                 intent = new Intent(MainActivity.this, AdvisoriesActivity.class);
                 startActivity(intent);
-            } else if (id == R.id.navFriends) {
-                Toast.makeText(MainActivity.this, "Friends", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.navFindFriends) {
                 intent = new Intent(MainActivity.this, FindFriendsActivity.class);
                 startActivity(intent);

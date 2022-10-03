@@ -1,10 +1,11 @@
 package com.app.dorav4.activities;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -17,7 +18,6 @@ import com.app.dorav4.fragments.RedCrossFragment;
 import com.gauravk.bubblenavigation.BubbleNavigationConstraintView;
 
 public class AdvisoriesActivity extends AppCompatActivity {
-    TextView tvToolbarHeader;
     ImageView ivBack;
 
     FragmentTransaction fragmentTransaction;
@@ -31,10 +31,11 @@ public class AdvisoriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_advisories);
 
         bubbleNavigationConstraintView = findViewById(R.id.bubbleNavigation);
-        tvToolbarHeader = findViewById(R.id.tvToolbarHeader);
         ivBack = findViewById(R.id.ivBack);
 
-        tvToolbarHeader.setText(R.string.advisories_header);
+        // Change status bar color
+        getWindow().setStatusBarColor(ContextCompat.getColor(AdvisoriesActivity.this, R.color.white));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         // Initialize fragments
         pagasaFragment = new PAGASAFragment();

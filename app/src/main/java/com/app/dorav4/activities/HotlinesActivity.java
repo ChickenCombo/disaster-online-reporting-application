@@ -4,10 +4,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.app.dorav4.R;
@@ -32,6 +34,10 @@ public class HotlinesActivity extends AppCompatActivity {
         cv163 = findViewById(R.id.cv163);
         cv8888 = findViewById(R.id.cv8888);
         ivBack = findViewById(R.id.ivBack);
+
+        // Change status bar color
+        getWindow().setStatusBarColor(ContextCompat.getColor(HotlinesActivity.this, R.color.white));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         // ivBack OnClickListener
         ivBack.setOnClickListener(v -> finish());

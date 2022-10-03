@@ -4,26 +4,21 @@
         <item
             android:id="@+id/navAdvisories"
             android:icon="@drawable/ic_advisories"
-            android:title="Advisories" />
+            android:title="@string/advisories_header" />
 
         <item
             android:id="@+id/navGuides"
             android:icon="@drawable/ic_guides"
-            android:title="Guides" />
+            android:title="@string/disaster_preparedness_guides" />
 
         <item
             android:id="@+id/navHotlines"
             android:icon="@drawable/ic_hotlines"
-            android:title="Hotlines" />
-
-        <item
-            android:id="@+id/navFriends"
-            android:icon="@drawable/ic_friends"
-            android:title="Friends" />
+            android:title="@string/hotlines_header" />
 
         <item
             android:id="@+id/navFindFriends"
             android:icon="@drawable/ic_find_friends"
-            android:title="Find Friends" />
+            android:title="@string/find_friends_header" />
     </group>
 </menu>

@@ -1,12 +1,13 @@
 package com.app.dorav4.activities;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.dorav4.R;
@@ -22,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FindFriendsActivity extends AppCompatActivity {
-    TextView tvToolbarHeader;
     ImageView ivBack;
     SearchView searchView;
 
@@ -38,14 +38,15 @@ public class FindFriendsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_friends);
 
-        tvToolbarHeader = findViewById(R.id.tvToolbarHeader);
         ivBack = findViewById(R.id.ivBack);
         recyclerView = findViewById(R.id.recyclerView);
         searchView = findViewById(R.id.searchView);
 
         usersList = new ArrayList<>();
 
-        tvToolbarHeader.setText("Find Friends");
+        // Change status bar color
+        getWindow().setStatusBarColor(ContextCompat.getColor(FindFriendsActivity.this, R.color.white));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         usersReference = FirebaseDatabase.getInstance().getReference("Users");
 

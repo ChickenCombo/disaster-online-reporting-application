@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowInsets;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -39,6 +40,8 @@ import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
 
 public class PairingFragment extends Fragment {
+    ImageView ivBack;
+
     public static final int CONNECTION_TIMEOUT = 5000;
     private RequestDialog connectionRequestDialog;
     private RequestDialog connectionConfirmDialog;
@@ -204,7 +207,14 @@ public class PairingFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_pairing, container, false);
+        View view = inflater.inflate(R.layout.fragment_pairing, container, false);
+
+        ivBack = view.findViewById(R.id.ivBack);
+
+        // ivBack OnClickListener
+        ivBack.setOnClickListener(v -> requireActivity().finish());
+
+        return view;
     }
 
     @Override

@@ -4,9 +4,11 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.app.dorav4.R;
 import com.app.dorav4.bluetoothchat.BluetoothChatActivity;
@@ -33,6 +35,10 @@ public class OfflineDashboardActivity extends AppCompatActivity implements EasyP
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offline_dashboard);
+
+        // Change status bar color
+        getWindow().setStatusBarColor(ContextCompat.getColor(OfflineDashboardActivity.this, R.color.white));
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         cvGuides = findViewById(R.id.cvGuides);
         cvHotlines = findViewById(R.id.cvHotlines);
