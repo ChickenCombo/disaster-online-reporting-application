@@ -105,8 +105,6 @@
     <string name="no_permission">It is not possible to search for devices without location permission, go to the settings to grant it, or reinstall the app</string>
     <string name="no_bluetooth">It is not possible to search because this device does not have Bluetooth Low Energy</string>
 
-
-
     <!-- Placeholder strings -->
     <string name="placeholder_header">Header</string>
     <string name="placeholder_name">Juan Dela Cruz</string>

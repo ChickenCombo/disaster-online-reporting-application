@@ -111,6 +111,7 @@
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/img_empty.xml" value="0.173" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/img_no_internet.xml" value="0.173" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/img_upvote.xml" value="0.173" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout-v26/activity_landslide.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_advisories.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_bluetooth_chat.xml" value="0.2" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_change_email.xml" value="0.25" />
@@ -118,11 +119,14 @@
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_change_profile_picture.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_comments.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_conversation.xml" value="0.264" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_earthquake.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_find_friends.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_fire.xml" value="0.2359375" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_guides.xml" value="0.2" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_hotlines.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_image_fullscreen.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_landslide.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_no_internet.xml" value="0.25" />
@@ -137,8 +141,11 @@
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_splash.xml" value="0.16077898550724637" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_start_conversation.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_terms_and_conditions.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_tsunami.xml" value="0.2359375" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_typhoon.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_upvotes.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_view_user.xml" value="0.264" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_volcanic_eruption.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/component_message_received.xml" value="0.4" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/component_message_send.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/component_row.xml" value="0.25" />
