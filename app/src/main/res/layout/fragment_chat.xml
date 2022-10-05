@@ -104,7 +104,7 @@
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/primary_green"
         android:elevation="2dp"
-        android:src="@drawable/ic_post"
+        android:src="@drawable/ic_conversation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@android:color/white"
