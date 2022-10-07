@@ -177,7 +177,7 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
                         String address = String.valueOf(ds.child("address").getValue());
 
                         // Add data to map cluster manager
-                        Markers offsetItem = new Markers(latitude, longitude, disasterType, "Address: " + address);
+                        Markers offsetItem = new Markers(latitude, longitude, disasterType, "Address: " + address, 0);
                         clusterManager.addItem(offsetItem);
                     }
                 }

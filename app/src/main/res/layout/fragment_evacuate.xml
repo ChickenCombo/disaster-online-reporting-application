@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.EvacuateFragment" />
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.EvacuateFragment" />
+
+    <ImageButton
+        android:id="@+id/btnNearest"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_map_button"
+        android:padding="14dp"
+        android:src="@drawable/ic_nearby"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:tint="#ff595959"
+        tools:ignore="ContentDescription" />
+</RelativeLayout>

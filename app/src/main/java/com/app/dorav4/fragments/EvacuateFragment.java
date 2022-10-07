@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +26,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
@@ -53,8 +56,14 @@ import www.sanju.motiontoast.MotionToastStyle;
 public class EvacuateFragment extends Fragment implements EasyPermissions.PermissionCallbacks {
     ClusterManager<Markers> clusterManager;
     LocationRequest locationRequest;
+    Markers nearestMarker;
+    SupportMapFragment mapFragment;
+    ImageButton btnNearest;
+    FusedLocationProviderClient fusedLocationProviderClient;
     DatabaseReference evacuationCentersReference;
     boolean isPermissionGranted;
+    double minimumDistance;
+    int index;
 
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         @SuppressLint("PotentialBehaviorOverride")
@@ -67,6 +76,10 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
 
             // Set default map camera starting location
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(11.6737, 122.4816), 5.4f));
+
+            btnNearest.setOnClickListener(v -> {
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(nearestMarker.getPosition(), 14));
+            });
 
             // Setup markers clustering
             clusterManager = new ClusterManager<>(requireActivity(), googleMap);
@@ -90,6 +103,8 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
                 if (!isGPSEnabled()) {
                     turnOnGPS();
                 }
+
+                setNearbyEvacuationButton();
                 return false;
             });
 
@@ -102,6 +117,8 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_evacuate, container, false);
+
+        btnNearest = view.findViewById(R.id.btnNearest);
 
         // Permission Check
         checkPermission();
@@ -133,12 +150,55 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
     }
 
+    // Set nearby evacuation center button's position and visibility
+    private void setNearbyEvacuationButton() {
+        try {
+            final ViewGroup parent = (ViewGroup) mapFragment.requireView().findViewWithTag("GoogleMapMyLocationButton").getParent();
+            parent.post(() -> {
+                try {
+                    // Get the "My Location" button's view
+                    View defaultButton = mapFragment.requireView().findViewWithTag("GoogleMapMyLocationButton");
+
+                    // Get the "Nearby Evacuation" button's view
+                    ViewGroup customButtonParent = (ViewGroup) btnNearest.getParent();
+                    customButtonParent.removeView(btnNearest);
+
+                    // Add custom button view to Google Maps control button parent
+                    ViewGroup defaultButtonParent = (ViewGroup) defaultButton.getParent();
+                    defaultButtonParent.addView(btnNearest);
+
+                    // Create layout with same size as default Google Maps control button (38x38)
+                    float size =  40 * requireActivity().getResources().getDisplayMetrics().density;
+                    RelativeLayout.LayoutParams customButtonLayoutParams = new RelativeLayout.LayoutParams((int) size, (int) size);
+
+                    // Align the custom button below the location button
+                    customButtonLayoutParams.addRule(RelativeLayout.ALIGN_LEFT, defaultButton.getId());
+                    customButtonLayoutParams.addRule(RelativeLayout.BELOW, defaultButton.getId());
+                    customButtonLayoutParams.topMargin = 8;
+                    customButtonLayoutParams.rightMargin = 8;
+
+                    // Add padding
+                    btnNearest.setAlpha(defaultButton.getAlpha());
+                    btnNearest.setPadding(defaultButton.getPaddingLeft(), defaultButton.getPaddingTop(), defaultButton.getPaddingRight(), defaultButton.getPaddingBottom());
+
+                    // Apply settings and set visibility
+                    btnNearest.setLayoutParams(customButtonLayoutParams);
+                    btnNearest.setVisibility(View.VISIBLE);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     // Initialize map
     private void initializeMap() {
         // Check if device has Google Play Services
         if (checkGooglePlayServices()) {
             // Initialize Map Fragment
-            SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+            mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
             if (mapFragment != null) {
                 mapFragment.getMapAsync(callback);
             }
@@ -165,31 +225,82 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
     private void getEvacuationCenters() {
         clusterManager.clearItems();
 
-        evacuationCentersReference = FirebaseDatabase.getInstance().getReference("EvacuationCenters");
-        evacuationCentersReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    if (snapshot.exists()) {
-                        // Fetch evacuation center data from the database
-                        double longitude = Objects.requireNonNull((Double) ds.child("longitude").getValue());
-                        double latitude =  Objects.requireNonNull((Double) ds.child("latitude").getValue());
-                        String evacuationCenterName = (String) ds.child("evacuationCenterName").getValue();
-                        String address = (String) ds.child("location").getValue();
+        // Get user's current location
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity());
+        if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
 
-                        // Add data to map cluster manager
-                        Markers offsetItem = new Markers(latitude, longitude, evacuationCenterName, "Address: " + address);
-                        clusterManager.addItem(offsetItem);
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(requireActivity(), location -> {
+            if (location != null) {
+                double currentLongitude = location.getLongitude();
+                double currentLatitude = location.getLatitude();
+
+
+                evacuationCentersReference = FirebaseDatabase.getInstance().getReference("EvacuationCenters");
+                evacuationCentersReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            if (snapshot.exists()) {
+                                // Fetch evacuation center data from the database
+                                double longitude = Objects.requireNonNull((Double) ds.child("longitude").getValue());
+                                double latitude =  Objects.requireNonNull((Double) ds.child("latitude").getValue());
+                                String evacuationCenterName = (String) ds.child("evacuationCenterName").getValue();
+                                String address = (String) ds.child("location").getValue();
+
+                                // Calculate distance between current location and evacuation center's location
+                                double distance = computeDistance(currentLatitude, currentLongitude, latitude, longitude);
+
+                                // Add data to map cluster manager
+                                Markers offsetItem = new Markers(latitude, longitude, evacuationCenterName, "Address: " + address, distance);
+
+                                // Find the nearest evacuation center
+                                if (index == 0) {
+                                    minimumDistance = distance;
+                                } else if (minimumDistance > distance) {
+                                    minimumDistance = distance;
+                                    nearestMarker = offsetItem;
+                                }
+                                index++;
+
+                                clusterManager.addItem(offsetItem);
+                            }
+                        }
+                        clusterManager.cluster();
                     }
-                }
-                clusterManager.cluster();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
+                    }
+                });
             }
         });
+    }
+
+    // Compute distance between coordinates
+    private double computeDistance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1))
+                * Math.sin(deg2rad(lat2))
+                + Math.cos(deg2rad(lat1))
+                * Math.cos(deg2rad(lat2))
+                * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        return (dist);
+    }
+
+    // Degree to radian
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    // Radian to degree
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
     }
 
     // Check if GPS in turned on
