@@ -30,6 +30,7 @@ public class SplashActivity extends AppCompatActivity {
     FirebaseUser mUser;
     DatabaseReference usersReference;
     SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,16 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         new Handler().postDelayed(() -> {
+            // Clear registration attempts after an hour
+            sharedPreferences = getSharedPreferences("REGISTRATION_ATTEMPTS", Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+
+            if (!(sharedPreferences.getLong("timestamp", -1) > System.currentTimeMillis())) {
+                editor.remove("attempts");
+                editor.remove("timestamp");
+                editor.apply();
+            }
+
             // Check if user has no internet connection
             if (!isConnected(SplashActivity.this)) {
                 // Redirect to NoInternetActivity
@@ -76,14 +87,13 @@ public class SplashActivity extends AppCompatActivity {
                     });
                 } else {
                     // Shared preferences for onboarding screen
-                    sharedPreferences = getSharedPreferences("onboarding", MODE_PRIVATE);
+                    sharedPreferences = getSharedPreferences("ONBOARDING", Context.MODE_PRIVATE);
                     boolean isFirstTime = sharedPreferences.getBoolean("isFirstTime", true);
                     // If this is the first time of the user (or no user session) then the user
                     // Then the user is redirected to the onboarding screen
-                    if(isFirstTime) {
+                    if (isFirstTime) {
                         // Set shared preferences to false to store that user has
                         // gone through the onboarding screen
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putBoolean("isFirstTime", false);
                         editor.apply();
 

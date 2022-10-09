@@ -1,6 +1,8 @@
 package com.app.dorav4.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
 import android.text.method.LinkMovementMethod;
@@ -22,6 +24,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +42,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,11 +60,31 @@ public class RegisterActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        // Initialize sharedPreferences
+        sharedPreferences = getSharedPreferences("REGISTRATION_ATTEMPTS", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
         // tvTermsAndPolicies OnClickListener
         customTextView(tvTermsAndPolicies);
 
         // btnRegister OnClickListener
-        btnRegister.setOnClickListener(v -> registerUser());
+        btnRegister.setOnClickListener(v -> {
+            int attempts = sharedPreferences.getInt("attempts", 0);
+
+            if (attempts < 3) {
+                registerUser();
+            } else {
+                MotionToast.Companion.darkToast(
+                        this,
+                        "Error",
+                        "Too many attempts, try again later",
+                        MotionToastStyle.ERROR,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                );
+            }
+        });
 
         // ivBack OnClickListener
         ivBack.setOnClickListener(v -> finish());
@@ -117,6 +143,17 @@ public class RegisterActivity extends AppCompatActivity {
                             MotionToast.LONG_DURATION,
                             ResourcesCompat.getFont(this, R.font.helvetica_regular)
                     );
+
+                    // Count registration attempts
+                    int attempts = sharedPreferences.getInt("attempts", 0);
+
+                    if (attempts < 3) {
+                        attempts++;
+                    }
+
+                    editor.putInt("attempts", attempts);
+                    editor.putLong("timestamp", System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(60));
+                    editor.apply();
 
                     intent = new Intent(RegisterActivity.this, SetupActivity.class);
                     startActivity(intent);
