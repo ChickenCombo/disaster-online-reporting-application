@@ -39,3 +39,7 @@ gradle/
 
 #NDK
 obj/
+
+# API keys
+google-services.json
+google_maps_api.xml
