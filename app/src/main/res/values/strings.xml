@@ -88,17 +88,19 @@
     <string name="disaster_preparedness_guides_header">Disaster Preparedness Guides</string>
     <string name="disaster_preparedness_description">Here are some of the guides validated by experts</string>
     <string name="earthquake">Earthquake</string>
-    <string name="earthquake_description">What to do before, during, and after an earthquake</string>
+    <string name="earthquake_description">A quick and comprehensive guide about earthquake preparedness</string>
     <string name="fire">Fire</string>
-    <string name="fire_description">What to do before, during, and after a fire</string>
-    <string name="typhoon">Typhoon</string>
-    <string name="typhoon_description">What to do before, during, and after a typhoon</string>
+    <string name="fire_description">A quick and comprehensive guide about fire preparedness</string>
+    <string name="typhoon">Tropical Cyclone</string>
+    <string name="typhoon_description">A quick and comprehensive guide about tropical cyclone preparedness</string>
     <string name="volcanic_eruption">Volcanic Eruption</string>
-    <string name="volcanic_eruption_description">What to do before, during, and after a volcanic eruption</string>
+    <string name="volcanic_eruption_description">A quick and comprehensive guide about volcanic eruption preparedness</string>
     <string name="tsunami">Tsunami</string>
-    <string name="tsunami_description">What to do before, during, and after a tsunami</string>
+    <string name="tsunami_description">A quick and comprehensive guide about tsunami preparedness</string>
     <string name="landslide">Landslide</string>
-    <string name="landslide_description">What to do before, during, and after a landslide</string>
+    <string name="landslide_description">A quick and comprehensive guide about landslide preparedness</string>
+    <string name="flood">Flood</string>
+    <string name="flood_description">A quick and comprehensive guide about flood preparedness</string>
 
     <!-- String used for Bluetooth chat -->
     <string name="no_devices_found">No nearby Bluetooth devices found</string>

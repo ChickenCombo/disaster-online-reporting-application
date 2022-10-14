@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             int id = item.getItemId();
 
             if (id == R.id.navGuides) {
-                intent = new Intent(MainActivity.this, GuidesActivity.class);
+                intent = new Intent(MainActivity.this, GuidesListActivity.class);
                 startActivity(intent);
             } else if (id == R.id.navHotlines) {
                 intent = new Intent(MainActivity.this, HotlinesActivity.class);

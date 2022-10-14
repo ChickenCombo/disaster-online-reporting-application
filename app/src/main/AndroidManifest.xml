@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.app.dorav4">
+    package="com.app.dorav4" >
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission
+        android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
@@ -20,24 +25,9 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DORAV4">
+        android:theme="@style/Theme.DORAV4" >
         <activity
-            android:name=".activities.EarthquakeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.FireActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.TyphoonActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.VolcanicEruptionActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.TsunamiActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.LandslideActivity"
+            android:name=".activities.GuidesActivity"
             android:exported="false" />
         <activity
             android:name=".bluetoothchat.BluetoothChatActivity"
@@ -57,7 +47,7 @@
             android:name=".activities.FindFriendsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.GuidesActivity"
+            android:name=".activities.GuidesListActivity"
             android:exported="false" />
         <activity
             android:name=".activities.HotlinesActivity"
@@ -97,7 +87,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.SplashActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -129,7 +119,7 @@
 
         <service
             android:name=".utils.FirebaseMessagingService"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -139,4 +129,5 @@
             android:name="org.apache.http.legacy"
             android:required="true" />
     </application>
+
 </manifest>
