@@ -8,7 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:369884319647:android:86a88d9ac2bcd690f3f7aa",
+        "mobilesdk_app_id": "1:369884319647:android:0c5dee7b0d648b19f3f7aa",
         "android_client_info": {
           "package_name": "com.app.dorav4"
         }
@@ -21,7 +21,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCSppwDPrK9_C5K_U7QlKuL1xzE7o11Lg4"
+          "current_key": "AIzaSyDvsDyH7vSwjprnIvyzZqNVpP0sSOKN4J8"
         }
       ],
       "services": {
