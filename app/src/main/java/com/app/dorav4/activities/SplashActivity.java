@@ -12,6 +12,7 @@ import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.app.dorav4.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,6 +41,8 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         new Handler().postDelayed(() -> {
+            PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
+
             // Clear registration attempts after an hour
             sharedPreferences = getSharedPreferences("REGISTRATION_ATTEMPTS", Context.MODE_PRIVATE);
             editor = sharedPreferences.edit();

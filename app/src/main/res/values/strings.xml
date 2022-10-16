@@ -123,6 +123,9 @@
     <string name="advisories_header">Advisories</string>
     <string name="comments_header">Comments</string>
     <string name="find_friends_header">Find Friends</string>
+    <string name="settings_header">Settings</string>
+    <string name="about_header">About</string>
+    <string name="notifications_header">Notifications</string>
     <string name="upvotes_header">Upvotes</string>
     <string name="terms_and_conditions_header">Terms and Conditions</string>
     <string name="privacy_policy_header">Privacy Policy</string>
@@ -178,6 +181,15 @@
     <string name="button_authenticate">Authenticate</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_submit">Submit</string>
+
+    <!-- Strings used for settings -->
+    <string name="push_notifications_title">Push Notifications</string>
+    <string name="push_notifications_on">Notifications about disaster reports, announcements, and chats are enabled</string>
+    <string name="push_notifications_off">Notifications about disaster reports, announcements, and chats are disabled</string>
+    <string name="developers_title">Developers</string>
+    <string name="developers_summary">Castro, Michaela Marie N.\nCuadra, John Lester G.\nMaruno, Hitomi B.\nQuitor, Cedric John D.</string>
+    <string name="version_title">Version</string>
+    <string name="version_summary">4.0.0</string>
 
     <!-- Miscellaneous Texts -->
     <string name="jump_to_top">Jump to Top</string>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.app.dorav4" >
+    package="com.app.dorav4">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -25,7 +25,11 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DORAV4" >
+        android:theme="@style/Theme.DORAV4">
+
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:exported="false"/>
         <activity
             android:name=".activities.GuidesActivity"
             android:exported="false" />
@@ -87,7 +91,7 @@
             android:exported="false" />
         <activity
             android:name=".activities.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -119,7 +123,7 @@
 
         <service
             android:name=".utils.FirebaseMessagingService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -129,5 +133,4 @@
             android:name="org.apache.http.legacy"
             android:required="true" />
     </application>
-
 </manifest>

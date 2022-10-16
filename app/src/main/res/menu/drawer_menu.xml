@@ -20,5 +20,10 @@
             android:id="@+id/navFindFriends"
             android:icon="@drawable/ic_find_friends"
             android:title="@string/find_friends_header" />
+
+        <item
+            android:id="@+id/navSettings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings_header" />
     </group>
 </menu>
