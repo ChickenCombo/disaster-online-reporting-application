@@ -105,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
             } else if (id == R.id.navFindFriends) {
                 intent = new Intent(MainActivity.this, FindFriendsActivity.class);
                 startActivity(intent);
+            } else if (id == R.id.navSettings) {
+                intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
             }
 
             return true;

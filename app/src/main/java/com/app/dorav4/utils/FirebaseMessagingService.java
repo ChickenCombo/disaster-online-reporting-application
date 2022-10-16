@@ -5,12 +5,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
+import androidx.preference.PreferenceManager;
 
 import com.app.dorav4.R;
 import com.app.dorav4.activities.SplashActivity;
@@ -57,7 +59,10 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         String messageBody = Objects.requireNonNull(remoteMessage.getNotification()).getBody();
         String messageTitle = Objects.requireNonNull(remoteMessage.getNotification()).getTitle();
 
-        sendNotification(messageTitle, messageBody);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        if (sp.getBoolean("pushNotifications", true)) {
+            sendNotification(messageTitle, messageBody);
+        }
     }
 
     // Notification Builder
