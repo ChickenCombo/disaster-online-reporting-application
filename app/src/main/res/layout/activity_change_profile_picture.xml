@@ -28,31 +28,69 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/safe_white" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivProfilePicture"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/ic_profile"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSaveProfile"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvAuthenticate"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="@color/primary_green"
-        android:fontFamily="@font/raleway"
-        android:text="@string/button_save_profile_picture"
-        android:textAllCaps="false"
-        android:textColor="@color/safe_white"
-        android:textStyle="bold"
-        app:cornerRadius="30dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/safe_white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivProfilePicture" />
+        app:layout_constraintTop_toBottomOf="@+id/ivBack">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/raleway"
+                android:text="@string/change_profile_picture"
+                android:textAlignment="center"
+                android:textColor="@color/safe_black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfilePicture"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_profile"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveProfile"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="@color/primary_green"
+                android:fontFamily="@font/raleway"
+                android:text="@string/button_save_profile_picture"
+                android:textAllCaps="false"
+                android:textColor="@color/safe_white"
+                android:textStyle="bold"
+                app:cornerRadius="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivProfilePicture" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

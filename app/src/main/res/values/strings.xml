@@ -194,4 +194,5 @@
     <!-- Miscellaneous Texts -->
     <string name="jump_to_top">Jump to Top</string>
     <string name="comments">Comments</string>
+    <string name="change_profile_picture">Change Profile Picture</string>
 </resources>
