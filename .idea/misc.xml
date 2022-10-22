@@ -99,6 +99,8 @@
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/bg_sender.xml" value="0.1815" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/bg_splash.xml" value="0.1815" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.1815" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_bluetooth.xml" value="0.165" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_bluetooth_search.xml" value="0.165" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_call.xml" value="0.173" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_cancel.xml" value="0.173" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_chat.xml" value="0.252" />
@@ -128,11 +130,13 @@
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout-v26/activity_landslide.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_advisories.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_bluetooth_chat.xml" value="0.2" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_bluetooth_chat2.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_change_email.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_change_password.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_change_profile_picture.xml" value="0.264" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_comments.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_conversation.xml" value="0.264" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_device_list.xml" value="0.2359375" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_earthquake.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_find_friends.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_fire.xml" value="0.2359375" />
@@ -164,10 +168,12 @@
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/component_message_received.xml" value="0.4" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/component_message_send.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/component_row.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/device_name.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/dialog_change_name.xml" value="0.264" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/dialog_connection_request.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/drawer_header.xml" value="0.21285140562248997" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/dropdown_disasters.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/fragment_bluetooth_chat.xml" value="0.2359375" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/fragment_chat.xml" value="0.264" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/fragment_conversation.xml" value="0.264" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/fragment_disasters.xml" value="0.25" />
@@ -180,6 +186,7 @@
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/fragment_red_cross.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/fragment_reports.xml" value="0.264" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/header_settings.xml" value="0.1" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/message.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/settings_activity.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/settings_header.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/single_onboarding_slide.xml" value="0.25" />

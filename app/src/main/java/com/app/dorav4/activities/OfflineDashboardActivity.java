@@ -11,14 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.app.dorav4.R;
-import com.app.dorav4.bluetoothchat.BluetoothChatActivity;
-import com.bluetooth.communicator.BluetoothCommunicator;
-import com.bluetooth.communicator.tools.BluetoothTools;
 import com.google.android.material.card.MaterialCardView;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -29,7 +24,6 @@ public class OfflineDashboardActivity extends AppCompatActivity implements EasyP
     public String[] REQUIRED_PERMISSIONS;
     private final int REQUEST_CODE_REQUIRED_PERMISSIONS = 4;
 
-    public static BluetoothCommunicator bluetoothCommunicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +56,7 @@ public class OfflineDashboardActivity extends AppCompatActivity implements EasyP
 
         // Disaster Preparedness Guides OnClickListener
         cvGuides.setOnClickListener(v -> {
-            intent = new Intent(OfflineDashboardActivity.this, GuidesListActivity.class);
+            intent = new Intent(OfflineDashboardActivity.this, GuidesActivity.class);
             startActivity(intent);
         });
 
@@ -75,7 +69,8 @@ public class OfflineDashboardActivity extends AppCompatActivity implements EasyP
         // Bluetooth Chat OnClickListener
         cvBluetoothChat.setOnClickListener(v -> {
             if (EasyPermissions.hasPermissions(this, REQUIRED_PERMISSIONS)) {
-                bluetoothChat();
+                intent = new Intent(OfflineDashboardActivity.this, BluetoothChatActivity.class);
+                startActivity(intent);
             } else {
                 EasyPermissions.requestPermissions(this, "This feature requires bluetooth permission in order to work!", REQUEST_CODE_REQUIRED_PERMISSIONS, REQUIRED_PERMISSIONS);
             }
@@ -99,38 +94,12 @@ public class OfflineDashboardActivity extends AppCompatActivity implements EasyP
 
     @Override
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
-        bluetoothChat();
-    }
-
-    @Override
-    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms)   {
-    }
-
-    // Initialize Bluetooth connectivity
-    private void bluetoothChat() {
-        String name = android.os.Build.MODEL;
-        ArrayList<Character> supportedCharacters = BluetoothTools.getSupportedUTFCharacters(this);
-
-        boolean equals = true;
-
-        for (int i = 0; i < name.length() && equals; i++) {
-            if (!supportedCharacters.contains(name.charAt(i))) {
-                equals = false;
-            }
-        }
-
-        if (!equals || name.length() > 18) {
-            name = "User " + new Random().nextInt(21);
-        }
-
-        bluetoothCommunicator = new BluetoothCommunicator(this, name, BluetoothCommunicator.STRATEGY_P2P_WITH_RECONNECTION);
-
         intent = new Intent(OfflineDashboardActivity.this, BluetoothChatActivity.class);
         startActivity(intent);
     }
 
-    // Get Bluetooth communicator
-    public static BluetoothCommunicator getBluetoothCommunicator() {
-        return bluetoothCommunicator;
+    @Override
+    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms)   {
+        finish();
     }
 }
