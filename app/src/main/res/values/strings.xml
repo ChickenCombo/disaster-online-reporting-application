@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- App Name -->
     <string name="app_name">DORA</string>
 
@@ -17,8 +17,6 @@
     <!-- String used for onboarding slider -->
     <string name="slider_first_title">Slider First Title</string>
     <string name="slider_first_desc">Slider First Description</string>
-    <string name="title_onboarding">Title Onboarding</string>
-    <string name="onboarding_description">Onboarding Description</string>
 
     <!-- String used for account login -->
     <string name="login_header">Welcome to DORA!</string>
@@ -85,8 +83,6 @@
     <string name="_8888_description">For complaints in public service</string>
 
     <!-- Strings used for disaster preparedness guides -->
-    <string name="disaster_preparedness_guides_header">Disaster Preparedness Guides</string>
-    <string name="disaster_preparedness_description">Here are some of the guides validated by experts</string>
     <string name="earthquake">Earthquake</string>
     <string name="earthquake_description">A quick and comprehensive guide about earthquake preparedness</string>
     <string name="fire">Fire</string>
@@ -103,9 +99,6 @@
     <string name="flood_description">A quick and comprehensive guide about flood preparedness</string>
 
     <!-- String used for Bluetooth chat -->
-    <string name="no_devices_found">No nearby Bluetooth devices found</string>
-    <string name="no_permission">It is not possible to search for devices without location permission, go to the settings to grant it, or reinstall the app</string>
-    <string name="no_bluetooth">It is not possible to search because this device does not have Bluetooth Low Energy</string>
 
     <!-- Placeholder strings -->
     <string name="placeholder_header">Header</string>
@@ -160,7 +153,6 @@
     <string name="edit_text_enter_a_comment">Enter a comment…</string>
     <string name="edit_text_new_password">New Password</string>
     <string name="edit_text_new_email_address">New Email Address</string>
-    <string name="edit_text_write_message">Write a message…</string>
 
     <!-- String used for Button -->
     <string name="button_save_profile">Save Profile</string>
@@ -186,7 +178,6 @@
     <string name="push_notifications_title">Push Notifications</string>
     <string name="push_notifications_on">Notifications about disaster reports, announcements, and chats are enabled</string>
     <string name="push_notifications_off">Notifications about disaster reports, announcements, and chats are disabled</string>
-    <string name="developers_title">Developers</string>
     <string name="developers_summary">Castro, Michaela Marie N.\nCuadra, John Lester G.\nMaruno, Hitomi B.\nQuitor, Cedric John D.</string>
     <string name="version_title">Version</string>
     <string name="version_summary">4.0.0</string>
@@ -195,4 +186,21 @@
     <string name="jump_to_top">Jump to Top</string>
     <string name="comments">Comments</string>
     <string name="change_profile_picture">Change Profile Picture</string>
+
+    <!--  Bluetooth Chat Activity -->
+    <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth Chat.</string>
+    <string name="title_connecting">Connecting…</string>
+    <string name="title_connected_to">Connected to <xliff:g id="device_name">%1$s</xliff:g></string>
+    <string name="title_not_connected">Not connected</string>
+
+    <!--  Device List Activity -->
+    <string name="scanning">Scanning for devices…</string>
+    <string name="select_device">Select a device to connect</string>
+    <string name="none_paired">No devices have been paired</string>
+    <string name="none_found">No devices found</string>
+    <string name="title_paired_devices">Paired Devices</string>
+    <string name="title_other_devices">Other Available Devices</string>
+    <string name="button_scan">Scan for devices</string>
+
+    <!-- Bluetooth Options Menu -->
 </resources>
