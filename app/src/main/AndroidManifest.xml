@@ -34,6 +34,12 @@
             android:name=".activities.BluetoothChatActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.TermsAndConditionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PrivacyPolicyActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.SettingsActivity"
             android:exported="false" />
         <activity
