@@ -84,13 +84,12 @@ public class DeviceListActivity extends AppCompatActivity {
 
         // If there are paired devices, add each one to the ArrayAdapter
         if (pairedDevices.size() > 0) {
-            findViewById(R.id.title_paired_devices).setVisibility(View.VISIBLE);
             for (BluetoothDevice device : pairedDevices) {
                 pairedDevicesArrayAdapter.add(device.getName() + "\n" + device.getAddress());
             }
         } else {
-            String noDevices = getResources().getText(R.string.none_paired).toString();
-            pairedDevicesArrayAdapter.add(noDevices);
+            TextView no_paired_devices = findViewById(R.id.no_paired_devices);
+            no_paired_devices.setVisibility(View.VISIBLE);
         }
     }
 
@@ -158,11 +157,10 @@ public class DeviceListActivity extends AppCompatActivity {
                 }
                 // When discovery is finished, change the Activity title
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                setProgressBarIndeterminateVisibility(false);
                 setTitle(R.string.select_device);
                 if (mNewDevicesArrayAdapter.getCount() == 0) {
-                    String noDevices = getResources().getText(R.string.none_found).toString();
-                    mNewDevicesArrayAdapter.add(noDevices);
+                    TextView no_devices_found = findViewById(R.id.no_devices_found);
+                    no_devices_found.setVisibility(View.VISIBLE);
                 }
             }
         }
