@@ -185,7 +185,7 @@ public class ConversationActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     String token = Objects.requireNonNull(snapshot.child("token").getValue()).toString();
-                    PushNotificationService.unicastNotification(ConversationActivity.this, token, receiverFullName, message);
+                    PushNotificationService.unicastNotification(ConversationActivity.this, token, MainActivity.fullName, message);
                 }
             }
 
