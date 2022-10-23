@@ -23,12 +23,12 @@ import com.app.dorav4.R;
 
 import java.util.Set;
 
+@SuppressLint("MissingPermission")
 public class DeviceListActivity extends AppCompatActivity {
     public static String EXTRA_DEVICE_ADDRESS = "device_address";
     private BluetoothAdapter mBtAdapter;
     private ArrayAdapter<String> mNewDevicesArrayAdapter;
 
-    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +80,7 @@ public class DeviceListActivity extends AppCompatActivity {
         mBtAdapter = BluetoothAdapter.getDefaultAdapter();
 
         // Get a set of currently paired devices
-        @SuppressLint("MissingPermission") Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
+        Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
 
         // If there are paired devices, add each one to the ArrayAdapter
         if (pairedDevices.size() > 0) {
@@ -94,7 +94,6 @@ public class DeviceListActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("MissingPermission")
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -108,7 +107,6 @@ public class DeviceListActivity extends AppCompatActivity {
         this.unregisterReceiver(mReceiver);
     }
 
-    @SuppressLint("MissingPermission")
     private void doDiscovery() {
         // Indicate scanning in the title
         setProgressBarIndeterminateVisibility(true);
@@ -127,7 +125,6 @@ public class DeviceListActivity extends AppCompatActivity {
     }
 
     private AdapterView.OnItemClickListener mDeviceClickListener = new AdapterView.OnItemClickListener() {
-        @SuppressLint("MissingPermission")
         public void onItemClick(AdapterView<?> av, View v, int arg2, long arg3) {
             // Cancel discovery because it's costly and we're about to connect
             mBtAdapter.cancelDiscovery();
@@ -147,7 +144,6 @@ public class DeviceListActivity extends AppCompatActivity {
     };
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        @SuppressLint("MissingPermission")
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
