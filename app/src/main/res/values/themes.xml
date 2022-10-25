@@ -25,10 +25,4 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">10dp</item>
     </style>
-    <style name="Theme.DORAV4.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="Theme.DORAV4.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.DORAV4.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

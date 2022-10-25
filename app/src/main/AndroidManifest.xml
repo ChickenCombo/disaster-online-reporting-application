@@ -26,16 +26,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DORAV4">
-
         <activity
-            android:name=".activities.SettingsActivity"
-            android:exported="false"/>
+            android:name=".activities.DeviceListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.Light.Dialog" />
         <activity
-            android:name=".activities.GuidesActivity"
+            android:name=".activities.BluetoothChatActivity"
             android:exported="false" />
         <activity
-            android:name=".bluetoothchat.BluetoothChatActivity"
-            android:configChanges="orientation|screenSize"
+            android:name=".activities.TermsAndConditionsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.PrivacyPolicyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.GuidesActivity"
             android:exported="false" />
         <activity
             android:name=".activities.StartConversationActivity"
@@ -139,4 +147,5 @@
             android:name="org.apache.http.legacy"
             android:required="true" />
     </application>
+
 </manifest>

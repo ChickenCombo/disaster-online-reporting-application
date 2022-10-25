@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:elevation="10dp"
+    app:cardCornerRadius="10dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_paired_devices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:text="@string/title_paired_devices"
+            android:textStyle="bold"
+            android:visibility="visible"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/no_paired_devices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:text="@string/none_paired"
+            android:textSize="20sp"
+            android:visibility="gone"
+            tools:ignore="RtlSymmetry" />
+
+        <ListView
+            android:id="@+id/paired_devices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:stackFromBottom="true"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/title_new_devices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:text="@string/title_other_devices"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/no_devices_found"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:text="@string/none_found"
+            android:textSize="20sp"
+            android:visibility="gone"
+            tools:ignore="RtlSymmetry" />
+
+        <ListView
+            android:id="@+id/new_devices"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:stackFromBottom="true" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_scan"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/primary_green"
+            android:fontFamily="@font/raleway"
+            android:text="@string/button_scan"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            app:cornerRadius="30dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

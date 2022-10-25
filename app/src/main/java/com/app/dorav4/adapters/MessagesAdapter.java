@@ -38,8 +38,6 @@ public class MessagesAdapter extends RecyclerView.Adapter<UsersViewHolder> {
 
     DatabaseReference chatsReference;
 
-    String userId, fullName, profilePicture;
-
     public MessagesAdapter(Context context, List<Users> usersList) {
         this.context = context;
         this.usersList = usersList;
@@ -60,9 +58,9 @@ public class MessagesAdapter extends RecyclerView.Adapter<UsersViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull UsersViewHolder holder, int position) {
         // Fetch user's details
-        userId = usersList.get(position).getUserId();
-        fullName = usersList.get(position).getFullName();
-        profilePicture = usersList.get(position).getProfilePicture();
+        String userId = usersList.get(position).getUserId();
+        String fullName = usersList.get(position).getFullName();
+        String profilePicture = usersList.get(position).getProfilePicture();
 
         // Set user's details
         holder.tvUserName.setText(fullName);
@@ -78,7 +76,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<UsersViewHolder> {
 
         // Holder OnLongClickListener
         holder.itemView.setOnLongClickListener(v -> {
-            deleteConversation();
+            deleteConversation(userId);
             return false;
         });
     }
@@ -89,7 +87,7 @@ public class MessagesAdapter extends RecyclerView.Adapter<UsersViewHolder> {
     }
 
     // Delete conversation
-    private void deleteConversation() {
+    private void deleteConversation(String userId) {
         MaterialDialog mDialog = new MaterialDialog.Builder((Activity) context)
                 .setTitle("Delete?")
                 .setMessage("Are you sure want to delete this conversation? This action cannot be undone.")
