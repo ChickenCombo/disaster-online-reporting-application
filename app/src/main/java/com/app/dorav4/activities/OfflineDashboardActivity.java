@@ -56,7 +56,7 @@ public class OfflineDashboardActivity extends AppCompatActivity implements EasyP
 
         // Disaster Preparedness Guides OnClickListener
         cvGuides.setOnClickListener(v -> {
-            intent = new Intent(OfflineDashboardActivity.this, GuidesActivity.class);
+            intent = new Intent(OfflineDashboardActivity.this, GuidesListActivity.class);
             startActivity(intent);
         });
 
