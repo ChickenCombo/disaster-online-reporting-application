@@ -31,7 +31,7 @@ public class OfflineDashboardActivity extends AppCompatActivity implements EasyP
         setContentView(R.layout.activity_offline_dashboard);
 
         // Change status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(OfflineDashboardActivity.this, R.color.white));
+        getWindow().setStatusBarColor(ContextCompat.getColor(OfflineDashboardActivity.this, R.color.background));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         cvGuides = findViewById(R.id.cvGuides);

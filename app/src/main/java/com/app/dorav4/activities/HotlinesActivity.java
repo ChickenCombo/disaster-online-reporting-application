@@ -36,7 +36,7 @@ public class HotlinesActivity extends AppCompatActivity {
         ivBack = findViewById(R.id.ivBack);
 
         // Change status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(HotlinesActivity.this, R.color.white));
+        getWindow().setStatusBarColor(ContextCompat.getColor(HotlinesActivity.this, R.color.background));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         // ivBack OnClickListener

@@ -5,6 +5,7 @@
     android:id="@+id/motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     app:layoutDescription="@xml/activity_splash_scene"
     tools:context=".activities.SplashActivity">
 
@@ -39,6 +40,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white"
+        app:tint="@color/background"
         tools:ignore="ContentDescription" />
 </androidx.constraintlayout.motion.widget.MotionLayout>

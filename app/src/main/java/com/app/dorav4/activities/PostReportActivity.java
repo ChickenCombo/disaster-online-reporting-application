@@ -96,7 +96,7 @@ public class PostReportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post_report);
 
         // Change status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(PostReportActivity.this, R.color.white));
+        getWindow().setStatusBarColor(ContextCompat.getColor(PostReportActivity.this, R.color.background));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         tokens = new JSONArray();

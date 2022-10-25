@@ -23,10 +23,10 @@ public class SliderAdapter extends PagerAdapter {
 
     // List of slide image resource
     int[] images = {
-            R.drawable.illu_welcome_photo,
-            R.drawable.illu_take_photo,
-            R.drawable.illu_verify_photo,
-            R.drawable.illu_post_photo,
+            R.drawable.img_welcome,
+            R.drawable.img_take_photo,
+            R.drawable.img_verify,
+            R.drawable.img_post_photo,
     };
 
     int[] titles = {

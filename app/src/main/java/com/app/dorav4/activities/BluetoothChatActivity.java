@@ -19,7 +19,7 @@ public class BluetoothChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bluetooth_chat);
 
         // Change status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(BluetoothChatActivity.this, R.color.white));
+        getWindow().setStatusBarColor(ContextCompat.getColor(BluetoothChatActivity.this, R.color.background));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         // Set starting fragment to ReportsFragment

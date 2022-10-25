@@ -27,7 +27,7 @@ public class NoInternetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_no_internet);
 
         // Change status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(NoInternetActivity.this, R.color.white));
+        getWindow().setStatusBarColor(ContextCompat.getColor(NoInternetActivity.this, R.color.background));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         btnTryAgain = findViewById(R.id.btnTryAgain);

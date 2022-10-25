@@ -45,7 +45,7 @@ public class FindFriendsActivity extends AppCompatActivity {
         usersList = new ArrayList<>();
 
         // Change status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(FindFriendsActivity.this, R.color.white));
+        getWindow().setStatusBarColor(ContextCompat.getColor(FindFriendsActivity.this, R.color.background));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         usersReference = FirebaseDatabase.getInstance().getReference("Users");

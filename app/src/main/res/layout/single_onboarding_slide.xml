@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/safe_white">
+    android:background="@color/background">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription"
-        tools:srcCompat="@drawable/illu_verify_photo" />
+        tools:srcCompat="@drawable/img_verify" />
 
     <TextView
         android:id="@+id/tvSlideTitle"

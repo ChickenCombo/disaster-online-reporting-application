@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".activities.OfflineDashboardActivity">
 
     <ImageView
@@ -69,7 +70,7 @@
             android:backgroundTint="#efefef"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
-            app:strokeColor="#dadada"
+            app:strokeColor="@color/card_stroke"
             app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -125,7 +126,7 @@
             android:backgroundTint="#efefef"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
-            app:strokeColor="#dadada"
+            app:strokeColor="@color/card_stroke"
             app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -181,7 +182,7 @@
             android:backgroundTint="#efefef"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
-            app:strokeColor="#dadada"
+            app:strokeColor="@color/card_stroke"
             app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -237,7 +238,7 @@
             android:backgroundTint="#efefef"
             app:cardCornerRadius="8dp"
             app:cardElevation="2dp"
-            app:strokeColor="#dadada"
+            app:strokeColor="@color/card_stroke"
             app:strokeWidth="1dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -31,7 +31,7 @@ public class GuidesListActivity extends AppCompatActivity {
         cvFlood = findViewById(R.id.cvFlood);
 
         // Change status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(GuidesListActivity.this, R.color.white));
+        getWindow().setStatusBarColor(ContextCompat.getColor(GuidesListActivity.this, R.color.background));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         // ivBack OnClickListener

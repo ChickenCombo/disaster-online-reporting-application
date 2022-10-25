@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         sidebarEmail = sidebarView.findViewById(R.id.tvEmailAddress);
 
         // Change status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.white));
+        getWindow().setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.background));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         // Set starting fragment to ReportsFragment

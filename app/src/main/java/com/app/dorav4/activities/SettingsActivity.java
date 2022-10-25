@@ -30,7 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
         ivBack = findViewById(R.id.ivBack);
 
         // Change status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(SettingsActivity.this, R.color.white));
+        getWindow().setStatusBarColor(ContextCompat.getColor(SettingsActivity.this, R.color.background));
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
         // ivBack OnClickListener
