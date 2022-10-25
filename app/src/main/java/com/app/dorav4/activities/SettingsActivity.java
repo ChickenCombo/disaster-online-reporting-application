@@ -1,11 +1,13 @@
 package com.app.dorav4.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.app.dorav4.R;
@@ -39,6 +41,23 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
+
+            Preference termsAndConditions = findPreference("termsAndConditions");
+            Preference privacyPolicy = findPreference("privacyPolicy");
+
+            assert termsAndConditions != null;
+            termsAndConditions.setOnPreferenceClickListener(preference -> {
+                Intent intent = new Intent(getActivity(), TermsAndConditionsActivity.class);
+                startActivity(intent);
+                return false;
+            });
+
+            assert privacyPolicy != null;
+            privacyPolicy.setOnPreferenceClickListener(preference -> {
+                Intent intent = new Intent(getActivity(), TermsAndConditionsActivity.class);
+                startActivity(intent);
+                return false;
+            });
         }
     }
 }
