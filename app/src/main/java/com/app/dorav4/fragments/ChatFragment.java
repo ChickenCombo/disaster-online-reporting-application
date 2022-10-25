@@ -65,10 +65,35 @@ public class ChatFragment extends Fragment {
         chatsReference = FirebaseDatabase.getInstance().getReference().child("Chats").child(mUser.getUid());
         usersReference = FirebaseDatabase.getInstance().getReference().child("Users");
 
+        usersList = new ArrayList<>();
+
         // searchFriends OnClickListener
         searchFriends.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), StartConversationActivity.class);
             startActivity(intent);
+        });
+
+        // searchView OnQueryTextListener
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if (!query.isEmpty()) {
+                    searchMessages(query);
+                } else {
+                    loadMessages();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                if (!query.isEmpty()) {
+                    searchMessages(query);
+                } else {
+                    loadMessages();
+                }
+                return false;
+            }
         });
 
         loadMessages();
@@ -78,8 +103,6 @@ public class ChatFragment extends Fragment {
 
     // Get all chat conversations
     private void loadMessages() {
-        usersList = new ArrayList<>();
-
         // Get chat ids
         chatsReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -125,6 +148,52 @@ public class ChatFragment extends Fragment {
 
                 // Show empty view if list is empty
                 showEmptyView();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    // Search messages
+    private void searchMessages(String query) {
+        chatsReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                usersList.clear();
+
+                // Get the uid of the current user's friend
+                for (DataSnapshot ds: snapshot.getChildren()) {
+                    String uid = ds.getRef().getKey();
+
+                    // Get the user's details based on their uid
+                    usersReference.orderByKey().equalTo(uid).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot ds: snapshot.getChildren()) {
+                                Users users = ds.getValue(Users.class);
+
+                                // Search query
+                                if (users != null) {
+                                    boolean nameQuery = users.getFullName().toLowerCase().contains(query.toLowerCase());
+                                    if (nameQuery) {
+                                        usersList.add(users);
+                                    }
+                                }
+
+                                messagesAdapter = new MessagesAdapter(getActivity(), usersList);
+                                recyclerView.setAdapter(messagesAdapter);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
             }
 
             @Override
