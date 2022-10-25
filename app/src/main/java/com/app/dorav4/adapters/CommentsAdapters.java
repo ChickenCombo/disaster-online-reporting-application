@@ -10,10 +10,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -132,7 +130,29 @@ public class CommentsAdapters extends RecyclerView.Adapter<CommentsViewHolder> {
     private void deleteComment(String commentId) {
         // Delete comment from the database
         DatabaseReference commentsReference = FirebaseDatabase.getInstance().getReference("Reports").child(reportId);
-        commentsReference.child("Comments").child(commentId).removeValue();
+        commentsReference.child("Comments").child(commentId).removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                MotionToast.Companion.darkToast(
+                        (Activity) context,
+                        "Delete",
+                        "Comment has been deleted",
+                        MotionToastStyle.DELETE,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(context, R.font.helvetica_regular)
+                );
+            } else {
+                MotionToast.Companion.darkToast(
+                        (Activity) context,
+                        "Error",
+                        "Failed to delete comment, please try again",
+                        MotionToastStyle.ERROR,
+                        MotionToast.GRAVITY_BOTTOM,
+                        MotionToast.LONG_DURATION,
+                        ResourcesCompat.getFont(context, R.font.helvetica_regular)
+                );
+            }
+        });
 
         // Update comment count
         commentsReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -148,16 +168,6 @@ public class CommentsAdapters extends RecyclerView.Adapter<CommentsViewHolder> {
 
             }
         });
-
-        MotionToast.Companion.darkToast(
-                (Activity) context,
-                "Delete",
-                "Comment has been deleted",
-                MotionToastStyle.DELETE,
-                MotionToast.GRAVITY_BOTTOM,
-                MotionToast.LONG_DURATION,
-                ResourcesCompat.getFont(context, R.font.helvetica_regular)
-        );
     }
 
     // Convert time into "time ago"

@@ -97,18 +97,31 @@ public class MessagesAdapter extends RecyclerView.Adapter<UsersViewHolder> {
                     dialogInterface.dismiss();
 
                     // Delete conversation
-                    chatsReference.child(userId).removeValue();
-
-                    // Show success confirmation toast
-                    MotionToast.Companion.darkToast(
-                            (Activity) context,
-                            "Delete",
-                            "Message has been deleted",
-                            MotionToastStyle.DELETE,
-                            MotionToast.GRAVITY_BOTTOM,
-                            MotionToast.LONG_DURATION,
-                            ResourcesCompat.getFont(context, R.font.helvetica_regular)
-                    );
+                    chatsReference.child(userId).removeValue().addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            // Show success toast
+                            MotionToast.Companion.darkToast(
+                                    (Activity) context,
+                                    "Delete",
+                                    "Message has been deleted",
+                                    MotionToastStyle.DELETE,
+                                    MotionToast.GRAVITY_BOTTOM,
+                                    MotionToast.LONG_DURATION,
+                                    ResourcesCompat.getFont(context, R.font.helvetica_regular)
+                            );
+                        } else {
+                            // Show failed toast
+                            MotionToast.Companion.darkToast(
+                                    (Activity) context,
+                                    "Error",
+                                    "Failed to delete message, please try again",
+                                    MotionToastStyle.DELETE,
+                                    MotionToast.GRAVITY_BOTTOM,
+                                    MotionToast.LONG_DURATION,
+                                    ResourcesCompat.getFont(context, R.font.helvetica_regular)
+                            );
+                        }
+                    });
                 })
                 .setNegativeButton("Cancel", R.drawable.ic_cancel, (dialogInterface, which) -> dialogInterface.dismiss())
                 .build();
