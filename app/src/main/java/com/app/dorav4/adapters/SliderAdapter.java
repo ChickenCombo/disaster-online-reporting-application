@@ -29,23 +29,20 @@ public class SliderAdapter extends PagerAdapter {
             R.drawable.illu_post_photo,
     };
 
-    // List of slide titles TODO: Convert to values.strings.xml
     int[] titles = {
             R.string.slider_first_title,
-            R.string.slider_first_title,
-            R.string.slider_first_title,
-            R.string.slider_first_title,
+            R.string.slider_second_title,
+            R.string.slider_third_title,
+            R.string.slider_fourth_title,
     };
 
-    // List of slide descriptions TODO: Convert to values.string.xml
     int[] descriptions = {
             R.string.slider_first_desc,
-            R.string.slider_first_desc,
-            R.string.slider_first_desc,
-            R.string.slider_first_desc,
+            R.string.slider_second_desc,
+            R.string.slider_third_desc,
+            R.string.slider_fourth_desc,
     };
 
-    // Override PagerAdapter methods
     @Override
     public int getCount() {
         return titles.length;
@@ -53,7 +50,7 @@ public class SliderAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == (ConstraintLayout)object;
+        return view == object;
     }
 
     @NonNull
