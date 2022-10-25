@@ -184,9 +184,12 @@
     <string name="push_notifications_title">Push Notifications</string>
     <string name="push_notifications_on">Notifications about disaster reports, announcements, and chats are enabled</string>
     <string name="push_notifications_off">Notifications about disaster reports, announcements, and chats are disabled</string>
+    <string name="developers_title">Developers</string>
     <string name="developers_summary">Castro, Michaela Marie N.\nCuadra, John Lester G.\nMaruno, Hitomi B.\nQuitor, Cedric John D.</string>
     <string name="version_title">Version</string>
     <string name="version_summary">4.0.0</string>
+    <string name="privacy_policy_summary">Read our Privacy Policy</string>
+    <string name="terms_and_conditions_summary">Read our Terms and Conditions</string>
 
     <!-- Miscellaneous Texts -->
     <string name="jump_to_top">Jump to Top</string>
@@ -207,6 +210,4 @@
     <string name="title_paired_devices">Paired Devices</string>
     <string name="title_other_devices">Other Available Devices</string>
     <string name="button_scan">Scan for devices</string>
-
-    <!-- Bluetooth Options Menu -->
 </resources>
