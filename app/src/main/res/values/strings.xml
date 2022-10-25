@@ -15,8 +15,14 @@
     </string-array>
 
     <!-- String used for onboarding slider -->
-    <string name="slider_first_title">Slider First Title</string>
-    <string name="slider_first_desc">Slider First Description</string>
+    <string name="slider_first_title">Welcome to DORA!</string>
+    <string name="slider_first_desc">DORA is your disaster preparedness companion complete with guides, emergency hotlines, and other information to keep you safe.</string>
+    <string name="slider_second_title">Be informed!</string>
+    <string name="slider_second_desc">DORA allows you to view disaster reports and evacuation centers to help you stay alert and prepared when disaster strikes.</string>
+    <string name="slider_third_title">Be responsible!</string>
+    <string name="slider_third_desc">Please be mindful when posting disaster reports and make sure that all information is accurate and correct, you may refer to our Terms and Conditions for our policies.</string>
+    <string name="slider_fourth_title">Stay connected!</string>
+    <string name="slider_fourth_desc">DORA allows you to chat with other users online using an active internet connection as well as offline using our Bluetooth chat in case of network outages.</string>
 
     <!-- String used for account login -->
     <string name="login_header">Welcome to DORA!</string>
