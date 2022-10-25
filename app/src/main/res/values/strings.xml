@@ -42,7 +42,7 @@
 
     <!-- String used for forgotten password -->
     <string name="forgot_your_password_header">Forgot your password?</string>
-    <string name="forgot_your_password_description">Don\'t worry, please enter your email address and we\'ll send you a password reset link</string>
+    <string name="forgot_your_password_description">Don\'t worry, enter your email address and we\'ll send you a password reset link</string>
 
     <!-- String used for no internet connection -->
     <string name="no_internet_header">Whoops!</string>
@@ -50,11 +50,11 @@
 
     <!-- Strings used for change password and email -->
     <string name="authenticate">Authenticate</string>
-    <string name="authenticate_description">Please take a moment to verify your account by entering your password, this helps us confirm your identity and secure your account.</string>
+    <string name="authenticate_description">Take a moment to verify your account by entering your password, this helps us confirm your identity and secure your account.</string>
     <string name="change_password">Change Password</string>
-    <string name="new_password">Please enter your new password</string>
+    <string name="new_password">Enter your new password</string>
     <string name="update_email_address">Update Email Address</string>
-    <string name="new_email_address">Please enter your new email address.</string>
+    <string name="new_email_address">Enter your new email address.</string>
 
     <!-- String used for offline dashboard -->
     <string name="offline_header">Be disaster resilient</string>
