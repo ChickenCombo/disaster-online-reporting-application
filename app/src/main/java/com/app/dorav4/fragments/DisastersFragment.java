@@ -18,6 +18,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.app.dorav4.R;
+import com.app.dorav4.adapters.InfoWindowAdapter;
 import com.app.dorav4.models.Markers;
 import com.app.dorav4.utils.MarkerClusterRenderer;
 import com.google.android.gms.common.ConnectionResult;
@@ -70,6 +71,7 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
             // Setup markers clustering
             clusterManager = new ClusterManager<>(requireActivity(), googleMap);
             clusterManager.setRenderer(new MarkerClusterRenderer(requireActivity(), googleMap, clusterManager));
+            clusterManager.getMarkerCollection().setInfoWindowAdapter(new InfoWindowAdapter(requireActivity()));
             googleMap.setOnCameraIdleListener(clusterManager);
             googleMap.setOnMarkerClickListener(clusterManager);
 
