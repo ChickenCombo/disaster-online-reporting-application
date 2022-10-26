@@ -77,7 +77,7 @@
             app:iconGravity="textStart"
             app:iconTint="@color/black"
             app:rippleColor="@color/primary_green"
-            app:strokeColor="@color/safe_black" />
+            app:strokeColor="#e0e0e0" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSubmit"

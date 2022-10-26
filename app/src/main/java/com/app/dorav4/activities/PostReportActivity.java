@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -72,9 +73,10 @@ public class PostReportActivity extends AppCompatActivity {
     TextInputLayout tilDisasterType, tilDescription;
     AutoCompleteTextView tvDisasterType;
     TextInputEditText etDescription;
-    ImageView ivBack, ivAddImage, ivGetLocation;
+    ImageView ivBack, ivAddImage, ivGetLocation, ivReportingPolicy;
     Button btnReport;
     Uri photoUri;
+    AlertDialog dialog;
     LocationRequest locationRequest;
     FusedLocationProviderClient fusedLocationProviderClient;
     Geocoder geocoder;
@@ -109,6 +111,7 @@ public class PostReportActivity extends AppCompatActivity {
         ivBack = findViewById(R.id.ivBack);
         ivAddImage = findViewById(R.id.ivAddImage);
         ivGetLocation = findViewById(R.id.ivGetLocation);
+        ivReportingPolicy = findViewById(R.id.ivReportingPolicy);
         btnReport = findViewById(R.id.btnReport);
 
         usersReference = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -133,6 +136,9 @@ public class PostReportActivity extends AppCompatActivity {
 
         // ivGetLocation OnClickListener
         ivGetLocation.setOnClickListener(v -> getLocation());
+
+        // ivReportingPolicy OnClickListener
+        ivReportingPolicy.setOnClickListener(v -> showReportingPolicy());
 
         // btnReport OnClickListener
         btnReport.setOnClickListener(v -> postReport());
@@ -441,5 +447,21 @@ public class PostReportActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    // Show reporting policy dialog
+    private void showReportingPolicy() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        View view = getLayoutInflater().inflate(R.layout.dialog_reporting_policy, null);
+        Button btnSubmit = view.findViewById(R.id.btnSubmit);
+
+        // btnSubmit OnClickListener
+        btnSubmit.setOnClickListener(v -> dialog.dismiss());
+
+        builder.setCancelable(false);
+        builder.setView(view);
+        dialog = builder.create();
+        dialog.show();
     }
 }
