@@ -196,6 +196,7 @@
     <string name="jump_to_top">Jump to Top</string>
     <string name="comments">Comments</string>
     <string name="change_profile_picture">Change Profile Picture</string>
+    <string name="change_profile_picture_description">Please select a new photo from your gallery or from your camera</string>
 
     <!--  String used for Bluetooth chat -->
     <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth Chat.</string>
