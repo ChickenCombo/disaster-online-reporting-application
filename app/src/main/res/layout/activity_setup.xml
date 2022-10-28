@@ -8,13 +8,13 @@
     tools:context=".activities.SetupActivity">
 
     <com.google.android.material.card.MaterialCardView
-        style="@style/roundedBottomCorner"
         android:id="@+id/view"
+        style="@style/roundedBottomCorner"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:backgroundTint="@color/primary_green"
-        app:layout_constraintEnd_toEndOf="parent"
         app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:fontFamily="@font/raleway"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
@@ -84,6 +84,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:src="@drawable/ic_profile"
+                android:layout_marginBottom="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

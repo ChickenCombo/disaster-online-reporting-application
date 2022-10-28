@@ -143,7 +143,7 @@ public class SetupActivity extends AppCompatActivity {
                             MotionToast.Companion.darkToast(
                                     this,
                                     "Success",
-                                    "Profile setup complete",
+                                    "Setup complete, please verify your email address",
                                     MotionToastStyle.SUCCESS,
                                     MotionToast.GRAVITY_BOTTOM,
                                     MotionToast.LONG_DURATION,

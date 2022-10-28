@@ -98,6 +98,7 @@
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/bg_receiver.xml" value="0.1815" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/bg_sender.xml" value="0.1815" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/bg_splash.xml" value="0.1815" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_account_circle_fill1_wght400_grad0_opsz48.xml" value="0.264" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.1815" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_bluetooth.xml" value="0.165" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_bluetooth_search.xml" value="0.165" />
@@ -129,6 +130,7 @@
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/img_beach.xml" value="0.173" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/img_call.xml" value="0.173" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/img_delete.xml" value="0.173" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/img_dora_logo.xml" value="0.165" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/img_empty.xml" value="0.173" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/img_no_internet.xml" value="0.173" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/img_upvote.xml" value="0.173" />
@@ -162,7 +164,7 @@
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_profile.xml" value="0.10282776349614396" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_search_friends.xml" value="0.25" />
-        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_setup.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_setup.xml" value="0.264" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_splash.xml" value="0.16077898550724637" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_start_conversation.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_terms_and_conditions.xml" value="0.25" />
