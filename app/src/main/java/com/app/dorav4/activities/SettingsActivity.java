@@ -54,7 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             assert privacyPolicy != null;
             privacyPolicy.setOnPreferenceClickListener(preference -> {
-                Intent intent = new Intent(getActivity(), TermsAndConditionsActivity.class);
+                Intent intent = new Intent(getActivity(), PrivacyPolicyActivity.class);
                 startActivity(intent);
                 return false;
             });
