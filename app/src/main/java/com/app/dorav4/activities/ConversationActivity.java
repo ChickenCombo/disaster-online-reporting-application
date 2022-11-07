@@ -79,7 +79,6 @@ public class ConversationActivity extends AppCompatActivity {
         // Setup recyclerView
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ConversationActivity.this);
         linearLayoutManager.setStackFromEnd(true);
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         // Fetch receiver's information
