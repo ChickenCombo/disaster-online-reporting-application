@@ -123,7 +123,7 @@
     <string name="comments_header">Comments</string>
     <string name="find_friends_header">Find Friends</string>
     <string name="settings_header">Settings</string>
-    <string name="credits_header">Credits</string>
+    <string name="credits_header">References</string>
     <string name="about_header">About</string>
     <string name="notifications_header">Notifications</string>
     <string name="upvotes_header">Upvotes</string>
@@ -193,6 +193,8 @@
     <string name="privacy_policy_summary">Read our Privacy Policy</string>
     <string name="terms_and_conditions_summary">Read our Terms and Conditions</string>
     <string name="credits_summary">Read our references</string>
+    <string name="contact_us_title">Contact Us</string>
+    <string name="contact_us_summary">dorav4.app@gmail.com</string>
 
     <!-- Miscellaneous Texts -->
     <string name="jump_to_top">Jump to Top</string>
