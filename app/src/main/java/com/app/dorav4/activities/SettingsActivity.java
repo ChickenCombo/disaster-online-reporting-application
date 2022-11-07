@@ -44,8 +44,10 @@ public class SettingsActivity extends AppCompatActivity {
 
             Preference termsAndConditions = findPreference("termsAndConditions");
             Preference privacyPolicy = findPreference("privacyPolicy");
+            Preference credits = findPreference("credits");
 
             assert termsAndConditions != null;
+            // termsAndConditions OnPreferenceClickListener
             termsAndConditions.setOnPreferenceClickListener(preference -> {
                 Intent intent = new Intent(getActivity(), TermsAndConditionsActivity.class);
                 startActivity(intent);
@@ -53,8 +55,17 @@ public class SettingsActivity extends AppCompatActivity {
             });
 
             assert privacyPolicy != null;
+            // privacyPolicy OnPreferenceClickListener
             privacyPolicy.setOnPreferenceClickListener(preference -> {
                 Intent intent = new Intent(getActivity(), PrivacyPolicyActivity.class);
+                startActivity(intent);
+                return false;
+            });
+
+            assert credits != null;
+            // credits OnPreferenceClickListener
+            credits.setOnPreferenceClickListener(preference -> {
+                Intent intent = new Intent(getActivity(), CreditsActivity.class);
                 startActivity(intent);
                 return false;
             });

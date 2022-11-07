@@ -27,6 +27,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DORAV4">
         <activity
+            android:name=".activities.CreditsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.DeviceListActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.Light.Dialog" />

@@ -27,6 +27,12 @@
             app:title="@string/privacy_policy_header" />
 
         <Preference
+            app:icon="@drawable/ic_credits"
+            app:key="credits"
+            app:summary="@string/credits_summary"
+            app:title="@string/credits_header" />
+
+        <Preference
             app:icon="@drawable/ic_developers"
             app:summary="@string/developers_summary"
             app:title="@string/developers_title" />
