@@ -127,6 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
+                        mUser.sendEmailVerification();
                         MotionToast.Companion.darkToast(
                                 this,
                                 "Info",
@@ -136,7 +137,6 @@ public class LoginActivity extends AppCompatActivity {
                                 MotionToast.LONG_DURATION,
                                 ResourcesCompat.getFont(this, R.font.helvetica_regular)
                         );
-
                     }
                 } else {
                     pDialog.dismiss();
