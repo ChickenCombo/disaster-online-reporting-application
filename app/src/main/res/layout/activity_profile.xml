@@ -72,84 +72,86 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvFullName" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnChangeName"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/raleway"
-        android:text="@string/button_change_name"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        app:cornerRadius="30dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEmailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEmailAddress">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnChangeProfile"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/raleway"
-        android:text="@string/button_change_profile_picture"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        app:cornerRadius="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChangeName" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnChangeEmail"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/raleway"
-        android:text="@string/button_change_email"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        app:cornerRadius="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChangeProfile" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnChangeName"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:fontFamily="@font/raleway"
+                android:text="@string/button_change_name"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:cornerRadius="30dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnChangePassword"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/raleway"
-        android:text="@string/button_change_password"
-        android:textAllCaps="false"
-        android:textStyle="bold"
-        app:cornerRadius="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChangeEmail" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnChangeProfile"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:fontFamily="@font/raleway"
+                android:text="@string/button_change_profile_picture"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:cornerRadius="30dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLogout"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/raleway"
-        android:text="@string/button_logout"
-        android:textAllCaps="false"
-        android:textColor="@color/primary_green"
-        android:textStyle="bold"
-        app:cornerRadius="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChangePassword"
-        app:rippleColor="@color/primary_green"
-        app:strokeColor="@color/primary_green"
-        app:strokeWidth="2dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnChangeEmail"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:fontFamily="@font/raleway"
+                android:text="@string/button_change_email"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:cornerRadius="30dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnChangePassword"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:fontFamily="@font/raleway"
+                android:text="@string/button_change_password"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:cornerRadius="30dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogout"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:fontFamily="@font/raleway"
+                android:text="@string/button_logout"
+                android:textAllCaps="false"
+                android:textColor="@color/primary_green"
+                android:textStyle="bold"
+                app:cornerRadius="30dp"
+                app:rippleColor="@color/primary_green"
+                app:strokeColor="@color/primary_green"
+                app:strokeWidth="2dp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
