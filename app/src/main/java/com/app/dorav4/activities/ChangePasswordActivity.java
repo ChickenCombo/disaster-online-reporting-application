@@ -196,17 +196,17 @@ public class ChangePasswordActivity extends AppCompatActivity {
     // Validate Password
     private static boolean isValid(String password) {
         /*
-            (?=.*[0-9])           # a number must occur at least once
-            (?=.*[a-z])           # a lower case letter must occur at least once
-            (?=.*[A-Z])           # an upper case letter must occur at least once
-            (?=.*[!@#$%^&*()+=])  # a special character must occur at least once
-            (?=\\S+$)             # no whitespace allowed in the entire string
-            .{8,20}               # length must be at least 8 but less than 20
+            (?=.*[0-9])             # a number must occur at least once
+            (?=.*[a-z])             # a lower case letter must occur at least once
+            (?=.*[A-Z])             # an upper case letter must occur at least once
+            (?=.*[!@#$%^&*()=_+.])  # a special character must occur at least once
+            (?=\\S+$)               # no whitespace allowed in the entire string
+            .{8,20}                 # length must be at least 8 but less than 20
          */
 
         Pattern pattern;
         Matcher matcher;
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()+=])(?=\\S+$).{8,20}$";
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()=_+.])(?=\\S+$).{8,20}$";
 
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(password);
