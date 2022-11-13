@@ -43,6 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
     DatabaseReference usersReference, reportsReference;
 
     String profilePicture;
+    boolean status = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,93 +156,94 @@ public class ProfileActivity extends AppCompatActivity {
                 hashMap.put("fullName", fullName);
 
                 // Change name on users database
-                usersReference.child(mUser.getUid()).updateChildren(hashMap).addOnSuccessListener(o -> {
-                    // Change name on reports database
-                    Query query = reportsReference.orderByChild("userId").equalTo(mUser.getUid());
-                    query.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot ds : snapshot.getChildren()) {
-                                String child = ds.getKey();
-                                if (child != null) {
-                                    if (snapshot.child(child).hasChild("fullName")) {
-                                        snapshot.getRef().child(child).child("fullName").setValue(fullName).addOnSuccessListener(o1 -> {
-                                            // Change name on comments database
-                                            reportsReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                    for (DataSnapshot ds: snapshot.getChildren()) {
-                                                        String child = ds.getKey();
+                usersReference.child(mUser.getUid()).updateChildren(hashMap).addOnFailureListener(e -> status = false);
 
-                                                        if (child != null) {
-                                                            if (snapshot.child(child).hasChild("Comments")) {
-                                                                String child1 = String.valueOf(snapshot.child(child).getKey());
-                                                                Query query = reportsReference.child(child1).child("Comments").orderByChild("userId").equalTo(mUser.getUid());
-                                                                query.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                    @Override
-                                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                                        for (DataSnapshot ds: snapshot.getChildren()) {
-                                                                            String child = ds.getKey();
 
-                                                                            if (child != null) {
-                                                                                if (snapshot.child(child).hasChild("name")) {
-                                                                                    snapshot.getRef().child(child).child("name").setValue(fullName).addOnCompleteListener(task -> {
-                                                                                        if (task.isSuccessful()) {
-                                                                                            // Show success confirmation toast
-                                                                                            MotionToast.Companion.darkToast(
-                                                                                                    ProfileActivity.this,
-                                                                                                    "Success",
-                                                                                                    "Name has been changed",
-                                                                                                    MotionToastStyle.SUCCESS,
-                                                                                                    MotionToast.GRAVITY_BOTTOM,
-                                                                                                    MotionToast.LONG_DURATION,
-                                                                                                    ResourcesCompat.getFont(ProfileActivity.this, R.font.helvetica_regular)
-                                                                                            );
-                                                                                        } else {
-                                                                                            // Show success confirmation toast
-                                                                                            MotionToast.Companion.darkToast(
-                                                                                                    ProfileActivity.this,
-                                                                                                    "Error",
-                                                                                                    "Name change failed, please try again",
-                                                                                                    MotionToastStyle.ERROR,
-                                                                                                    MotionToast.GRAVITY_BOTTOM,
-                                                                                                    MotionToast.LONG_DURATION,
-                                                                                                    ResourcesCompat.getFont(ProfileActivity.this, R.font.helvetica_regular)
-                                                                                            );
-                                                                                        }
-                                                                                        dialog.dismiss();
-                                                                                    });
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-
-                                                                    @Override
-                                                                    public void onCancelled(@NonNull DatabaseError error) {
-                                                                    }
-                                                                });
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                                }
-                                            });
-                                        });
-                                    }
+                // Change name on reports database
+                Query query = reportsReference.orderByChild("userId").equalTo(mUser.getUid());
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            String child = ds.getKey();
+                            if (child != null) {
+                                if (snapshot.child(child).hasChild("fullName")) {
+                                    snapshot.getRef().child(child).child("fullName").setValue(fullName).addOnFailureListener(e -> status = false);
                                 }
                             }
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
+                    }
                 });
+
+                // Change name on comments database
+                reportsReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot ds: snapshot.getChildren()) {
+                            String child = ds.getKey();
+
+                            if (child != null) {
+                                if (snapshot.child(child).hasChild("Comments")) {
+                                    String child1 = String.valueOf(snapshot.child(child).getKey());
+                                    Query query = reportsReference.child(child1).child("Comments").orderByChild("userId").equalTo(mUser.getUid());
+                                    query.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for (DataSnapshot ds: snapshot.getChildren()) {
+                                                String child = ds.getKey();
+
+                                                if (child != null) {
+                                                    if (snapshot.child(child).hasChild("name")) {
+                                                        snapshot.getRef().child(child).child("name").setValue(fullName).addOnFailureListener(e -> status = false);
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                // Show toast message
+                if (status) {
+                    MotionToast.Companion.darkToast(
+                            this,
+                            "Success",
+                            "Name changed successfully",
+                            MotionToastStyle.SUCCESS,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                    );
+                } else {
+                    MotionToast.Companion.darkToast(
+                            this,
+                            "Error",
+                            "Name change failed, please try again",
+                            MotionToastStyle.ERROR,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.LONG_DURATION,
+                            ResourcesCompat.getFont(this, R.font.helvetica_regular)
+                    );
+                }
+
+                dialog.dismiss();
             } else {
                 tilFullName.setError("Full name cannot be empty");
             }
