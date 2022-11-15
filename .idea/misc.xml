@@ -123,6 +123,7 @@
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_notifications.xml" value="0.165" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_privacy_policy.xml" value="0.165" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_profile.xml" value="0.1435" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_search_user.xml" value="0.12" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_settings.xml" value="0.165" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_terms_and_conditions.xml" value="0.165" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/drawable/ic_upvote.xml" value="0.252" />
@@ -149,7 +150,7 @@
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_credits.xml" value="0.1875" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_device_list.xml" value="0.2359375" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_earthquake.xml" value="0.25" />
-        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_find_friends.xml" value="0.25" />
+        <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_find_friends.xml" value="0.176" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_fire.xml" value="0.2359375" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
         <entry key="..\:/Users/63927/Desktop/disaster-online-reporting-application-v4/app/src/main/res/layout/activity_guides.xml" value="0.2" />

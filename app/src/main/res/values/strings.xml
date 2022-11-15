@@ -142,6 +142,9 @@
     <string name="empty_comments_description">Be the first to comment</string>
     <string name="empty_messages">You have no messages!</string>
     <string name="empty_messages_description">Tap the floating button to start a conversation</string>
+    <string name="empty_search">Search a user!</string>
+    <string name="empty_search_description">Type someone\'s name and tap on them to add them.</string>
+
 
     <!-- String used for friends system -->
     <string name="send_friend_request">Send Friend Request</string>

@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +26,7 @@ import java.util.List;
 public class FindFriendsActivity extends AppCompatActivity {
     ImageView ivBack;
     SearchView searchView;
+    ConstraintLayout emptyView;
 
     RecyclerView recyclerView;
 
@@ -41,6 +43,7 @@ public class FindFriendsActivity extends AppCompatActivity {
         ivBack = findViewById(R.id.ivBack);
         recyclerView = findViewById(R.id.recyclerView);
         searchView = findViewById(R.id.searchView);
+        emptyView = findViewById(R.id.emptyView);
 
         usersList = new ArrayList<>();
 
@@ -56,8 +59,9 @@ public class FindFriendsActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 if (!query.isEmpty()) {
                     searchUsers(query);
+                    emptyView.setVisibility(View.GONE);
                 } else {
-                    loadUsers();
+                    emptyView.setVisibility(View.VISIBLE);
                 }
                 return false;
             }
@@ -66,8 +70,9 @@ public class FindFriendsActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String query) {
                 if (!query.isEmpty()) {
                     searchUsers(query);
+                    emptyView.setVisibility(View.GONE);
                 } else {
-                    loadUsers();
+                    emptyView.setVisibility(View.VISIBLE);
                 }
                 return false;
             }
@@ -76,37 +81,8 @@ public class FindFriendsActivity extends AppCompatActivity {
         // ivBack OnClickListener
         ivBack.setOnClickListener(v -> finish());
 
-        loadUsers();
-    }
-
-    // Get all users
-    private void loadUsers() {
-        usersReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                usersList.clear();
-
-                // Add database data inside the list
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    String uid = ds.getRef().getKey();
-                    Users users = ds.getValue(Users.class);
-
-                    if (users != null && uid != null) {
-                        // Hide current user from the list
-                        if (!uid.equals(MainActivity.userId)) {
-                            usersList.add(users);
-                            usersAdapter = new UsersAdapter(FindFriendsActivity.this, usersList);
-                            recyclerView.setAdapter(usersAdapter);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        // Show empty view
+        emptyView.setVisibility(View.VISIBLE);
     }
 
     // Search for users
