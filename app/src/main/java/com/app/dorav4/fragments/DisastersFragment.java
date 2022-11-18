@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.RenderMode;
 import com.app.dorav4.R;
 import com.app.dorav4.adapters.InfoWindowAdapter;
 import com.app.dorav4.models.Markers;
@@ -46,6 +49,7 @@ import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;
 
+import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
@@ -164,6 +168,21 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
 
     // Get reports list
     private void getReports() {
+        // Progress Dialog
+        MaterialDialog pDialog = new MaterialDialog.Builder(requireActivity())
+                .setTitle("Loading")
+                .setMessage("Fetching disaster reports, please wait")
+                .setAnimation(R.raw.lottie_loading)
+                .setCancelable(false)
+                .build();
+
+        LottieAnimationView animationView = pDialog.getAnimationView();
+        animationView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        animationView.setRenderMode(RenderMode.SOFTWARE);
+        animationView.setPadding(0, 64, 0, 0);
+
+        pDialog.show();
+
         clusterManager.clearItems();
 
         reportsReference = FirebaseDatabase.getInstance().getReference().child("Reports");
@@ -184,11 +203,12 @@ public class DisastersFragment extends Fragment implements EasyPermissions.Permi
                     }
                 }
                 clusterManager.cluster();
+                pDialog.dismiss();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                pDialog.dismiss();
             }
         });
     }

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.RenderMode;
 import com.app.dorav4.R;
 import com.app.dorav4.adapters.InfoWindowAdapter;
 import com.app.dorav4.models.Markers;
@@ -50,6 +53,7 @@ import com.google.maps.android.clustering.ClusterManager;
 import java.util.List;
 import java.util.Objects;
 
+import dev.shreyaspatil.MaterialDialog.MaterialDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 import www.sanju.motiontoast.MotionToast;
 import www.sanju.motiontoast.MotionToastStyle;
@@ -225,6 +229,21 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
 
     // Get evacuation areas list
     private void getEvacuationCenters() {
+        // Progress Dialog
+        MaterialDialog pDialog = new MaterialDialog.Builder(requireActivity())
+                .setTitle("Loading")
+                .setMessage("Fetching evacuation areas, please wait")
+                .setAnimation(R.raw.lottie_loading)
+                .setCancelable(false)
+                .build();
+
+        LottieAnimationView animationView = pDialog.getAnimationView();
+        animationView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        animationView.setRenderMode(RenderMode.SOFTWARE);
+        animationView.setPadding(0, 64, 0, 0);
+
+        pDialog.show();
+
         clusterManager.clearItems();
 
         // Get user's current location
@@ -237,7 +256,6 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
             if (location != null) {
                 double currentLongitude = location.getLongitude();
                 double currentLatitude = location.getLatitude();
-
 
                 evacuationCentersReference = FirebaseDatabase.getInstance().getReference("EvacuationCenters");
                 evacuationCentersReference.addValueEventListener(new ValueEventListener() {
@@ -270,11 +288,12 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
                             }
                         }
                         clusterManager.cluster();
+                        pDialog.dismiss();
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        pDialog.dismiss();
                     }
                 });
             }
