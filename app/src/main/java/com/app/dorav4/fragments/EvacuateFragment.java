@@ -79,7 +79,7 @@ public class EvacuateFragment extends Fragment implements EasyPermissions.Permis
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(11.6737, 122.4816), 5.4f));
 
             btnNearest.setOnClickListener(v -> {
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(nearestMarker.getPosition(), 14));
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(nearestMarker.getPosition(), 20));
             });
 
             // Setup markers clustering
