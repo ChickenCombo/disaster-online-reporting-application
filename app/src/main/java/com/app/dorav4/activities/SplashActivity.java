@@ -102,7 +102,7 @@ public class SplashActivity extends AppCompatActivity {
 
                         // Redirect to OnboardingActivity if there is no user session
                         // or it is the user's first time
-                        intent = new Intent(SplashActivity.this, LoginActivity.class);
+                        intent = new Intent(SplashActivity.this, OnboardingActivity.class);
                     } else {
                         // Redirect to LoginActivity if there is a user session
                         // or it is not the user's first time
