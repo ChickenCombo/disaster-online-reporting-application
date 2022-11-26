@@ -71,13 +71,13 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(v -> {
             int attempts = sharedPreferences.getInt("attempts", 0);
 
-            if (attempts < 3) {
+            if (attempts < 1) {
                 registerUser();
             } else {
                 MotionToast.Companion.darkToast(
                         this,
                         "Error",
-                        "Too many attempts, try again later",
+                        "Only one account is allowed.",
                         MotionToastStyle.ERROR,
                         MotionToast.GRAVITY_BOTTOM,
                         MotionToast.LONG_DURATION,
@@ -147,7 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
                     // Count registration attempts
                     int attempts = sharedPreferences.getInt("attempts", 0);
 
-                    if (attempts < 3) {
+                    if (attempts < 1) {
                         attempts++;
                     }
 
