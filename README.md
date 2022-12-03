@@ -22,7 +22,7 @@ Then open the project using Android Studio.
 
 * Switch to *Project* view in Android Studio and paste `google-services.json` into `app/` directory.
 
-* Configure the following on your Firebase dashboard: Authentication, Realtime Database, and Storage.
+* Configure the following on your Firebase dashboard: Authentication, Realtime Database, Tokens V1, and Storage.
 
 ### Maps SDK for Android Setup
 
