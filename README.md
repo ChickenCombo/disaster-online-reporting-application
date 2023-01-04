@@ -1,18 +1,29 @@
+![Mockup](https://i.imgur.com/nWus4Zf.jpg)
+
 # Disaster Online Reporting Application v4
 
-**Disaster Online Reporting Application v4 (DORA v4)** is an Android-based mobile application that aims to enhance the features of the previous version of the application and add features that will enable the user to collaborate with other people. The purpose of DORA v4 is to provide disaster warnings, allow communication between users, and provide support assistance to the affected areas.
+**Disaster Online Reporting Application v4 (DORA v4)** is an Android-based mobile application that allows users to easily and quickly report disasters in real-time. With this app, users can provide critical information about the disaster, including its location, type, and images allowing emergency responders to emergency responders to quickly and effectively respond to the situation. This app also allows users to receive real-time updates about the disaster and any relevant safety information.
+
+## 📄 About
 
 **Members:**
+
 * Castro, Michaela Marie N.
 * Cuadra, John Lester G.
 * Maruno, Hitomi B.
 * Quitor, Cedric John D.
 
-## Getting Started
+**Technical Adviser:**
+
+* Asst. Prof. Zhuo, Eugenia R., DIT
+
+## ⚙️ Getting Started
+
 ### Project Setup
+
 Clone the repository:
 
-    gh repo clone ChickenCombo/disaster-online-reporting-application-v4
+    git clone ChickenCombo/disaster-online-reporting-application-v4
 
 Then open the project using Android Studio.
 
@@ -22,7 +33,15 @@ Then open the project using Android Studio.
 
 * Switch to *Project* view in Android Studio and paste `google-services.json` into `app/` directory.
 
-* Configure the following on your Firebase dashboard: Authentication, Realtime Database, Tokens V1, and Storage.
+* Configure the following on your Firebase dashboard: Authentication, Realtime Database, and Storage.
+
+### Cloud Messaging Setup
+
+* After setting up Firebase, navigate to Project Settings > Cloud Messaging > Cloud Messaging API (Legacy) to get your API key.
+
+* Return to the project directory and find `PushNotificationService.java`.
+
+* Replace the API key with your own API key.
 
 ### Maps SDK for Android Setup
 
@@ -32,11 +51,13 @@ Then open the project using Android Studio.
 
 * Navigate to Credentials to get your API key.
 
-## Installation
+* Find `google_maps_api.xml` and replace the API key.
+
+## 📱 Installation
 
 Connect an Android device or an emulator on your development machine.
 
 ### Android Studio
 
-* Select `Run -> Run 'app'` (or `Debug 'app'`) from the menu bar
-* Select the device you wish to run the app on and click 'OK'
+* Select `Run -> Run 'app'` (or `Debug 'app'`) from the menu bar.
+* Select the device you wish to run the app on and click 'OK'.
