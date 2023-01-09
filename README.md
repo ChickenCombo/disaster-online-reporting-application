@@ -36,7 +36,7 @@
 
 Clone the repository:
 
-    git clone ChickenCombo/disaster-online-reporting-application-v4
+    git clone ChickenCombo/disaster-online-reporting-application
 
 Then open the project using Android Studio.
 
