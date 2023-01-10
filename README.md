@@ -17,7 +17,7 @@ _To be added..._
 * Maruno, Hitomi B.
 * Quitor, Cedric John D.
 
-**Technical Adviser:**
+**Technical Advisor:**
 
 * Asst. Prof. Zhuo, Eugenia R., DIT
 
