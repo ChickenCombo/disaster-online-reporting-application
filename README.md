@@ -4,11 +4,15 @@
 
 **Disaster Online Reporting Application (DORA)** version 4 is an Android-based mobile application that allows users to easily and quickly report disasters in real-time. With this app, users can provide critical information about the disaster, including its location, type, and images allowing emergency responders to emergency responders to quickly and effectively respond to the situation. This app also allows users to receive real-time updates about the disaster and any relevant safety information.
 
+A web app for Disaster Online Reporting Application v4 was also made which serves as the admin panel for Local Government Units. It features disaster report monitoring, managing of evacuation centers, sending of advisories via push notification, and similar to the mobile app, it has a map for monitoring disaster reports and evacuation centers.
+
+More information about the web app can be found here: [Disaster Online Reporting Application Web App](https://github.com/cedricquitor/disaster-online-reporting-application-v4-web-app)
+
 ## 📄 About
 
 **ACM Conference Paper:** 
 
-_To be added..._
+[DORA v4 Conference Paper](https://drive.google.com/file/d/1NkkymFQ7Tw61rF5l68LpiJRzfJdXonWZ/view?usp=sharing)
 
 **Members:**
 
