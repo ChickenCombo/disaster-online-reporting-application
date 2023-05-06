@@ -10,9 +10,9 @@ More information about the web app can be found here: [Disaster Online Reporting
 
 ## 📄 About
 
-**ACM Conference Paper:** 
+This capstone project was granted the "3rd Best Capstone Award" during the IT Research Colloquium 2023 held at the University of Santo Tomas.
 
-[DORA v4 Conference Paper](https://drive.google.com/file/d/1NkkymFQ7Tw61rF5l68LpiJRzfJdXonWZ/view?usp=sharing)
+**ACM Conference Paper:** [DORA v4 Conference Paper](https://drive.google.com/file/d/1NkkymFQ7Tw61rF5l68LpiJRzfJdXonWZ/view?usp=sharing)
 
 **Members:**
 
